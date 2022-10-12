@@ -1,0 +1,9 @@
+{
+	"fileName": "testaudio.mp3",
+	"fileType": "audio/mpg",
+	"size" : 225324,
+	"encode": "aac_encode",
+	"channels": "2",
+	"bitrate": "320k",
+	"format": "m4a"
+}
