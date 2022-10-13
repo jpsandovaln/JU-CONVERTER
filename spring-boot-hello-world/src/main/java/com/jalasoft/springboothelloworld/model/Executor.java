@@ -22,7 +22,7 @@ public class Executor {
             System.out.println (e);
         }
     }
-    private void readConsole () {
+    private void readConsole() {
         try {
             process.waitFor();
             InputStreamReader streamReader = new InputStreamReader(process.getInputStream());
