@@ -5,12 +5,12 @@ public class AudioUploadResponse {
     private String fileType;
     private long size;
     private String bitrate;
-    private int channels;
+    private String channels;
     private String encode;
     private String format;
 
 
-    public AudioUploadResponse(String fileName, String fileType, long size,String bitrate,int channels, String encode, String format) {
+    public AudioUploadResponse(String fileName, String fileType, long size, String bitrate, String channels, String encode, String format) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.size = size;
@@ -59,12 +59,12 @@ public class AudioUploadResponse {
     }
 
 
-    public int getChannels() {
+    public String getChannels() {
         return channels;
     }
 
 
-    public void setChannels(int channels) {
+    public void setChannels(String channels) {
         this.channels = channels;
     }
 

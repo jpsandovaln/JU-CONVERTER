@@ -8,18 +8,20 @@ import java.util.List;
 public class Executor {
     private Process process;
 
-    public void runCommand(List<String> command) {
+    public void runCommand(List<String> command) throws IOException {
         initProcess(command);
         //readConsole();
     }
 
-    private void initProcess(List<String> command) {
+    private void initProcess(List<String> command) throws IOException {
         ProcessBuilder builder = new ProcessBuilder(command);
         builder.redirectErrorStream(true);
+
         try {
             process = builder.start();
         } catch (IOException e) {
             System.out.println (e);
+
         }
     }
     private void readConsole () {
