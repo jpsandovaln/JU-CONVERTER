@@ -1,9 +1,11 @@
-package com.jalasoft.springboothelloworld.model.converter;
+package com.jalasoft.springboothelloworld.model.commandbuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoConverter implements CommandBuilder {
+import com.jalasoft.springboothelloworld.model.converter.CommandBuilder;
+
+public class VideoCommand implements CommandBuilder {
     private String input;
     private String ffmpegPath = "ffmpeg";
     private String outName = "out";
@@ -12,8 +14,8 @@ public class VideoConverter implements CommandBuilder {
     boolean thereIsVf = false;
     String vfCommand = "";
 
-    public VideoConverter() {
-        initCommand();
+    public VideoCommand() {
+        //initCommand();
     }
     /*public String getImages() {
         command += " %d.png";
@@ -25,36 +27,37 @@ public class VideoConverter implements CommandBuilder {
     public void setParameters(List<String> parameters) {
         this.input = parameters.get(0);
         initCommand();
-        this.outName = parameters.get(2);
-        this.outFormat = parameters.get(3);
-        setVolume(Double.parseDouble(parameters.get(4)));
-        if (parameters.get(5) == "1") {
+        if (!parameters.get(1).equals("")) {
+            this.outName = parameters.get(1);
+        }
+        this.outFormat = parameters.get(2);
+        setVolume(Double.parseDouble(parameters.get(3)));
+        if (parameters.get(4) == "1") {
             removeAudio();
+            System.out.println("remuve audio");
         }
-        if (parameters.get(6) != "") {
-            setVideoBitrate(Integer.parseInt(parameters.get(6)));
+        if (!parameters.get(5).equals("")) {
+            setVideoBitrate(Integer.parseInt(parameters.get(5)));
         }
-        if (parameters.get(7) != "") {
-            setAudioBitrate(Integer.parseInt(parameters.get(7)));
+        if (!parameters.get(6).equals("")) {
+            setAudioBitrate(Integer.parseInt(parameters.get(6)));
         }
-        if (parameters.get(8) != "") {
-            vfSetFPS(Integer.parseInt(parameters.get(8)));
-        }if (parameters.get(8) != "") {
-            vfSetFPS(Integer.parseInt(parameters.get(8)));
+        if (!parameters.get(7).equals("")) {
+            vfSetFPS(Integer.parseInt(parameters.get(7)));
         }
-        vfSetColor(Double.parseDouble(parameters.get(9)));
-        if (parameters.get(10) != "") {
-            String[] size = parameters.get(10).split("x");
+        vfSetColor(Double.parseDouble(parameters.get(8)));
+        if (!parameters.get(9).equals("")) {
+            String[] size = parameters.get(9).split("x");
             vfResize(Integer.parseInt(size[0]),Integer.parseInt(size[1]));
         }
-        if (vfCommand != null) {
+        if (!vfCommand.equals("")) {
             command.add(vfCommand);
         }
     }
     @Override
     public List<String> getCommand() {
         command.add("-y");
-        command.add(outName + outFormat);
+        command.add("Uploads\\" + outName + outFormat);
         System.out.println(command);
         return command;
     }
@@ -142,3 +145,4 @@ public class VideoConverter implements CommandBuilder {
         thereIsVf = true;
     }
 }
+

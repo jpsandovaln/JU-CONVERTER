@@ -21,7 +21,7 @@ public class Executor {
         InputStreamReader inputStreamReader = new InputStreamReader(errorStream);
         BufferedReader br = new BufferedReader(inputStreamReader);
         String line = "";
-         while ((line = br.readLine())!= null)  {
+         while ((br.readLine())!= null)  {
 
          }
          if ( br!= null) {
