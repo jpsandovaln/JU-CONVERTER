@@ -52,7 +52,7 @@ List<String> settings = new ArrayList<String>();
         String fileName = fileStorageService.storeFile(file);
         List<String> parameters = new ArrayList<String>();
         parameters.add("Uploads\\" + fileName);
-        System.out.println("Uploads\\" + fileName);
+        
         parameters.add(newName);
         parameters.add(outFormat);
         parameters.add(volume);
@@ -65,6 +65,7 @@ List<String> settings = new ArrayList<String>();
         parameters.add(color);
         parameters.add(size);
         parameters.add(cropVideo);
+
         CommandBuilder builderCommand = new VideoCommand();
         builderCommand.setParameters(parameters);
         Executor executor = new Executor();
