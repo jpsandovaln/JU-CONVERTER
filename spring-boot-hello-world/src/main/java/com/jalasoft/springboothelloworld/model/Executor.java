@@ -2,6 +2,7 @@ package com.jalasoft.springboothelloworld.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -15,14 +16,32 @@ public class Executor {
 
     private void initProcess(List<String> command) throws IOException {
         ProcessBuilder builder = new ProcessBuilder(command);
-        builder.redirectErrorStream(true);
+        Process process = builder.start();
+        InputStream errorStream = process.getErrorStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(errorStream);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+        String line = "";
+         while ((line = br.readLine())!= null)  {
+
+         }
+         if ( br!= null) {
+            br.close();
+         }
+         if (inputStreamReader != null) {
+            inputStreamReader.close();
+         }
+         if (errorStream != null) {
+            errorStream.close();
+         }
+
+        /*builder.redirectErrorStream(true);
 
         try {
             process = builder.start();
         } catch (IOException e) {
             System.out.println (e);
 
-        }
+        }*/
     }
     private void readConsole () {
         try {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.springboothelloworld.FileStorageService;
 import com.jalasoft.springboothelloworld.model.Executor;
-import com.jalasoft.springboothelloworld.model.converter.AudioConverter;
+import com.jalasoft.springboothelloworld.model.converter.AudioCommand;
 import com.jalasoft.springboothelloworld.response.AudioUploadResponse;
 
 
@@ -31,13 +31,12 @@ public class AudioControllerr {
         String fileName = fileStorageService.storeFile(file);
         List<String> parameters = new ArrayList<>();
         String name = "Uploads\\";
-        //parameters.add(name);
         parameters.add(bitrate);
         parameters.add(channels);
         parameters.add(encode);
         parameters.add(format);
-        AudioConverter audioConverter = new AudioConverter(parameters, name + fileName);
-        //System.out.println(audioConverter.getCommand());
+        AudioCommand audioConverter = new AudioCommand(name + fileName);
+        audioConverter.setParameters(parameters);
         Executor executor = new Executor();
         executor.runCommand(audioConverter.getCommand());
         return new AudioUploadResponse(fileName,
