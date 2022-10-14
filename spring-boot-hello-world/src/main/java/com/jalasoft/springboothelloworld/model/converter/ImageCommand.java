@@ -1,7 +1,23 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
+
 package com.jalasoft.springboothelloworld.model.converter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * It is responsible for assembling a command with user requirements for audio file conversion.
+ *
+ * @author Daniela Martinez
+ * @version 1.0
+ */
 
 public class ImageCommand implements CommandBuilder {
     private static ImageProcess imageprocess;
