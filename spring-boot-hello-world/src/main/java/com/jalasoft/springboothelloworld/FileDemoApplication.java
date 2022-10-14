@@ -12,6 +12,4 @@ public class FileDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(FileDemoApplication.class, args);
     }
-
-    
 }

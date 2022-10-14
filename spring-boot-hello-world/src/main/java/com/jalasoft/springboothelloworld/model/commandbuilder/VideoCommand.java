@@ -5,7 +5,7 @@ import java.util.List;
 
 public class VideoCommand implements CommandBuilder {
     private String input;
-    private String ffmpegPath = "ffmpeg";
+    private String ffmpegPath = "ffmpeg\\bin\\ffmpeg.exe";
     private String outName = "out";
     private String outFormat = ".mov";
     private List<String> command;
