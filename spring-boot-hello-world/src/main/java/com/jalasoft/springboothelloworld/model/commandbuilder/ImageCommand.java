@@ -7,7 +7,7 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.springboothelloworld.model.converter;
+package com.jalasoft.springboothelloworld.model.commandbuilder;
 
 import java.util.ArrayList;
 import java.util.List;
