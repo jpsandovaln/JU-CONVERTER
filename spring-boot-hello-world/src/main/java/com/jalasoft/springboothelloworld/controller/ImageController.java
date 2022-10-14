@@ -10,7 +10,12 @@ import com.jalasoft.springboothelloworld.FileStorageService;
 import com.jalasoft.springboothelloworld.model.Executor;
 import com.jalasoft.springboothelloworld.model.commandbuilder.ImageCommand;
 import com.jalasoft.springboothelloworld.response.ImageUploadResponse;
-
+/**
+ * It is responsable for uploading Images and converting them 
+ *
+ * @author Fernanda Aguilar
+ * @version 1.0
+ */
 
 @RestController
 public class ImageController {

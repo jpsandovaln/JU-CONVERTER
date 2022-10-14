@@ -21,7 +21,12 @@ import com.jalasoft.springboothelloworld.model.Executor;
 import com.jalasoft.springboothelloworld.model.commandbuilder.AudioCommand;
 import com.jalasoft.springboothelloworld.response.AudioUploadResponse;
 
-
+/**
+ * It is responsable for uploading Audios and converting them 
+ *
+ * @author Fernanda Aguilar
+ * @version 1.0
+ */
 
 @RestController
 public class AudioControllerr {

@@ -1,5 +1,10 @@
 package com.jalasoft.springboothelloworld.response;
-
+/**
+ * It is responsable returning a response to a request 
+ *
+ * @author Fernanda Aguilar
+ * @version 1.0
+ */
 public class ImageUploadResponse {
     private String process;
     private String file;
