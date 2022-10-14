@@ -3,8 +3,6 @@ package com.jalasoft.springboothelloworld.model.commandbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jalasoft.springboothelloworld.model.converter.CommandBuilder;
-
 public class VideoCommand implements CommandBuilder {
     private String input;
     private String ffmpegPath = "ffmpeg";

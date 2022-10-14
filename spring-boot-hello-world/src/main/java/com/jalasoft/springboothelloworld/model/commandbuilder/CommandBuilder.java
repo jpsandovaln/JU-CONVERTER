@@ -1,4 +1,4 @@
-package com.jalasoft.springboothelloworld.model.converter;
+package com.jalasoft.springboothelloworld.model.commandbuilder;
 
 import java.util.List;
 
