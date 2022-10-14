@@ -1,0 +1,50 @@
+Get video information
+ffmpeg -i prueba.mp4
+
+Convert to other format
+ffmpeg -i prueba.mp4 out.avi
+
+Remove video audio
+ffmpeg -i video.mp4 -an audio.mp4
+
+Remove video //In case of convert to mkv
+ffmpeg -i video.mp4 -vn audio.mkv
+
+Edit video/audio bitrate
+ffmpeg -i video.avi -b:v 2500k -b:a 192k video_final.mp4
+
+Edit audio volume //1 normal
+ffmpeg -i video.mp4 -af volume=2 video.mp4        //volumen*2
+
+Rotate a video
+ffmpeg -i video.mp4 -vf transpose=clock video_rotado_90.mp4
+$ ffmpeg -i prueba.mp4 -vf transpose=clock,transpose=clock video_rotado_180.mp4
+
+Resize video
+ffmpeg -i video.mp4 -vf scale=320:240 video_320x240.mp4         //widht:height
+ffmpeg -i prueba.mp4 -vf scale=320:-1 video_320x180.mp4          //widht:proporcional height
+ffmpeg -i input -vf "scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:-1:-1:color=black" output
+Fuente: https://www.enmimaquinafunciona.com/pregunta/28695/cambiar-el-tamano-de-los-videos-con-ffmpegavconv-para-que-quepan-en-un-reproductor-de-tamano-estatico#comment-120287
+
+Get video fragment
+ffmpeg -i video.mp4 -ss 00:35 -to 01:05 fragmento.mp4
+
+Edit video color
+ffmpeg -i input.mp4 -vf "hue=s=0" output.mp4            //0: without color, 1: normal color
+
+Add audio tracks
+ffmpeg -i video.mp4 -i audio_es.mp3 -map 0:v -map 0:a -map 1:a -vcodec copy video_final.mp4     //add the input audio to the second chanel
+
+Remove audio track
+ffmpeg -i video.mp4 -map 0:0 -map 0:2 solo_canal1_audio.mp4     /Keep only the secod audio track
+
+Edit fps
+ffmpeg -i video.mp4 -vf fps=1 less_fps.mp4
+
+Get images from video (Acording fps)
+ffmpeg -i video.mp4 %d.png 
+ffmpeg -i video.mp4 -vf fps=1 image%d.png       //One image per second
+
+Cut a part of video
+ffmpeg -i screencast.mp4 -vf crop=640:480:500:250 video_final.mp4       //Region of 640:480 from 500:250 position
+
