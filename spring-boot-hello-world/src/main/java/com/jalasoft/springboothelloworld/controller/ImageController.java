@@ -24,7 +24,6 @@ public class ImageController {
                                         @RequestParam("tool") String tool,
                                         @RequestParam("width_black") String width_black,
                                         @RequestParam("height_white") String height_white,
-                                       // @RequestParam("toolcolor") String toolcolor,
                                         @RequestParam("color") String color,
                                         @RequestParam("fileout") String fileout,
                                         @RequestParam("format") String format) throws IOException {
@@ -36,7 +35,6 @@ public class ImageController {
         settings.add(tool);
         settings.add(width_black);
         settings.add(height_white);
-      //  settings.add(toolcolor);
         settings.add(color);
         settings.add(name + fileout);
         settings.add(format);

@@ -22,11 +22,15 @@ public class ImageProcess {
      return "gray";
     }
 
-    protected static String level(int blackPoint, int whitePoint) {
+    protected static String level(String blackPoint, String whitePoint) {
         String blackLevel = String.valueOf(blackPoint);
         String whiteLevel = String.valueOf(whitePoint);
         String finalLevel = blackLevel + "%" + "," + whiteLevel + "%";
         return finalLevel.toString();
+    }
+
+    protected static String rotate(String grades) {
+        return grades;
     }
 
 }

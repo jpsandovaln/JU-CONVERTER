@@ -3,7 +3,7 @@ package com.jalasoft.springboothelloworld.model.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageCommand implements CommandBuilder{
+public class ImageCommand implements CommandBuilder {
     private static ImageProcess imageprocess;
     List<String> command = new ArrayList<>();
     List<String> setup = new ArrayList<>();
@@ -14,8 +14,8 @@ public class ImageCommand implements CommandBuilder{
     String colorspace;
 
     public ImageCommand(List<String> setup) {
-//C:\\Program Files\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe
-        command.add("magick");
+        // C:\\Program Files\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe
+        command.add("magick\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe");
         setParameters(setup);
 
         imageprocess = new ImageProcess();
@@ -42,7 +42,7 @@ public class ImageCommand implements CommandBuilder{
     private void tool(String tool, String width_black, String height_white, String color_rotate) {
         switch (tool) {
 
-            case " -resize":
+            case "-resize":
                 command.add("-resize");
                 command.add(imageprocess.resize(width_black, height_white));
                 System.out.println("choose to change the size of the image");
@@ -55,10 +55,14 @@ public class ImageCommand implements CommandBuilder{
                 break;
 
             case "-level":
+                command.add("-level");
+                command.add(imageprocess.level(width_black, height_white));
                 System.out.println("choose the tool to change the level colors of the image");
                 break;
 
             case "-rotate":
+                command.add("-rotate");
+                command.add(imageprocess.rotate(width_black));
                 System.out.println("choose the tool to change the pixel of the image");
                 break;
 
@@ -111,7 +115,7 @@ public class ImageCommand implements CommandBuilder{
         processImage(setup.get(0));
         filepath(setup.get(1));
         tool(setup.get(2), setup.get(3), setup.get(4), setup.get(5));
-        //tool(setup.get(6), setup.get(7), setup.get(8), setup.get(9));
+        // tool(setup.get(6), setup.get(7), setup.get(8), setup.get(9));
         format(setup.get(6), setup.get(7));
 
     }
