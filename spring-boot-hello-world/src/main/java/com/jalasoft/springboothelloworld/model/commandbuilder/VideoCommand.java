@@ -1,11 +1,25 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.model.commandbuilder;
+/**
+ * It is responsible for assembling a command with user requirements for video file conversion.
+ *
+ * @author Adriana Olivera Ordoñez
+ * @version 1.0
+ */
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VideoCommand implements CommandBuilder {
     private String input;
-    private String ffmpegPath = "ffmpeg";
+    private String ffmpegPath = "ffmpeg\\bin\\ffmpeg.exe";
     private String outName = "out";
     private String outFormat = ".mov";
     private List<String> command;
@@ -73,7 +87,7 @@ public class VideoCommand implements CommandBuilder {
     @Override
     public List<String> getCommand() {
         command.add("-y");
-        command.add("Uploads\\" + outName + outFormat);
+        command.add("Download\\" + outName + outFormat);
         System.out.println(command);
         return command;
     }

@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.response;
 
 public class AudioUploadResponse {
@@ -6,19 +14,18 @@ public class AudioUploadResponse {
     private long size;
     private String bitrate;
     private String channels;
-    private String encode;
+    private String samplingFrequency;
     private String format;
 
 
-    public AudioUploadResponse(String fileName, String fileType, long size, String bitrate, String channels, String encode, String format) {
+    public AudioUploadResponse(String fileName, String fileType, long size, String bitrate, String channels, String samplingFrequency, String format) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.size = size;
         this.bitrate = bitrate;
         this.channels = channels;
-        this.encode = encode;
+        this.samplingFrequency = samplingFrequency;
         this.format = format;
-
     }
     public String getFileName() {
         return fileName;
@@ -69,13 +76,13 @@ public class AudioUploadResponse {
     }
 
 
-    public String getEncode() {
-        return encode;
+    public String getSamplingFrequency() {
+        return samplingFrequency;
     }
 
 
-    public void setEncode(String encode) {
-        this.encode = encode;
+    public void setSamplingFrequency(String samplingFrequency) {
+        this.samplingFrequency = samplingFrequency;
     }
 
 

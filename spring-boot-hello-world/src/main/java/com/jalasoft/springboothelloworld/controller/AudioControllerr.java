@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.controller;
 
 
@@ -26,21 +34,22 @@ public class AudioControllerr {
     public AudioUploadResponse uploadAudio(@RequestParam("file") MultipartFile file,
                                         @RequestParam("bitrate") String bitrate,
                                         @RequestParam("channels") String channels,
-                                        @RequestParam("encode") String encode,
+                                        @RequestParam("sampling frequency") String samplingFrequency,
                                         @RequestParam("format") String format) throws IOException {
         String fileName = fileStorageService.storeFile(file);
         List<String> parameters = new ArrayList<>();
         String name = "Uploads\\";
+        parameters.add(fileName);
         parameters.add(bitrate);
         parameters.add(channels);
-        parameters.add(encode);
+        parameters.add(samplingFrequency);
         parameters.add(format);
         AudioCommand audioConverter = new AudioCommand(name + fileName);
         audioConverter.setParameters(parameters);
         Executor executor = new Executor();
         executor.runCommand(audioConverter.getCommand());
         return new AudioUploadResponse(fileName,
-                file.getContentType(), file.getSize(), bitrate, channels, encode, format);
+                file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format);
     }
 
 }
