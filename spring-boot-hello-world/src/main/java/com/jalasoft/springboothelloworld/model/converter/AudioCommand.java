@@ -1,11 +1,23 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.model.converter;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * It is responsible for assembling a command with user requirements for audio file conversion.
+ *
+ * @author Alvaro Sivila Ramirez
+ * @version 1.0
+ */
 public class AudioCommand implements CommandBuilder {
 
     List <String> command = new ArrayList<>();
-    String volume;
     String fileName;
     String exe;
     String format;
@@ -22,7 +34,7 @@ public class AudioCommand implements CommandBuilder {
         format = parts[1];
         return parts[0];
     }
-    private void selectEncode(String sampligFrecuency) {
+    private void selectSamplingFrequency(String sampligFrecuency) {
 
         switch (sampligFrecuency) {
             case "32000":
@@ -103,23 +115,13 @@ public class AudioCommand implements CommandBuilder {
     @Override
     public void setParameters(List<String> parameters) {
         String value;
-        if (parameters.contains(format)) {
-
-            for (int ind = 0; ind < parameters.size(); ind++) {
-                value  = parameters.get(ind);
-                selectAudioChannel(value);
-                selectBitrateAudio(value);
-                selectFormat(value, getName(fileName));
+        for (int ind = 0; ind < parameters.size(); ind++) {
+            value  = parameters.get(ind);
+            selectSamplingFrequency(value);
+            selectAudioChannel(value);
+            selectBitrateAudio(value);
+            selectFormat(value, getName("Download\\" + parameters.get(0)));
             }
-        } else {
-            for (int ind = 0; ind < parameters.size(); ind++) {
-                value  = parameters.get(ind);
-                selectEncode(value);
-                selectAudioChannel(value);
-                selectBitrateAudio(value);
-                selectFormat(value, getName(fileName));
-            }
-        }
     }
     @Override
     public List<String> getCommand() {
