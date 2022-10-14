@@ -21,57 +21,23 @@ public class VideoCommand implements CommandBuilder {
     private String input;
     private String ffmpegPath = "ffmpeg\\bin\\ffmpeg";
     private String outName = "out";
-    private String outFormat = ".mov";
+    private String outFormat = ".mp4";
     private List<String> command;
-    boolean thereIsVf = false;
-    String vfCommand = "";
+    private List<String> settings;
+    private VideoFilterCommand videoFilter;
 
     public VideoCommand() {}
 
     @Override
     public void setParameters(List<String> parameters) {
-        List<String> settings = parameters.subList(0, 8);
+        settings = parameters.subList(0, 8);
         List<String> vfsetings = parameters.subList(8, 12);
         this.input = settings.get(0);
-        initCommand();
-        if (!settings.get(1).equals("")) {
-            this.outName = parameters.get(1);
-        }
-        this.outFormat = settings.get(2);
-        for (int index = 3; index < settings.size(); index++) {
-            if (!settings.get(index).equals("")) {
-                switch (index){
-                    case 3:
-                        setVolume(Double.parseDouble(parameters.get(index)));
-                        break;
-                    case 4:
-                        if (parameters.get(4) == "1") {
-                            removeAudio();
-                        }
-                        break;
-                    case 5:
-                        setVideoBitrate(Integer.parseInt(parameters.get(index)));
-                        break;
-                    case 6:
-                        setAudioBitrate(Integer.parseInt(parameters.get(index)));
-                        break;
-                    case 7:
-                        String[] time = parameters.get(index).split(" ");
-                        getFragment(time[0], time[1]);
-                        break;
-                }
-            }
-        }
-        VideoFilterCommand videoFilter = new VideoFilterCommand(vfsetings);
-        if(!videoFilter.getCommandText().equals("")) {
-            command.add("-vf");
-            command.add(videoFilter.getCommandText());
-        }
-        command.add("-y");
-        command.add("Download\\" + outName + outFormat);
+        videoFilter = new VideoFilterCommand(vfsetings);
     }
     @Override
     public List<String> getCommand() {
+        buildCommand();
         System.out.println(command);
         return command;
     }
@@ -82,6 +48,47 @@ public class VideoCommand implements CommandBuilder {
         command.add("-i");
         command.add(input);
     }
+    
+    private void buildCommand() {
+        initCommand();
+        for (int index = 1; index < settings.size(); index++) {
+            if (!settings.get(index).equals("")) {
+                switch (index){
+                    case 1:
+                        this.outName = settings.get(1);
+                        break;
+                    case 2:
+                        this.outFormat = settings.get(2);
+                        break;
+                    case 3:
+                        setVolume(Double.parseDouble(settings.get(index)));
+                        break;
+                    case 4:
+                        if (settings.get(index) == "1") {
+                            removeAudio();
+                        }
+                        break;
+                    case 5:
+                        setVideoBitrate(Integer.parseInt(settings.get(index)));
+                        break;
+                    case 6:
+                        setAudioBitrate(Integer.parseInt(settings.get(index)));
+                        break;
+                    case 7:
+                        String[] time = settings.get(index).split(" ");
+                        getFragment(time[0], time[1]);
+                        break;
+                }
+            }
+        }
+        if(!videoFilter.getCommandText().equals("")) {
+            command.add("-vf");
+            command.add(videoFilter.getCommandText());
+        }
+        command.add("-y");
+        command.add("Download\\" + outName + outFormat);
+    }
+    
     private void setVolume(double vol) {
         command.add("-af");
         command.add("volume=" + vol);

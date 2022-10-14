@@ -1,6 +1,21 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.model.commandbuilder;
 
 import java.util.List;
+
+/**
+ * It is responsible for assembling the text for add the video filters to the video convert command.
+ *
+ * @author Adriana Olivera Ordoñez
+ * @version 1.0
+ */
 
 public class VideoFilterCommand {
     private boolean thereIsVf = false;
@@ -12,9 +27,7 @@ public class VideoFilterCommand {
     private void buildVfCommand(List<String> vfsetings) {
         for (int index = 0; index < vfsetings.size(); index++) {
             if (!vfsetings.get(index).equals("")) {
-                if (thereIsVf) {
-                    vfCommand += ",";
-                }
+                vfCommand += thereIsVf ? "," : "";
                 switch(index) {
                     case 0:
                         vfRotateVideo(Integer.parseInt(vfsetings.get(index)));
@@ -45,24 +58,19 @@ public class VideoFilterCommand {
                 vfCommand += ",";
             }
             vfCommand += "transpose=clock";
-            thereIsVf = true;
         }
     }
     private void vfSetFPS(int fps) {
         vfCommand += "fps=" + fps;
-        thereIsVf = true;
     }
     private void vfSetColor(double color) {
         vfCommand += "\"hue=s=" + color + "\""; // -vf "hue=s=0"
-        thereIsVf = true;
     }
     private void vfResize(int width, int height) {
         vfCommand += "scale=" + width + ":" + height + ":force_original_aspect_ratio=decrease,pad="  + width + ":" + height + ":-1:-1:color=black";
-        thereIsVf = true;
     }
     private void vfCropVideo(int width, int height, int posX, int posY) {
         vfCommand +="crop=" + width + ":" + height + ":" + posX + ":" + posY;
-        thereIsVf = true;
     }
     public String getCommandText() {
         return vfCommand;
