@@ -53,6 +53,7 @@ public class VideoCommand implements CommandBuilder {
             vfResize(Integer.parseInt(size[0]),Integer.parseInt(size[1]));
         }
         if (!vfCommand.equals("")) {
+            command.add("-vf");
             command.add(vfCommand);
         }
     }
@@ -92,9 +93,7 @@ public class VideoCommand implements CommandBuilder {
     }
     public void vfRotateVideo(int angle) {
         for (int rotate = 1; rotate <= angle/90; rotate ++) {
-            if (!thereIsVf) {
-                command.add("-vf");
-            } else {
+            if (thereIsVf) {
                 vfCommand += ",";
             }
             vfCommand += "transpose=clock";
@@ -102,18 +101,14 @@ public class VideoCommand implements CommandBuilder {
         }
     }
     public void vfSetFPS(int fps) {
-        if (!thereIsVf) {
-            command.add("-vf");
-        } else {
+        if (thereIsVf) {
             vfCommand += ",";
         }
         vfCommand += "fps=" + fps;
         thereIsVf = true;
     }
     public void vfSetColor(double color) {
-        if (!thereIsVf) {
-            command.add("-vf");
-        } else {
+        if (thereIsVf) {
             vfCommand += ",";
         }
         vfCommand += "\"hue=s=" + color + "\""; // -vf "hue=s=0"
@@ -121,18 +116,14 @@ public class VideoCommand implements CommandBuilder {
     }
 
     public void vfResize(int width, int height) {
-        if (!thereIsVf) {
-            command.add("-vf");
-        } else {
+        if (thereIsVf) {
             vfCommand += ",";
         }
         vfCommand += "scale=" + width + ":" + height + ":force_original_aspect_ratio=decrease,pad="  + width + ":" + height + ":-1:-1:color=black";
         thereIsVf = true;
     }
     public void vfCropVideo(int width, int height, int posX, int posY) {
-        if (!thereIsVf) {
-            command.add("-vf");
-        } else {
+        if (thereIsVf) {
             vfCommand += ",";
         }
         vfCommand +="crop=" + width + ":" + height + ":" + posX + ":" + posY;

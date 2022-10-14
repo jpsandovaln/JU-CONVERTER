@@ -20,8 +20,7 @@ public class Executor {
         InputStream errorStream = process.getErrorStream();
         InputStreamReader inputStreamReader = new InputStreamReader(errorStream);
         BufferedReader br = new BufferedReader(inputStreamReader);
-        String line = "";
-         while ((br.readLine())!= null)  {
+        while ((br.readLine())!= null)  {
 
          }
          if ( br!= null) {
