@@ -1,22 +1,24 @@
 package com.jalasoft.springboothelloworld.response;
 
 public class ImageUploadResponse {
-    private String process; 
-    private String file; 
+    private String process;
+    private String file;
     private String tool;
-    private String width_black; 
+    private String width_black;
     private String height_white;
-    private String color; 
-    private String fileout; 
+ //   private String toolcolor;
+    private String color;
+    private String fileout;
     private String format;
 
 
-    public ImageUploadResponse(String process, String file, String tool, String width_black, String height_white, String color, String fileout, String format) {
+    public ImageUploadResponse(String process, String file, String tool, String width_black, String height_white, String color, String fileout, String format) { //String toolcolor
         this.process = process;
         this.file = file;
         this.tool = tool;
         this.width_black = width_black;
         this.height_white = height_white;
+       // this.toolcolor = toolcolor;
         this.color = color;
         this.fileout = fileout;
         this.format = format;
@@ -72,6 +74,15 @@ public class ImageUploadResponse {
         this.height_white = height_white;
     }
 
+    //public String gettoolcolor() {
+    //    return toolcolor;
+    //}
+
+
+   // public void settoolcolor(String toolcolor) {
+   //     this.toolcolor = toolcolor;
+   // }
+
 
     public String getColor() {
         return color;
@@ -102,5 +113,5 @@ public class ImageUploadResponse {
         this.format = format;
     }
 
-    
+
 }

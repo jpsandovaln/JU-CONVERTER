@@ -3,7 +3,7 @@ package com.jalasoft.springboothelloworld.model.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoConverter implements Converter {
+public class VideoConverter implements CommandBuilder {
     private String input;
     private String ffmpegPath = "ffmpeg";
     private String outName = "out";
