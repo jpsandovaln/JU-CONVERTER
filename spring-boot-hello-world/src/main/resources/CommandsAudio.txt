@@ -1,0 +1,37 @@
+Command to convert Audio
+[executable path] -i [Address of the file to convert.audioFormat]  [address where the file will be saved and the file name with formatting ]
+Eg.
+ffmpeg\bin\ffmpeg.exe -i Uploads\prueba.mp3 Download\prueba.aac 
+
+Configure conversion values
+
+Configure bitrate:
+Command: -b:a bitrate
+bitrate: "128k"
+	"160k"
+	"192k"
+	"320k"
+
+Configure channels:
+Command: -ac channels
+channels: "1"
+	  "2"
+
+Configure sampling frequency
+Command: -ar sampling frequency
+ampling frequency: "32000"
+		    "44100"
+		    "48000"
+	            "96000"
+
+Configure format
+Command: filename.format
+format: "mp3"
+	"aac"
+	"ogg"
+	"flac"
+	"wma"
+	"wav"
+eg.
+ffmpeg\bin\ffmpeg.exe -i Uploads\test.flac -b:a 128k -ac 2 -ar 44100 Download\test.mp3  
+
