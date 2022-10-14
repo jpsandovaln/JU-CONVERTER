@@ -31,12 +31,12 @@ public class ImageController {
         List<String> settings = new ArrayList<>();
         String name = "E:\\workspacejala\\progra102\\JU-CONVERTER\\Uploads\\";
         settings.add(process);
-        settings.add(name + fileName);
+        settings.add("Uploads\\" + fileName);
         settings.add(tool);
         settings.add(width_black);
         settings.add(height_white);
         settings.add(color);
-        settings.add(name + fileout);
+        settings.add("Download\\" + fileout);
         settings.add(format);
 
         ImageCommand imageconverter = new ImageCommand(settings);
