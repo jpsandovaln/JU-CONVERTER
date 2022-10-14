@@ -25,7 +25,12 @@ import com.jalasoft.springboothelloworld.response.UploadFileResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-
+/**
+ * It is responsable for uploading and downloading all type of files 
+ *
+ * @author Fernanda Aguilar
+ * @version 1.0
+ */
 
 @RestController
 public class FileController {

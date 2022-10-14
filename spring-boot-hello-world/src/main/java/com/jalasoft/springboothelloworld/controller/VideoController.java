@@ -20,15 +20,21 @@ import com.jalasoft.springboothelloworld.model.Executor;
 import com.jalasoft.springboothelloworld.model.commandbuilder.CommandBuilder;
 import com.jalasoft.springboothelloworld.model.commandbuilder.VideoCommand;
 import com.jalasoft.springboothelloworld.response.VideoUploadResponse;
-
+/**
+ * It is responsable for uploading Video and converting them 
+ *
+ * @author Fernanda Aguilar
+ * @version 1.0
+ */
 
 @RestController
 public class VideoController {
 
+List<String> settings = new ArrayList<String>();
 
     @Autowired
     private FileStorageService fileStorageService;
-    
+
     @PostMapping("/uploadVideo")
     public VideoUploadResponse uploadVideo(@RequestParam("file") MultipartFile file,
                                         @RequestParam("outName") String newName,
@@ -43,7 +49,7 @@ public class VideoController {
                                         @RequestParam("color") String color,
                                         @RequestParam("size") String size,
                                         @RequestParam("cropVideo") String cropVideo) throws IOException {
-        String fileName = fileStorageService.storeFile(file);   
+        String fileName = fileStorageService.storeFile(file);
         List<String> parameters = new ArrayList<String>();
         parameters.add("Uploads\\" + fileName);
         System.out.println("Uploads\\" + fileName);

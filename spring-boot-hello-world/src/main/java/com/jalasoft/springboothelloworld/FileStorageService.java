@@ -25,7 +25,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-
+/**
+ * It is responsable for storing the uploaded file
+ *
+ * @author Fernanda Aguilar
+ * @version 1.0
+ */
 @Service
 public class FileStorageService {
 
