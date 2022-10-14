@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.springboothelloworld.FileStorageService;
 import com.jalasoft.springboothelloworld.model.Executor;
-import com.jalasoft.springboothelloworld.model.converter.AudioCommand;
+import com.jalasoft.springboothelloworld.model.commandbuilder.AudioCommand;
 import com.jalasoft.springboothelloworld.response.AudioUploadResponse;
 
 

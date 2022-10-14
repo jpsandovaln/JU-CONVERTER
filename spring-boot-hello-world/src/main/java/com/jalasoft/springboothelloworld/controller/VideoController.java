@@ -29,9 +29,12 @@ public class VideoController {
                                         @RequestParam("removeAudio") String removeAudio,
                                         @RequestParam("videoBitrate") String videoBitrate,
                                         @RequestParam("audioBitrate") String audioBitrate,
+                                        @RequestParam("videoFragment") String videoFragment,
+                                        @RequestParam("rotate") String rotate,
                                         @RequestParam("fps") String fps,
                                         @RequestParam("color") String color,
-                                        @RequestParam("size") String size) throws IOException {
+                                        @RequestParam("size") String size,
+                                        @RequestParam("cropVideo") String cropVideo) throws IOException {
         String fileName = fileStorageService.storeFile(file);   
         List<String> parameters = new ArrayList<String>();
         parameters.add("Uploads\\" + fileName);
@@ -42,9 +45,12 @@ public class VideoController {
         parameters.add(removeAudio);
         parameters.add(videoBitrate);
         parameters.add(audioBitrate);
+        parameters.add(videoFragment);
+        parameters.add(rotate);
         parameters.add(fps);
         parameters.add(color);
         parameters.add(size);
+        parameters.add(cropVideo);
         CommandBuilder builderCommand = new VideoCommand();
         builderCommand.setParameters(parameters);
         Executor executor = new Executor();
