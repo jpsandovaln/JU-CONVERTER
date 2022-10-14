@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.model;
 
 import java.io.BufferedReader;
@@ -5,6 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+/**
+ * It is responsible for executing the command in console.
+ *
+ * @author Alvaro Sivila Ramirez, Adriana Olivera Ordoñez
+ * @version 1.0
+ */
 
 public class Executor {
     private Process process;
@@ -21,7 +35,7 @@ public class Executor {
         InputStreamReader inputStreamReader = new InputStreamReader(errorStream);
         BufferedReader br = new BufferedReader(inputStreamReader);
         String line = "";
-         while ((line = br.readLine())!= null)  {
+         while ((br.readLine())!= null)  {
 
          }
          if ( br!= null) {

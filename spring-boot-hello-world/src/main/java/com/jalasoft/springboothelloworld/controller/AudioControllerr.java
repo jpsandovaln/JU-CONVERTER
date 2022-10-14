@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprieraty information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
 package com.jalasoft.springboothelloworld.controller;
 
 
@@ -10,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.springboothelloworld.FileStorageService;
 import com.jalasoft.springboothelloworld.model.Executor;
-import com.jalasoft.springboothelloworld.model.converter.AudioCommand;
+import com.jalasoft.springboothelloworld.model.commandbuilder.AudioCommand;
 import com.jalasoft.springboothelloworld.response.AudioUploadResponse;
 
 
