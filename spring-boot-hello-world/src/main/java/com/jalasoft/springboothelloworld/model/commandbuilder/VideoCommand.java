@@ -23,34 +23,47 @@ public class VideoCommand implements CommandBuilder {
             this.outName = parameters.get(1);
         }
         this.outFormat = parameters.get(2);
-        setVolume(Double.parseDouble(parameters.get(3)));
-        if (parameters.get(4) == "1") {
-            removeAudio();
-        }
-        if (!parameters.get(5).equals("")) {
-            setVideoBitrate(Integer.parseInt(parameters.get(5)));
-        }
-        if (!parameters.get(6).equals("")) {
-            setAudioBitrate(Integer.parseInt(parameters.get(6)));
-        }
-        if (!parameters.get(7).equals("")) {
-            String[] time = parameters.get(7).split(" ");
-            getFragment(time[0], time[1]);
-        }
-        if (!parameters.get(8).equals("")) {
-            vfRotateVideo(Integer.parseInt(parameters.get(8)));
-        }
-        if (!parameters.get(9).equals("")) {
-            vfSetFPS(Integer.parseInt(parameters.get(9)));
-        }
-        vfSetColor(Double.parseDouble(parameters.get(10)));
-        if (!parameters.get(12).equals("")) {
-            String[] size = parameters.get(12).split(":");
-            vfCropVideo(Integer.parseInt(size[0]),Integer.parseInt(size[1]), Integer.parseInt(size[2]), Integer.parseInt(size[3]));
-        }
-        if (!parameters.get(11).equals("")) {
-            String[] size = parameters.get(11).split("x");
-            vfResize(Integer.parseInt(size[0]),Integer.parseInt(size[1]));
+        for (int index = 3; index < parameters.size(); index++) {
+            if (!parameters.get(index).equals("")) {
+                switch (index){
+                    case 3:
+                        setVolume(Double.parseDouble(parameters.get(index)));
+                        break;
+                    case 4:
+                        if (parameters.get(4) == "1") {
+                            removeAudio();
+                        }
+                        break;
+                    case 5:
+                        setVideoBitrate(Integer.parseInt(parameters.get(index)));
+                        break;
+                    case 6:
+                        setAudioBitrate(Integer.parseInt(parameters.get(index)));
+                        break;
+                    case 7:
+                        String[] time = parameters.get(index).split(" ");
+                        getFragment(time[0], time[1]);
+                        break;
+                    case 8:
+                        vfRotateVideo(Integer.parseInt(parameters.get(index)));
+                        break;
+                    case 9:
+                        vfSetFPS(Integer.parseInt(parameters.get(9)));
+                        break;
+                    case 10:
+                        vfSetColor(Double.parseDouble(parameters.get(10)));
+                        break;
+                    case 11:
+                        String[] size = parameters.get(11).split("x");
+                        vfResize(Integer.parseInt(size[0]),Integer.parseInt(size[1]));
+                        break;
+                    case 12:
+                        String[] crop = parameters.get(12).split(":");
+                        vfCropVideo(Integer.parseInt(crop[0]),Integer.parseInt(crop[1]),
+                                    Integer.parseInt(crop[2]), Integer.parseInt(crop[3]));
+                        break;
+                }
+            }
         }
         if (!vfCommand.equals("")) {
             command.add("-vf");
