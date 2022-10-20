@@ -15,7 +15,7 @@ import net.sourceforge.tess4j.TesseractException;
 import java.io.File;
 
 /**
- * It is responsible for uploading Audios and converting them
+ * It is responsible for reading images and converting them to text
  *
  * @author Hugo Solares
  * @version 1.0
