@@ -11,11 +11,13 @@ package com.jalasoft.convert.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.convert.FileStorageService;
+import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.Executor;
 import com.jalasoft.convert.model.commandbuilder.CommandBuilder;
 import com.jalasoft.convert.model.commandbuilder.VideoCommand;
@@ -31,7 +33,7 @@ import com.jalasoft.convert.response.VideoUploadResponse;
 public class VideoController {
 
 List<String> settings = new ArrayList<String>();
-
+    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -50,6 +52,7 @@ List<String> settings = new ArrayList<String>();
                                         @RequestParam("size") String size,
                                         @RequestParam("cropVideo") String cropVideo) throws IOException {
         String fileName = fileStorageService.storeFile(file);
+        LOG.fine("File uploaded: " + fileName);
         List<String> parameters = new ArrayList<String>();
         parameters.add("Uploads\\" + fileName);
         
@@ -65,11 +68,14 @@ List<String> settings = new ArrayList<String>();
         parameters.add(color);
         parameters.add(size);
         parameters.add(cropVideo);
-
+        
         CommandBuilder builderCommand = new VideoCommand();
         builderCommand.setParameters(parameters);
+        LOG.fine("Bulding command...");
         Executor executor = new Executor();
         executor.runCommand(builderCommand.getCommand());
+        LOG.fine("Executing command...");
+        LOG.info("Dowload the new file");
         return new VideoUploadResponse(fileName,
                 file.getContentType(), newName, outFormat, volume, removeAudio, videoBitrate, audioBitrate, fps, color, size);
     }
