@@ -12,11 +12,13 @@ package com.jalasoft.convert.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.convert.FileStorageService;
+import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.Executor;
 import com.jalasoft.convert.model.commandbuilder.AudioCommand;
 import com.jalasoft.convert.response.AudioUploadResponse;
@@ -31,7 +33,7 @@ import com.jalasoft.convert.response.AudioUploadResponse;
 @RestController
 public class AudioControllerr {
 
-
+    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -42,6 +44,7 @@ public class AudioControllerr {
                                         @RequestParam("sampling frequency") String samplingFrequency,
                                         @RequestParam("format") String format) throws IOException {
         String fileName = fileStorageService.storeFile(file);
+        LOG.info("File uploaded: " + fileName);
         List<String> parameters = new ArrayList<>();
         String name = "Uploads\\";
         parameters.add(fileName);
