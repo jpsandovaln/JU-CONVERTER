@@ -8,8 +8,8 @@
  */
 package com.jalasoft.convert;
 
-import com.jalasoft.convert.exception.FileStorageException;
-import com.jalasoft.convert.exception.MyFileNotFoundException;
+import com.jalasoft.convert.common.exception.FileStorageException;
+import com.jalasoft.convert.common.exception.MyFileNotFoundException;
 import com.jalasoft.convert.properties.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
