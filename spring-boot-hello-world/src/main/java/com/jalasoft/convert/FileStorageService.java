@@ -35,7 +35,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileStorageService {
 
-    private final Path fileStorageLocation;
+    public final Path fileStorageLocation;
     private final Path root = Paths.get("documentconvert");
 
     @PostConstruct
