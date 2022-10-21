@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2022 Jala University.
- *
+ * <p>
  * This software is the confidential and proprieraty information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+
 /**
  * It is responsable for storing the uploaded file
  *
@@ -40,13 +41,14 @@ public class FileStorageService {
     @PostConstruct
     public void init() {
         try {
-            if(!Files.exists(root)){
+            if (!Files.exists(root)) {
                 Files.createDirectory(root);
             }
         } catch (IOException e) {
             throw new RuntimeException("Could not initialize folder for upload!");
         }
     }
+
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
@@ -64,7 +66,7 @@ public class FileStorageService {
 
         try {
             // Check if the file's name contains invalid characters
-            if(fileName.contains("..")) {
+            if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
@@ -95,7 +97,7 @@ public class FileStorageService {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
-            if(resource.exists()) {
+            if (resource.exists()) {
                 return resource;
             } else {
                 throw new MyFileNotFoundException("File not found " + fileName);
