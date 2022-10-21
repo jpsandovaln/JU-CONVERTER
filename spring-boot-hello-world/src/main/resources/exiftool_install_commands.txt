@@ -1,0 +1,5 @@
+Exiftool needs to be installed in order to run the Converter, the following commands or links are for installing them.
+
+Linux Ubuntu: "sudo apt install libimage-exiftool-perl"
+Windows: "https://www.youtube.com/watch?v=dAJ2jn0Flp0"
+MacOsx with Homebrew: "brew install exiftool"
