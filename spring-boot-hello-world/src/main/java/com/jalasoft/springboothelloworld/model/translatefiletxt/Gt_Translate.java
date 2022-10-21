@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2022 Jala University.
+ * <p> * This software is the confidential and proprietary information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
+
 package com.jalasoft.springboothelloworld.model.translatefiletxt;
 
 import com.alibaba.fastjson.JSONArray;
@@ -13,7 +21,11 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
-
+/*
+ * It is responsible for using the Google Translate API to translate a text document.
+ * @author Sarai Alvarez
+ * @version 1.0
+ */
 class Gt_Translate {
 
     public static String txt;
