@@ -10,14 +10,13 @@ import javax.swing.JOptionPane;
 
 public class TxtFile {
 
+    private static String newPath;
     private static Gt_Translate g;
     public static String txt;
     public static File file;
-    public static String[] name ;
-        public static void main(String args[]) throws Exception {
-            GetPath("D:\\jala\\progra102\\proyectoprogra102\\archivo de texto\\prueba.txt", "en", "de");
-        }
-        public static void GetPath(String path, String languageE, String languageS) {
+    public static String[] name;
+
+    public void getPath(String path, String languageE, String languageS) {
             // We get the path of the txt file
             //file = new File("D:\\jala\\progra102\\proyectoprogra102\\archivo de texto\\prueba.txt");
             file = new File(path);
@@ -57,6 +56,9 @@ public class TxtFile {
             }
         }
 
+        public String getNewPath() {
+            return newPath;
+        }
        //Create a new text file to which the translation of the text is added
         public static void writeee(String nombre,String languageE, String languageS) {
             File f;
@@ -69,6 +71,8 @@ public class TxtFile {
                 bw = new BufferedWriter(w);
                 wr = new PrintWriter(bw);
                 wr.write(g.translateText(txt,languageE,languageS));
+                // newPath= f.getAbsolutePath();
+                newPath= f.toPath().toString();
 
                 wr.close();
                 bw.close();
