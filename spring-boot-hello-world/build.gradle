@@ -15,6 +15,8 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.springframework', name: 'spring-test', version: '3.1.1.RELEASE'
+
 
 	implementation group: 'fr.opensagres.xdocreport', name: 'fr.opensagres.poi.xwpf.converter.pdf', version: '2.0.4'
 	implementation group: 'fr.opensagres.xdocreport', name: 'fr.opensagres.poi.xwpf.converter.xhtml', version: '2.0.4'
