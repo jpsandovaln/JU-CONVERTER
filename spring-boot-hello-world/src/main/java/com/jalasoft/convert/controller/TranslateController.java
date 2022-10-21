@@ -1,10 +1,11 @@
-package com.jalasoft.springboothelloworld.controller;
+package com.jalasoft.convert.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.jalasoft.springboothelloworld.FileStorageService;
+
+import com.jalasoft.convert.FileStorageService;
 import com.jalasoft.springboothelloworld.model.translatefiletxt.*;
 
 import org.springframework.core.io.InputStreamResource;
