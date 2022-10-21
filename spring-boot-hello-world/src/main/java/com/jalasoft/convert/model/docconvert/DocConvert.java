@@ -1,12 +1,14 @@
 package com.jalasoft.convert.model.docconvert;
 
+import com.jalasoft.convert.model.coverters.Converter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public interface DocConvert {
-    void convert (InputStream inputStream, OutputStream outputStream) throws IOException;
-
-    //
-    //void laguage (InputStream doc, String typeLanguageOrigin, String typeLanguageTranslate);
+public abstract class DocConvert implements Converter {
+    @Override
+    public void convert(InputStream inputStream, OutputStream outputStream) throws IOException {
+        this.convert(inputStream, outputStream);
+    }
 }
