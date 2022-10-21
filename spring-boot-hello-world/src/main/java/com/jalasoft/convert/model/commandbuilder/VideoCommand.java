@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2022 Jala University.
- *
+ * <p>
  * This software is the confidential and proprieraty information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -26,7 +26,8 @@ public class VideoCommand implements CommandBuilder {
     private List<String> settings;
     private VideoFilterCommand videoFilter;
 
-    public VideoCommand() {}
+    public VideoCommand() {
+    }
 
     @Override
     public void setParameters(List<String> parameters) {
@@ -35,6 +36,7 @@ public class VideoCommand implements CommandBuilder {
         this.input = settings.get(0);
         videoFilter = new VideoFilterCommand(vfsetings);
     }
+
     @Override
     public List<String> getCommand() {
         buildCommand();
@@ -48,12 +50,12 @@ public class VideoCommand implements CommandBuilder {
         command.add("-i");
         command.add(input);
     }
-    
+
     private void buildCommand() {
         initCommand();
         for (int index = 1; index < settings.size(); index++) {
             if (!settings.get(index).equals("")) {
-                switch (index){
+                switch (index) {
                     case 1:
                         this.outName = settings.get(1);
                         break;
@@ -81,29 +83,33 @@ public class VideoCommand implements CommandBuilder {
                 }
             }
         }
-        if(!videoFilter.getCommandText().equals("")) {
+        if (!videoFilter.getCommandText().equals("")) {
             command.add("-vf");
             command.add(videoFilter.getCommandText());
         }
         command.add("-y");
         command.add("Download\\" + outName + outFormat);
     }
-    
+
     private void setVolume(double vol) {
         command.add("-af");
         command.add("volume=" + vol);
     }
+
     private void removeAudio() {
         command.add("-an");
     }
+
     private void setVideoBitrate(int videoBitrate) {
         command.add("-b:v");
         command.add(videoBitrate + "k");
     }
+
     private void setAudioBitrate(int audioBitrate) {
         command.add("-b:a");
         command.add(audioBitrate + "k");
     }
+
     private void getFragment(String initTime, String finalTime) {
         command.add("-ss");
         command.add(initTime);

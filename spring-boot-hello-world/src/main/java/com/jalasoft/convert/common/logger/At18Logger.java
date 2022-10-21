@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.springboothelloworld.common.logger;
+package com.jalasoft.convert.common.logger;
 
 import java.io.FileInputStream;
 import java.io.IOException;
