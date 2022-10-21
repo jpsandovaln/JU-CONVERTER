@@ -13,8 +13,8 @@ import java.io.IOException;
 
 @Service
 public class ConvertImageToTextOCR {
-    public void convertImageToText(String imageInputname, String OutputName) throws IOException {
+    public void convertImageToText(String imageInputname, String lang) throws IOException {
         OCR imageOCR = new OCR();
-        imageOCR.convertOCR(imageInputname, OutputName);
+        imageOCR.convertOCR(imageInputname, lang);
     }
 }
