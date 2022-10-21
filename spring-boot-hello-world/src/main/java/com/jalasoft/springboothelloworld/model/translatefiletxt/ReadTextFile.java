@@ -26,6 +26,7 @@ public class ReadTextFile {
         while ((line = br.readLine()) != null) {
             sb.append(line + System.lineSeparator());
         }
+        br.close();
         return sb.toString();
     }
 }
