@@ -8,8 +8,8 @@
  */
 package com.jalasoft.convert;
 
-import com.jalasoft.convert.exception.FileStorageException;
-import com.jalasoft.convert.exception.MyFileNotFoundException;
+import com.jalasoft.convert.common.exception.FileStorageException;
+import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.properties.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -100,10 +100,10 @@ public class FileStorageService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new MyFileNotFoundException("File not found " + fileName);
+                throw new FileNotFoundException("File not found " + fileName);
             }
         } catch (MalformedURLException ex) {
-            throw new MyFileNotFoundException("File not found " + fileName, ex);
+            throw new FileNotFoundException("File not found " + fileName, ex);
         }
     }
 }

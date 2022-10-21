@@ -6,18 +6,18 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.exception;
+package com.jalasoft.convert.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class MyFileNotFoundException extends RuntimeException {
-    public MyFileNotFoundException(String message) {
+public class FileNotFoundException extends RuntimeException {
+    public FileNotFoundException(String message) {
         super(message);
     }
 
-    public MyFileNotFoundException(String message, Throwable cause) {
+    public FileNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -9,6 +9,7 @@
 package com.jalasoft.convert.controller;
 
 import com.jalasoft.convert.FileStorageService;
+import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * It is responsable for uploading Video and converting them
@@ -32,8 +34,8 @@ import java.util.List;
 @RestController
 public class VideoController {
 
-    List<String> settings = new ArrayList<String>();
-
+List<String> settings = new ArrayList<String>();
+    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -53,6 +55,7 @@ public class VideoController {
                             @RequestParam("size") String size,
                             @RequestParam("cropVideo") String cropVideo, HttpServletResponse response) throws IOException {
         String fileName = fileStorageService.storeFile(file);
+        LOG.fine("File uploaded: " + fileName);
         VideoCommandAdapterConvert videoCommandAdapterConvert = new VideoCommandAdapterConvert();
         VideoConverterConfigurationValues setting = new VideoConverterConfigurationValues(fileName, newName, outFormat, volume,
                 removeAudio, videoBitrate, audioBitrate, videoFragment, rotate, fps, color, size, cropVideo);
