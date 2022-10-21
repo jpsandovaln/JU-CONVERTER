@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class MetadataExtractor {
     public static final String EXIFTOOL = "exiftool";
-    public static final String FILE_TXT = "file.txt";
+    public static final String FILE_TXT = "Uploads/file.txt";
     private File file;
     
     public MetadataExtractor(File file) {
