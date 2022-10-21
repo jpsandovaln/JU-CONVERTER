@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.jalasoft.convert.FileStorageService;
-//import com.jalasoft.convert.model.MetadataExtractor;
+import com.jalasoft.convert.model.MetadataExtractor;
 import com.jalasoft.convert.response.MetadataUploadResponse;
 
 @RestController
@@ -30,15 +30,15 @@ public class MetadataController {
         File metadataFile = new File(targetLocation.toString());
         file.transferTo(metadataFile);
 
-        //MetadataExtractor metadata = new MetadataExtractor(metadataFile);
-        //File newFile = metadata.extractMetadataTxt();
+        MetadataExtractor metadata = new MetadataExtractor(metadataFile);
+        File newFile = metadata.extractMetadataTxt();
 
-        /*String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+        String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(newFile.getName())
-                .toUriString(); */
+                .toUriString();
 
-        return new MetadataUploadResponse(fileName,newFormat, "a");//metadataDownloadUri);
+        return new MetadataUploadResponse(fileName,newFormat, metadataDownloadUri);
     }
 
 }
