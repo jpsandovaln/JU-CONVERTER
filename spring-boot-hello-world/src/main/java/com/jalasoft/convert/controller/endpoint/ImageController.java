@@ -1,4 +1,4 @@
-package com.jalasoft.convert.controller;
+package com.jalasoft.convert.controller.endpoint;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

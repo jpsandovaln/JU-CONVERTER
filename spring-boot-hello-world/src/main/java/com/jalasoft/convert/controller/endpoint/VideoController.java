@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.controller;
+package com.jalasoft.convert.controller.endpoint;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.common.logger.At18Logger;

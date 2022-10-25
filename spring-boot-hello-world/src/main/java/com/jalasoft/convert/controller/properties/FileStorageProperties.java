@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.properties;
+package com.jalasoft.convert.controller.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "file")

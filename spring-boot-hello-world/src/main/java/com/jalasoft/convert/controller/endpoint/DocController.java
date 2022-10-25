@@ -1,4 +1,4 @@
-package com.jalasoft.convert.controller;
+package com.jalasoft.convert.controller.endpoint;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.controller.service.ConvertWordDocumentToPDF;

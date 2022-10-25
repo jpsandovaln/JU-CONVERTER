@@ -10,7 +10,7 @@ package com.jalasoft.convert.controller.service;
 
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.exception.FileNotFoundException;
-import com.jalasoft.convert.model.properties.FileStorageProperties;
+import com.jalasoft.convert.controller.properties.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
