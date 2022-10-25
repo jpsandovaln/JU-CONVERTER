@@ -1,7 +1,7 @@
 package com.jalasoft.convert.controller;
 
-import com.jalasoft.convert.model.service.FileStorageService;
-import com.jalasoft.convert.model.service.ConvertWordDocumentToPDF;
+import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.controller.service.ConvertWordDocumentToPDF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

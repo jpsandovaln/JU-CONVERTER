@@ -16,9 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import com.jalasoft.convert.model.service.ConvertImageToTextOCR;
+import com.jalasoft.convert.controller.service.ConvertImageToTextOCR;
 
-import com.jalasoft.convert.model.service.FileStorageService;
+import com.jalasoft.convert.controller.service.FileStorageService;
 
 import java.io.File;
 import java.io.FileInputStream;

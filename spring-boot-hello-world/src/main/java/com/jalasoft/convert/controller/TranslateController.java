@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jalasoft.convert.model.service.FileStorageService;
+import com.jalasoft.convert.controller.service.FileStorageService;
 
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;

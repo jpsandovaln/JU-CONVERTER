@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.service;
+package com.jalasoft.convert.controller.service;
 
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.exception.FileNotFoundException;

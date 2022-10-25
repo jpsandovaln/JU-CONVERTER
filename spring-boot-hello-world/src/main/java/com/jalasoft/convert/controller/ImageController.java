@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import com.jalasoft.convert.model.service.FileStorageService;
+import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.Executor;
 import com.jalasoft.convert.model.commandbuilder.ImageCommand;
 import com.jalasoft.convert.model.response.ImageUploadResponse;

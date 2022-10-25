@@ -8,7 +8,7 @@
  */
 package com.jalasoft.convert.controller;
 
-import com.jalasoft.convert.model.service.FileStorageService;
+import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
