@@ -6,7 +6,7 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.springboothelloworld.model.translatefiletxt;
+package com.jalasoft.convert.model.translatefiletxt;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -6,8 +6,7 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.springboothelloworld.model.translatefiletxt;
-
+package com.jalasoft.convert.model.translatefiletxt;
 import com.alibaba.fastjson.JSONArray;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;

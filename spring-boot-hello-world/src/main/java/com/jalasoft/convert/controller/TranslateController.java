@@ -1,12 +1,12 @@
 package com.jalasoft.convert.controller;
 
+import com.jalasoft.convert.model.translatefiletxt.TxtFile;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jalasoft.convert.FileStorageService;
-import com.jalasoft.springboothelloworld.model.translatefiletxt.*;
+import com.jalasoft.convert.model.service.FileStorageService;
 
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;

@@ -6,11 +6,11 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert;
+package com.jalasoft.convert.model.service;
 
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.exception.FileNotFoundException;
-import com.jalasoft.convert.properties.FileStorageProperties;
+import com.jalasoft.convert.model.properties.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

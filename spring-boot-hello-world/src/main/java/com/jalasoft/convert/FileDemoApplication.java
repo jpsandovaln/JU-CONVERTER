@@ -11,7 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-import com.jalasoft.convert.properties.FileStorageProperties;
+import com.jalasoft.convert.model.properties.FileStorageProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties({FileStorageProperties.class })

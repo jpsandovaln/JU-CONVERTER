@@ -16,9 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import com.jalasoft.convert.service.ConvertImageToTextOCR;
+import com.jalasoft.convert.model.service.ConvertImageToTextOCR;
 
-import com.jalasoft.convert.FileStorageService;
+import com.jalasoft.convert.model.service.FileStorageService;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,15 +41,10 @@ public class OcrController {
     @PostMapping("/uploadOcrImg")
     public ResponseEntity<Object> translateGt(@RequestParam("img") MultipartFile file,
             @RequestParam("lang") String lang) throws IOException {
-
         String fileName = fileStorageService.storeFile(file);
-
         ConvertImageToTextOCR convert = new ConvertImageToTextOCR();
         convert.convertImageToText(fileName, lang);
-        
         return  downloadFile(convert.getPathOcr());
-
-       
     }
 
     public ResponseEntity<Object> downloadFile(String pathOcr) throws IOException  {

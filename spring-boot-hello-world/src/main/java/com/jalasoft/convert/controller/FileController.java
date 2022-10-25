@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.jalasoft.convert.FileStorageService;
-import com.jalasoft.convert.response.UploadFileResponse;
+import com.jalasoft.convert.model.service.FileStorageService;
+import com.jalasoft.convert.model.response.UploadFileResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
