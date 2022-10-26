@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
+import com.jalasoft.convert.middleware.AudioControllerMiddleware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +35,7 @@ import com.jalasoft.convert.model.response.AudioUploadResponse;
 @RestController
 public class AudioControllerr {
 
+    AudioControllerMiddleware audioControllerMiddleware = new AudioControllerMiddleware();
     private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
@@ -44,21 +46,7 @@ public class AudioControllerr {
                                         @RequestParam("channels") String channels,
                                         @RequestParam("sampling frequency") String samplingFrequency,
                                         @RequestParam("format") String format) throws IOException {
-        String fileName = fileStorageService.storeFile(file);
-        LOG.info("File uploaded: " + fileName);
-        List<String> parameters = new ArrayList<>();
-        String name = "Uploads\\";
-        parameters.add(fileName);
-        parameters.add(bitrate);
-        parameters.add(channels);
-        parameters.add(samplingFrequency);
-        parameters.add(format);
-        AudioCommand audioConverter = new AudioCommand(name + fileName);
-        audioConverter.setParameters(parameters);
-        Executor executor = new Executor();
-        executor.runCommand(audioConverter.getCommand());
-        return new AudioUploadResponse(fileName,
-                file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format);
+        return audioControllerMiddleware.uploadAudioFile(file, bitrate, channels, samplingFrequency, format, fileStorageService);
     }
 
 }

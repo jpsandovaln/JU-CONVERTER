@@ -8,6 +8,7 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.middleware.FileControllerMiddleware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import java.io.IOException;
 @RestController
 public class FileController {
 
+    FileControllerMiddleware fileControllerMiddleware = new FileControllerMiddleware();
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @Autowired
@@ -42,37 +44,11 @@ public class FileController {
     
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(fileName)
-                .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+        return fileControllerMiddleware.uploadFileMiddleware(file, fileStorageService);
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-        // Loads the file as a Resource
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
-
-        // Identify the file's type
-        String contentType = null;
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            logger.info("Could not determine file type.");
-        }
-
-        // If content type if type could not be determined
-        if(contentType == null) {
-            contentType = "application/octet-stream";
-        }
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
+        return  fileControllerMiddleware.downloadFileMiddleware(fileName, request, fileStorageService);
     }
 }

@@ -1,5 +1,6 @@
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.middleware.TranslateControllerMiddleware;
 import com.jalasoft.convert.model.translatefiletxt.TxtFile;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,7 @@ import java.io.IOException;
 
 @RestController
 public class TranslateController {
+  TranslateControllerMiddleware translateControllerMiddleware = new TranslateControllerMiddleware();
 
   @Autowired
     private FileStorageService fileStorageService;
@@ -28,31 +30,8 @@ public class TranslateController {
     public ResponseEntity<Object> translateGt(@RequestParam("text") MultipartFile file, 
                             @RequestParam("langI") String langI,
                             @RequestParam("langO") String langO) throws IOException{
-      
-      String fileName = fileStorageService.storeFile(file);
-      String path = "Uploads\\"+fileName;
-    
-      TxtFile tFile = new TxtFile();
-      tFile.getPath(path,langI,langO);
-                                
-      return downloadFile(tFile.getNewPath());
+      return translateControllerMiddleware.translateGt(file, langI, langO, fileStorageService);
     }
 
-    public ResponseEntity<Object> downloadFile(String pathOcr) throws IOException {
-      String filename = pathOcr;
-      File file = new File(filename);
-      InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-      HttpHeaders headers = new HttpHeaders();
-
-      headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
-      headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-      headers.add("Pragma", "no-cache");
-      headers.add("Expires", "0");
-
-      ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(
-              file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
-
-      return responseEntity;
-  }
 
 }

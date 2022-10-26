@@ -2,6 +2,7 @@ package com.jalasoft.convert.controller.endpoint;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.controller.service.ConvertWordDocumentToPDF;
+import com.jalasoft.convert.middleware.DocControllerMiddleware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import java.nio.file.Path;
  */
 @RestController
 public class DocController {
+    DocControllerMiddleware docControllerMiddleware = new DocControllerMiddleware();
     @Autowired
     private FileStorageService fileStorageService;
     @Autowired
@@ -30,12 +32,6 @@ public class DocController {
 
     @PostMapping("/convertdocument")
     public void readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response) throws IOException {
-        Path pathFile = fileStorageService.save(file);
-        InputStream inputStream = new FileInputStream(pathFile.toFile());
-        documentWord.convertWordDocument(inputStream, response.getOutputStream());
-
-        response.addHeader("Content-disposition", "attachment; filename=" + "doc.pdf");
-        response.setContentType("application/pdf");
-        response.flushBuffer();
+        docControllerMiddleware.readDocFunctionality(file, response, fileStorageService, documentWord);
     }
 }
