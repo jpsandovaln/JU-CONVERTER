@@ -1,4 +1,4 @@
-package com.jalasoft.convert.service;
+package com.jalasoft.convert.controller.service;
 
 import com.jalasoft.convert.model.docconvert.DocConvert;
 import com.jalasoft.convert.model.docconvert.XWPFWordDocument;

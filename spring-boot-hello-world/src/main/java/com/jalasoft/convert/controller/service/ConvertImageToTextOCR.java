@@ -1,4 +1,4 @@
-package com.jalasoft.convert.service;
+package com.jalasoft.convert.controller.service;
 
 /**
  * It is responsible for receiving images and converting them to text

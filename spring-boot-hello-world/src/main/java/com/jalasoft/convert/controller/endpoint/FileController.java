@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.controller;
+package com.jalasoft.convert.controller.endpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.jalasoft.convert.FileStorageService;
-import com.jalasoft.convert.response.UploadFileResponse;
+import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.model.response.UploadFileResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

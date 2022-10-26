@@ -1,4 +1,4 @@
-package com.jalasoft.convert.response;
+package com.jalasoft.convert.model.response;
 /**
  * It is responsable returning a response to a request 
  *
