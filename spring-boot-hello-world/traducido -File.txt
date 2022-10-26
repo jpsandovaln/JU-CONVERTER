@@ -1,0 +1,45 @@
+﻿
+Solo evaluación. Creado con Aspose.Words. Copyright 2003-2022 Aspose Pty Ltd.
+40 siglas y abreviaturas comerciales útiles
+ABC - siempre estar cerrando
+Lo antes posible, tan pronto como sea posible
+B2B: empresa a empresa
+B2C: empresa a consumidor
+CAD: diseño asistido por computadora
+CEO - director ejecutivo
+CFO - director financiero
+CIO - director de inversiones/director de información
+CMO - director de marketing
+COO - director de operaciones
+CTO - director de tecnología
+DOE – dependiendo del experimento
+EBITDA: ganancias antes de intereses, impuestos, depreciación y amortización
+EOD - fin del día/fin de la discusión
+ERP: planificación de recursos empresariales (software de gestión comercial que una empresa puede usar para almacenar y administrar datos de cada etapa del negocio)
+ESOP: plan de propiedad de acciones para empleados
+ETA – hora estimada de llegada
+FYI - para su información
+HTML: lenguaje de marcas de hipertexto
+IPO - oferta pública inicial
+ISP - proveedor de servicios de Internet
+KPI: indicadores clave de rendimiento
+LLC - sociedad de responsabilidad limitada
+MILLA - máximo impacto, poco esfuerzo
+MOOC – curso en línea abierto masivo
+MSRP: precio minorista sugerido por el fabricante
+NDA - acuerdo de confidencialidad
+NOI - ingreso operativo neto
+NRN: no es necesario responder
+OTC: de venta libre
+relaciones públicas - relaciones públicas
+Control de calidad: control de calidad
+I+D – investigación y desarrollo
+RFP - solicitud de propuesta
+ROI – retorno de la inversión
+PVP – precio de venta recomendado
+SEO – optimización de motores de búsqueda
+SLA: acuerdo de nivel de servicio
+IVA – impuesto al valor agregado
+VPN – red privada virtual
+
+Creado con una copia de evaluación de Aspose.Words. Para descubrir las versiones completas de nuestras API, visite: https://products.aspose.com/words/
