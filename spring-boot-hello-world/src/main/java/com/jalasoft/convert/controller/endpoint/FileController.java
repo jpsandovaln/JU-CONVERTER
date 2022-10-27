@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.response.UploadFileResponse;
+import com.jalasoft.convert.controller.response.UploadFileResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

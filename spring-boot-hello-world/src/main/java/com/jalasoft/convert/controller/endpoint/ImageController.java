@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.Executor;
+import com.jalasoft.convert.controller.executor.Executor;
 import com.jalasoft.convert.model.commandbuilder.ImageCommand;
-import com.jalasoft.convert.model.response.ImageUploadResponse;
+import com.jalasoft.convert.controller.response.ImageUploadResponse;
 /**
  * It is responsable for uploading Images and converting them 
  *

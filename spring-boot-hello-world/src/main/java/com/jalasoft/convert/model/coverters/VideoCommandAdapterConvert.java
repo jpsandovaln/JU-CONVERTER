@@ -1,6 +1,6 @@
 package com.jalasoft.convert.model.coverters;
 
-import com.jalasoft.convert.model.Executor;
+import com.jalasoft.convert.controller.executor.Executor;
 import com.jalasoft.convert.model.commandbuilder.CommandBuilder;
 import com.jalasoft.convert.model.commandbuilder.VideoCommand;
 import org.apache.commons.io.IOUtils;

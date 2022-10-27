@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.response;
+package com.jalasoft.convert.controller.response;
 
 /**
  * It is responsable for uploading Audios and converting them

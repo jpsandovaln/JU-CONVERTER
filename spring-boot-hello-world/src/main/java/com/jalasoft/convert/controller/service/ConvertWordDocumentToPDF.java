@@ -1,7 +1,7 @@
 package com.jalasoft.convert.controller.service;
 
-import com.jalasoft.convert.model.docconvert.DocConvert;
-import com.jalasoft.convert.model.docconvert.XWPFWordDocument;
+import com.jalasoft.convert.model.coverters.DocConvert;
+import com.jalasoft.convert.model.coverters.XWPFWordDocument;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

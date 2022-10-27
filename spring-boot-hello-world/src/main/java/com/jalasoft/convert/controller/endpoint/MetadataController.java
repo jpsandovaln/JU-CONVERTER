@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.MetadataExtractor;
-import com.jalasoft.convert.model.response.MetadataUploadResponse;
+import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 
 
 /**
