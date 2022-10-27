@@ -1,7 +1,8 @@
-package com.jalasoft.convert.controller.middleware;
+package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.logger.At18Logger;
 import org.apache.poi.EmptyFileException;
+
 import javax.servlet.*;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * It is responsible to put a middelware between postman and VideoController
+ * It is responsible to put a middelware between postman and MetadataController
  *
  * Methods to use for HttpServletRequest req: https://docs.oracle.com/javaee/6/api/javax/servlet/ServletRequest.html#getParameterMap()
  * Methods to get the parameters of a file req.getPart("Key file"): https://tomcat.apache.org/tomcat-8.0-doc/api/org/apache/catalina/core/ApplicationPart.html
@@ -22,8 +23,9 @@ import java.util.logging.Logger;
  * @author Mauricio Aliendre
  * @version 1.0
  */
-@WebFilter(urlPatterns = "/uploadVideo")
-public class VideoControllerMiddleware implements Filter{
+@WebFilter(urlPatterns = "/metadata")
+public class MetadataControllerMiddleware implements Filter{
+
     private static final Logger LOG = new At18Logger().getLogger();
     @Override
     public void doFilter(ServletRequest request,
