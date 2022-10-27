@@ -4,7 +4,10 @@ import com.aspose.words.Document;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.translatefiletxt.TxtFile;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.beans.factory.annotation.Autowired;

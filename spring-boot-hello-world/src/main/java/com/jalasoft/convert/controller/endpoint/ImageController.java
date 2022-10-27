@@ -7,7 +7,9 @@ import com.jalasoft.convert.common.exception.ExecuteException;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jalasoft.convert.controller.response.ErrorResponse;
@@ -17,7 +19,7 @@ import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.executor.Executor;
 import com.jalasoft.convert.model.commandbuilder.ImageCommand;
 /**
- * It is responsable for uploading Images and converting them 
+ * It is responsible for uploading Images and converting them
  *
  * @author Fernanda Aguilar
  * @version 1.0
