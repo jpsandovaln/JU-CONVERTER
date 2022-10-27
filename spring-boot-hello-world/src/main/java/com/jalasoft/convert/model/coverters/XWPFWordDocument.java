@@ -1,4 +1,4 @@
-package com.jalasoft.convert.model.docconvert;
+package com.jalasoft.convert.model.coverters;
 
 import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;

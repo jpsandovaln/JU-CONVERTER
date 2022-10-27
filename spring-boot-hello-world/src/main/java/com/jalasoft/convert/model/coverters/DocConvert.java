@@ -1,4 +1,4 @@
-package com.jalasoft.convert.model.docconvert;
+package com.jalasoft.convert.model.coverters;
 
 import com.jalasoft.convert.model.coverters.Converter;
 

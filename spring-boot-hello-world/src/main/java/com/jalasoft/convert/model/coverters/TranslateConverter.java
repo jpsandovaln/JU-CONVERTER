@@ -1,4 +1,4 @@
-package com.jalasoft.convert.model.translateconvert;
+package com.jalasoft.convert.model.coverters;
 
 import com.jalasoft.convert.model.coverters.Converter;
 import com.jalasoft.convert.model.coverters.ConverterConfiguration;

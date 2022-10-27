@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model;
+package com.jalasoft.convert.controller.executor;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +25,6 @@ public class Executor {
 
     public void runCommand(List<String> command) throws IOException {
         initProcess(command);
-        //readConsole();
     }
 
     private void initProcess(List<String> command) throws IOException {
@@ -46,15 +45,6 @@ public class Executor {
          if (errorStream != null) {
             errorStream.close();
          }
-
-        /*builder.redirectErrorStream(true);
-
-        try {
-            process = builder.start();
-        } catch (IOException e) {
-            System.out.println (e);
-
-        }*/
     }
     private void readConsole () {
         try {
