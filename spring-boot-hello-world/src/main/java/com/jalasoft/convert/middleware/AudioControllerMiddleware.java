@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 @WebFilter(urlPatterns = "/uploadAudio")
-public class AudioControllerMiddleware implements  Filter{
+public class AudioControllerMiddleware implements Filter{
     private static final Logger LOG = new At18Logger().getLogger();
 
     @Override
