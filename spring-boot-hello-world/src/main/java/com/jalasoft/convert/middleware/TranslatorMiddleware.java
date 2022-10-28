@@ -6,6 +6,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -29,13 +30,14 @@ public class TranslatorMiddleware implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            if(((req.getParameter("langI").length() == 2) && req.getParameter("langO").length() == 2) && (req.getPart("text").getContentType().contains("text") || req.getPart("text").getContentType() != null)){
+            if(((req.getParameter("langI").length() == 2) && req.getParameter("langO").length() == 2) && (req.getPart("text").getContentType().contains("text") || req.getPart("text").getContentType().contains("word"))){
                 LOG.info("Proccess Executed Sucessfully");
+                LOG.info(req.getPart("text").getContentType());
                 chain.doFilter(request, response);
                 LOG.info ("Response Status Code is " + res.getStatus());
             } else {
-                LOG.info("the file is no file or there is an empty field");
-                throw new EmptyFileException();
+                LOG.info("The language is incorrect or the file does not contain a .txt or .dock file");
+                throw new FileNotFoundException("The language is incorrect or the file does not contain a .txt or .dock file");
             }
         } catch (InstantiationError ie){
             LOG.info("Catch Instantiation Error: " + ie);

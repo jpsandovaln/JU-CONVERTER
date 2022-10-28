@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -39,8 +40,8 @@ public class OcrControllerMiddleware implements Filter{
                 chain.doFilter(request, response);
                 LOG.info ("Response Status Code is: " + res.getStatus());
             } else {
-                LOG.info("the file is Emtpy or there is a blank field");
-                throw new EmptyFileException();
+                LOG.info("Status is not 200 or the file does not have content");
+                throw new FileNotFoundException("Status is not 200 or the file does not have content");
             }
         } catch (InstantiationError ie){
             LOG.info("Catch Instantiation Error: " + ie);

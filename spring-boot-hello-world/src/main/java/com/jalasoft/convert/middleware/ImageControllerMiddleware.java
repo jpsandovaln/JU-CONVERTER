@@ -1,5 +1,6 @@
 package com.jalasoft.convert.middleware;
 
+import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import org.apache.poi.EmptyFileException;
 
@@ -35,8 +36,8 @@ public class ImageControllerMiddleware implements Filter{
                 chain.doFilter(request, response);
                 LOG.info ("Response Status Code is: " + res.getStatus());
             } else {
-                LOG.info("the file is Emtpy or there is a blank field");
-                throw new EmptyFileException();
+                LOG.info("Status is not 200 or the file does not have content");
+                throw new FileNotFoundException("Status is not 200 or the file does not have content");
             }
         } catch (InstantiationError ie){
             LOG.info("Catch Instantiation Error: " + ie);
