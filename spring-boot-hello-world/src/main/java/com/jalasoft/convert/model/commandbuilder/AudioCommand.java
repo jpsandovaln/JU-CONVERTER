@@ -56,16 +56,21 @@ public class AudioCommand implements CommandBuilder {
     }
 
     private void selectAudioChannel(String channels) {
+        try{
+            switch (channels) {
+                case "2":
+                    command.add("-ac");
+                    command.add("2");
+                    break;
+                case "1":
+                    command.add("-ac");
+                    command.add("1");
+                    break;
+                default:
 
-        switch (channels) {
-            case "2":
-                command.add("-ac");
-                command.add("2");
-                break;
-            case "1":
-                command.add("-ac");
-                command.add("1");
-                break;
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
     private void selectBitrateAudio(String bitrate) {

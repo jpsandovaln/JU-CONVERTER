@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'com.codacum'
@@ -26,8 +27,7 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient:4.5'
 
 	implementation group: 'org.springframework', name: 'spring-test', version: '3.1.1.RELEASE'
-
-
+	testImplementation 'junit:junit:4.12'
 	implementation group: 'fr.opensagres.xdocreport', name: 'fr.opensagres.poi.xwpf.converter.pdf', version: '2.0.4'
 	implementation group: 'fr.opensagres.xdocreport', name: 'fr.opensagres.poi.xwpf.converter.xhtml', version: '2.0.4'
 	implementation 'net.sourceforge.tess4j:tess4j:5.4.0'
@@ -35,6 +35,15 @@ dependencies {
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+test {
+	testLogging {
+		events "failed"
+		exceptionFormat "full"
+	}
+	filter {
+		includeTestsMatching("com.jalasoft.convert.*")
+	}
 }
+
+test.finalizedBy("jacocoTestReport")
+
