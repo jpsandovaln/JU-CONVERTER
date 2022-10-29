@@ -16,7 +16,7 @@ public class ConvertImageToTextOCR {
     public void convertImageToText(String imageInputname, String lang) throws TesseractException {
         OCR imageOCR = new OCR();
         imageOCR.convertOCR(imageInputname, lang);
-        pathOcr=imageOCR.getPathOcr();
+        pathOcr = imageOCR.getPathOcr();
     }
     public String getPathOcr() {
         return pathOcr;

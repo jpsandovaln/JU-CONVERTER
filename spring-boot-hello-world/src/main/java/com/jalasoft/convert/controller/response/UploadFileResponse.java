@@ -59,5 +59,4 @@ public class UploadFileResponse extends Response{
         this.size = size;
     }
 
-    
 }

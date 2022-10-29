@@ -107,5 +107,4 @@ public class ImageUploadResponse extends Response{
         this.format = format;
     }
 
-
 }

@@ -25,7 +25,6 @@ public class MetadataUploadResponse extends Response{
         this.fileName = fileName;
         this.outFormat = outFormat;
         this.downloadMetadata = downloadMetadata;
-
     }
 
     public String getFileName() {
