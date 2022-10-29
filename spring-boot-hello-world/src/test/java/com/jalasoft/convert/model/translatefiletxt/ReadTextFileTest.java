@@ -13,7 +13,7 @@ public class ReadTextFileTest {
     @Test
     public void shouldReturnTextRead() throws IOException {
         ReadTextFile readTextFile = new ReadTextFile();
-        File file = new File("D:\\AutomationTesting\\Prog102\\gitRemote\\JU-CONVERTER\\spring-boot-hello-world\\Downloads\\testText.txt");
+        File file = new File("Downloads\\testText.txt");
         assertEquals(expectedResult, readTextFile.readFile(file,StandardCharsets.UTF_8).trim());
     }
 
@@ -33,9 +33,9 @@ public class ReadTextFileTest {
         assertEquals(null,gt_translate.getCode("en"));
     }
 
-    @Test
+    @Test(expected = IOException.class)
     public void shouldGetPath(){
         TxtFile txtFile = new TxtFile();
-        txtFile.getPath("D:\\AutomationTesting\\Prog102\\gitRemote\\JU-CONVERTER\\spring-boot-hello-world\\Downloads\\testText.txt","en","es");
+        txtFile.getPath("Downloads\\testText.txt","en","es");
     }
 }
