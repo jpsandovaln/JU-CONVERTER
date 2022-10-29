@@ -1,6 +1,9 @@
 package com.jalasoft.convert.controller.endpoint;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.common.exception.InvalidFileException;
+import com.jalasoft.convert.controller.response.ErrorResponse;
+import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.ConvertWordDocumentToPDF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,13 +32,17 @@ public class DocController {
     private ConvertWordDocumentToPDF documentWord;
 
     @PostMapping("/convertdocument")
-    public void readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response) throws IOException {
-        Path pathFile = fileStorageService.save(file);
-        InputStream inputStream = new FileInputStream(pathFile.toFile());
-        documentWord.convertWordDocument(inputStream, response.getOutputStream());
-
-        response.addHeader("Content-disposition", "attachment; filename=" + "doc.pdf");
-        response.setContentType("application/pdf");
-        response.flushBuffer();
+    public Response readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response){
+        try {
+            Path pathFile = fileStorageService.save(file);
+            InputStream inputStream = new FileInputStream(pathFile.toFile());
+            documentWord.convertWordDocument(inputStream, response.getOutputStream());
+            response.addHeader("Content-disposition", "attachment; filename=" + "doc.pdf");
+            response.setContentType("application/pdf");
+            response.flushBuffer();
+            return new Response("200");
+        } catch (InvalidFileException | IOException e) {
+            return new ErrorResponse("400",e.getMessage());
+        }
     }
 }

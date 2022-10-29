@@ -8,7 +8,11 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.common.exception.FileStorageException;
+import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
+import com.jalasoft.convert.controller.response.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,26 +41,28 @@ public class MetadataController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/metadata")
-    public MetadataUploadResponse uploadMetadata(@RequestParam("file") MultipartFile file,
-                                                 @RequestParam("outFormat") String newFormat) throws IllegalStateException, IOException {
-        String fileName = fileStorageService.storeFile(file);
-        Path targetLocation = fileStorageService.fileStorageLocation.resolve(fileName);
+    public Response uploadMetadata(@RequestParam("file") MultipartFile file,
+                                                 @RequestParam("outFormat") String newFormat){
+        try {
+            String fileName = fileStorageService.storeFile(file);
+            Path targetLocation = fileStorageService.fileStorageLocation.resolve(fileName);
+            //Convert the MultipartFile to a File
+            File metadataFile = new File(targetLocation.toString());
+            file.transferTo(metadataFile);
 
-        //Convert the MultipartFile to a File
-        File metadataFile = new File(targetLocation.toString());
-        file.transferTo(metadataFile);
+            //Extract the metadata in a new File
+            MetadataExtractor metadata = new MetadataExtractor(metadataFile);
+            File newFile = metadata.extractMetadataTxt();
 
-        //Extract the metadata in a new File
-        MetadataExtractor metadata = new MetadataExtractor(metadataFile);
-        File newFile = metadata.extractMetadataTxt();
-
-        //Create the link to Download the new file with the metadata
-        String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(newFile.getName())
-                .toUriString();
-
-        return new MetadataUploadResponse(fileName,newFormat, metadataDownloadUri);
+            //Create the link to Download the new file with the metadata
+            String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/downloadFile/")
+                    .path(newFile.getName())
+                    .toUriString();
+            return new MetadataUploadResponse(fileName,newFormat, metadataDownloadUri);
+        } catch (FileStorageException | IllegalStateException | IOException e) {
+            return new ErrorResponse("400", e.getMessage());
+        }
     }
 
 }

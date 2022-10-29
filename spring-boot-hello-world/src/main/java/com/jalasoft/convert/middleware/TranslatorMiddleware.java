@@ -1,7 +1,6 @@
 package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.logger.At18Logger;
-import org.apache.poi.EmptyFileException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

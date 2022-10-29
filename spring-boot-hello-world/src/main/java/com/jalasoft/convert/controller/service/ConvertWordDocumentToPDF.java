@@ -1,10 +1,9 @@
 package com.jalasoft.convert.controller.service;
 
+import com.jalasoft.convert.common.exception.InvalidFileException;
 import com.jalasoft.convert.model.coverters.DocConvert;
 import com.jalasoft.convert.model.coverters.XWPFWordDocument;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -16,7 +15,7 @@ import java.io.OutputStream;
  */
 @Service
 public class ConvertWordDocumentToPDF {
-    public void convertWordDocument(InputStream documentInputStream, OutputStream outputStream) throws IOException {
+    public void convertWordDocument(InputStream documentInputStream, OutputStream outputStream) throws InvalidFileException  {
         DocConvert docConvert = new XWPFWordDocument();
         docConvert.convert(documentInputStream, outputStream);
     }

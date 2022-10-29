@@ -7,14 +7,13 @@ package com.jalasoft.convert.controller.service;
  * @version 1.0
  */
 import com.jalasoft.convert.model.ocrconvert.OCR;
+import net.sourceforge.tess4j.TesseractException;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class ConvertImageToTextOCR {
     private String pathOcr;
-    public void convertImageToText(String imageInputname, String lang) throws IOException {
+    public void convertImageToText(String imageInputname, String lang) throws TesseractException {
         OCR imageOCR = new OCR();
         imageOCR.convertOCR(imageInputname, lang);
         pathOcr=imageOCR.getPathOcr();

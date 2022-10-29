@@ -1,10 +1,5 @@
 package com.jalasoft.convert.model.coverters;
 
-import com.jalasoft.convert.model.coverters.Converter;
-import com.jalasoft.convert.model.coverters.ConverterConfiguration;
-import com.jalasoft.convert.model.coverters.ConverterConfigurationValues;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -12,11 +7,11 @@ public abstract class TranslateConverter implements Converter, ConverterConfigur
     private ConverterConfigurationValues configurationValues;
 
     @Override
-    public void convert(InputStream inputStream, OutputStream outputStream) throws IOException {
+    public void convert(InputStream inputStream, OutputStream outputStream){
         this.convert(inputStream, outputStream, configurationValues);
     }
 
-    protected abstract void convert(InputStream inputStream, OutputStream outputStream, ConverterConfigurationValues configurationValues) throws IOException;
+    protected abstract void convert(InputStream inputStream, OutputStream outputStream, ConverterConfigurationValues configurationValues);
 
     @Override
     public void initializeConfiguration(ConverterConfigurationValues configurationValues) {
