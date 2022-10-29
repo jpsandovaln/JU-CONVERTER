@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
+import com.jalasoft.convert.controller.response.AudioUploadResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +23,6 @@ import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.executor.Executor;
 import com.jalasoft.convert.model.commandbuilder.AudioCommand;
-import com.jalasoft.convert.controller.response.AudioUploadResponse;
 
 /**
  * It is responsable for uploading Audios and converting them 
@@ -33,17 +33,16 @@ import com.jalasoft.convert.controller.response.AudioUploadResponse;
 
 @RestController
 public class AudioControllerr {
-
     private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadAudio")
     public AudioUploadResponse uploadAudio(@RequestParam("file") MultipartFile file,
-                                        @RequestParam("bitrate") String bitrate,
-                                        @RequestParam("channels") String channels,
-                                        @RequestParam("sampling frequency") String samplingFrequency,
-                                        @RequestParam("format") String format) throws IOException {
+                                           @RequestParam("bitrate") String bitrate,
+                                           @RequestParam("channels") String channels,
+                                           @RequestParam("sampling frequency") String samplingFrequency,
+                                           @RequestParam("format") String format) throws IOException {
         String fileName = fileStorageService.storeFile(file);
         LOG.info("File uploaded: " + fileName);
         List<String> parameters = new ArrayList<>();

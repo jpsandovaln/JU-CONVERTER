@@ -8,6 +8,7 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,6 @@ import java.io.IOException;
 
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.MetadataExtractor;
-import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 
 
 /**
@@ -38,7 +38,7 @@ public class MetadataController {
 
     @PostMapping("/metadata")
     public MetadataUploadResponse uploadMetadata(@RequestParam("file") MultipartFile file,
-                                            @RequestParam("outFormat") String newFormat) throws IllegalStateException, IOException {
+                                                 @RequestParam("outFormat") String newFormat) throws IllegalStateException, IOException {
         String fileName = fileStorageService.storeFile(file);
         Path targetLocation = fileStorageService.fileStorageLocation.resolve(fileName);
 
