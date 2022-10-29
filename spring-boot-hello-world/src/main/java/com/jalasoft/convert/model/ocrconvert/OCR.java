@@ -35,8 +35,8 @@ public class OCR {
             System.out.println("Test from image is: ");
             System.out.println();
             System.out.println(strOutput);
-            FileUtils.writeStringToFile(new File("Downloads\\" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
-            pathOcr="Downloads\\" + outputName[0] + ".txt";
+            FileUtils.writeStringToFile(new File("Download\\" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
+            pathOcr="Download\\" + outputName[0] + ".txt";
         } catch (TesseractException e) {
             throw new TesseractException("Error during processing");
         } catch (IOException e) {

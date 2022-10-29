@@ -33,8 +33,7 @@ public class TxtFile {
     public static void getFileName() {
 
         String namefile = file.getAbsolutePath(); // save as string the path of the file
-        String separator = "\\\\";
-        name = namefile.split(separator); // we get only the name of the txt from the path.
+        name = namefile.split("\\\\"); // we get only the name of the txt from the path.
     }
 
     //to translate the word "translated" which is added to the new generated txt, and rename the new document
@@ -63,7 +62,7 @@ public class TxtFile {
             fileWriter = new FileWriter(newfile);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
-            printWriter.write(g.translateText(textToTranslate, languageInput, languageOuput));
+            printWriter.write(g.translateText(textToTranslate, languageInput, languageOuput)); //translation with Gtranslate
             newPath = newfile.toPath().toString();
 
             printWriter.close();
