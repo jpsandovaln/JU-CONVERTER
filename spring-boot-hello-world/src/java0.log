@@ -1,6 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 oct. 30, 2022 6:16:22 P. M. org.apache.coyote.AbstractProtocol start
 =======
 oct. 26, 2022 11:35:59 P. M. org.apache.coyote.AbstractProtocol start
 >>>>>>> 391e189 (create branch for code cleanup and integration controller model)
 INFO: Starting ProtocolHandler ["http-nio-5000"]
+=======
+oct. 29, 2022 4:00:55 A. M. org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-5000"]
+oct. 29, 2022 4:01:01 A. M. org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring DispatcherServlet 'dispatcherServlet'
+>>>>>>> 6472b86 (solving format errors in translate classes, new issue to fix download file in folder download)

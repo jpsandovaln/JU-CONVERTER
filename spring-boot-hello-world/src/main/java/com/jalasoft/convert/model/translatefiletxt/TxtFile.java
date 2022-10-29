@@ -40,7 +40,7 @@ public class TxtFile {
     //to translate the word "translated" which is added to the new generated txt, and rename the new document
     public static void translateWord(String languageInput, String languageOuput) {
         g = Gt_Translate.getInstance();
-        String titleDocument = "Traducido - "; // word to be added to the name of the new text file containing the translated text.
+        String titleDocument = "Translated-"; // word to be added to the name of the new text file containing the translated text.
         //for the name of the new txt the word "translated" is translated into the selected language
         String translateTitle;
         try {
@@ -52,7 +52,7 @@ public class TxtFile {
         }
     }
 
-    //code to create the new file and write the translation to it
+    //code to create the new file and write the translation into it
     public static void writeee(String name, String languageInput, String languageOuput) {
         File newfile;
         FileWriter fileWriter;
@@ -83,7 +83,6 @@ public class TxtFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
         getFileName();
         translateWord(languageInput, languageOuput);
