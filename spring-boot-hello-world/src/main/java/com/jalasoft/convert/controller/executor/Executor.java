@@ -45,9 +45,6 @@ public class Executor {
         }
         if (errorStream != null) {
             errorStream.close();
-<<<<<<< HEAD:spring-boot-hello-world/src/main/java/com/jalasoft/convert/controller/executor/Executor.java
-         }
-=======
         }
 
         /*builder.redirectErrorStream(true);
@@ -57,7 +54,6 @@ public class Executor {
         } catch (IOException e) {
             System.out.println (e);
         }*/
->>>>>>> 60d1909 (solving format errors in controller classes):spring-boot-hello-world/src/main/java/com/jalasoft/convert/model/Executor.java
     }
 
     private void readConsole() {
