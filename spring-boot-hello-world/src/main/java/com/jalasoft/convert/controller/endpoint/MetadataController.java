@@ -9,9 +9,12 @@
 package com.jalasoft.convert.controller.endpoint;
 
 import com.jalasoft.convert.common.exception.FileStorageException;
+import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import com.jalasoft.convert.controller.response.Response;
+import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.model.MetadataExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.nio.file.Path;
 import java.io.File;
 import java.io.IOException;
-
-import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.MetadataExtractor;
+import java.nio.file.Path;
+import java.util.logging.Logger;
 
 
 /**
@@ -35,15 +36,17 @@ import com.jalasoft.convert.model.MetadataExtractor;
  */
 @RestController
 public class MetadataController {
+    private static final Logger LOG = new At18Logger().getLogger();
 
     @Autowired
     private FileStorageService fileStorageService;
 
     @PostMapping("/metadata")
     public Response uploadMetadata(@RequestParam("file") MultipartFile file,
-                                                 @RequestParam("outFormat") String newFormat){
+                                   @RequestParam("outFormat") String newFormat) {
         try {
             String fileName = fileStorageService.storeFile(file);
+            LOG.info("File uploaded: " + fileName);
             Path targetLocation = fileStorageService.fileStorageLocation.resolve(fileName);
             //Convert the MultipartFile to a File
             File metadataFile = new File(targetLocation.toString());
@@ -57,7 +60,7 @@ public class MetadataController {
                     .path("/downloadFile/")
                     .path(newFile.getName())
                     .toUriString();
-            return new MetadataUploadResponse(fileName,newFormat, metadataDownloadUri);
+            return new MetadataUploadResponse(fileName, newFormat, metadataDownloadUri);
         } catch (FileStorageException | IllegalStateException | IOException e) {
             return new ErrorResponse("400", e.getMessage());
         }
