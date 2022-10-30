@@ -5,7 +5,7 @@ package com.jalasoft.convert.controller.response;
  * @author Fernanda Aguilar
  * @version 1.0
  */
-public class ImageUploadResponse {
+public class ImageUploadResponse extends Response{
     private String process;
     private String file;
     private String tool;
@@ -17,6 +17,7 @@ public class ImageUploadResponse {
 
 
     public ImageUploadResponse(String process, String file, String tool, String width_black, String height_white, String color, String fileout, String format) {
+        super("200");
         this.process = process;
         this.file = file;
         this.tool = tool;

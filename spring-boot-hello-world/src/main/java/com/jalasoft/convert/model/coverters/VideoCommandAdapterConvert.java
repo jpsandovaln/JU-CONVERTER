@@ -1,7 +1,7 @@
 package com.jalasoft.convert.model.coverters;
 
 import com.jalasoft.convert.common.exception.ExecuteException;
-import com.jalasoft.convert.common.exception.InvalidFileException;
+import com.jalasoft.convert.common.exception.ConverterFileException;
 import com.jalasoft.convert.model.executor.Executor;
 import com.jalasoft.convert.model.commandbuilder.CommandBuilder;
 import com.jalasoft.convert.model.commandbuilder.VideoCommand;
@@ -12,7 +12,7 @@ import java.io.*;
 public class VideoCommandAdapterConvert extends VideoConvert {
 
     @Override
-    protected void convert(InputStream inputStream, OutputStream outputStream, ConverterConfigurationValues configurationValues) throws ExecuteException, InvalidFileException {
+    protected void convert(InputStream inputStream, OutputStream outputStream, ConverterConfigurationValues configurationValues) throws ExecuteException, ConverterFileException {
         try {
             VideoConverterConfigurationValues settings = (VideoConverterConfigurationValues) configurationValues;
             CommandBuilder builderCommand = new VideoCommand();
@@ -24,7 +24,7 @@ public class VideoCommandAdapterConvert extends VideoConvert {
         } catch (ExecuteException e) {
             throw new ExecuteException(e.getMessage());
         } catch (IOException e){
-            throw new InvalidFileException(e.getMessage(),e);
+            throw new ConverterFileException(e.getMessage(),e);
         }
     }
 }

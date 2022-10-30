@@ -12,7 +12,6 @@ import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import com.jalasoft.convert.controller.response.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,7 +52,6 @@ public class MetadataController {
             //Extract the metadata in a new File
             MetadataExtractor metadata = new MetadataExtractor(metadataFile);
             File newFile = metadata.extractMetadataTxt();
-
             //Create the link to Download the new file with the metadata
             String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/downloadFile/")

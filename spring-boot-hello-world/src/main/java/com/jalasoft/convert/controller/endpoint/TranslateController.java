@@ -28,8 +28,6 @@ public class TranslateController {
   private static final Logger LOG = new At18Logger().getLogger();
   @Autowired
   private FileStorageService fileStorageService;
-
-
   @PostMapping("txt")
   public ResponseEntity<Object> translateGtTxt(@RequestParam("text") MultipartFile file,
                                             @RequestParam("langI") String langI,

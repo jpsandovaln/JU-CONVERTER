@@ -11,9 +11,9 @@ package com.jalasoft.convert.controller.endpoint;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.common.exception.ConverterFileException;
 import com.jalasoft.convert.common.exception.ExecuteException;
 import com.jalasoft.convert.common.exception.FileStorageException;
-import com.jalasoft.convert.common.exception.InvalidFileException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
@@ -70,7 +70,7 @@ List<String> settings = new ArrayList<String>();
             response.setContentType("application/pdf");
             response.flushBuffer();
             return new Response("200");
-        } catch (ExecuteException | InvalidFileException | FileStorageException |IOException e) {
+        } catch (ExecuteException | FileStorageException | ConverterFileException | IOException e) {
             return new ErrorResponse("400", e.getMessage());
         }
     }

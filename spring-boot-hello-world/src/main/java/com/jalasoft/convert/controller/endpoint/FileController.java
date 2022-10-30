@@ -7,8 +7,6 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.endpoint;
-
-
 import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.exception.MalformedUrlException;
@@ -77,10 +75,10 @@ public class FileController {
                     .body(resource);
         } catch (MalformedUrlException e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+        } catch (FileNotFoundException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         } catch (IOException ex) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", "Could not determine file type."));
-        } catch (FileNotFoundException e) {
-            return ResponseEntity.badRequest().body(new ErrorResponse("404", e.getMessage()));
         }
     }
 }

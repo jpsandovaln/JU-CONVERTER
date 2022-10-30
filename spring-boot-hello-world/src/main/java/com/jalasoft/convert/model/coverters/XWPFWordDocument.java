@@ -1,6 +1,6 @@
 package com.jalasoft.convert.model.coverters;
 
-import com.jalasoft.convert.common.exception.InvalidFileException;
+import com.jalasoft.convert.common.exception.ConverterFileException;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -16,7 +16,7 @@ import java.io.OutputStream;
  */
 public class XWPFWordDocument extends DocConvert {
     @Override
-    public void convert(InputStream inputStream, OutputStream outputStream) throws InvalidFileException {
+    public void convert(InputStream inputStream, OutputStream outputStream) throws ConverterFileException {
         XWPFDocument document = null;
         PdfOptions pdfOptions = PdfOptions.create();
         try {
@@ -24,7 +24,7 @@ public class XWPFWordDocument extends DocConvert {
             PdfConverter.getInstance().convert(document, outputStream, pdfOptions);
             document.close();
         } catch (IOException e){
-            throw new InvalidFileException(e.getMessage(),e);
+            throw new ConverterFileException(e.getMessage(),e);
         }
     }
 }

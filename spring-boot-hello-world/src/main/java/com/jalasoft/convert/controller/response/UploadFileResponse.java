@@ -13,13 +13,14 @@ package com.jalasoft.convert.controller.response;
  * @author Fernanda Aguilar
  * @version 1.0
  */
-public class UploadFileResponse {
+public class UploadFileResponse extends Response{
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
     private long size;
 
     public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size) {
+        super("200");
         this.fileName = fileName;
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;

@@ -12,7 +12,10 @@ import java.util.List;
 import java.util.logging.Logger;
 import com.jalasoft.convert.common.exception.ExecuteException;
 import com.jalasoft.convert.common.exception.FileStorageException;
+<<<<<<< HEAD
 import com.jalasoft.convert.controller.response.AudioUploadResponse;
+=======
+>>>>>>> 02bc9be (Added some Responses with exceptions)
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +62,8 @@ public class AudioControllerr {
             return new AudioUploadResponse(fileName,
                     file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format);
         } catch (ExecuteException | FileStorageException e) {
+            return new ErrorResponse("400",e.getMessage());
+        } catch (FileStorageException e) {
             return new ErrorResponse("400",e.getMessage());
         }
     }
