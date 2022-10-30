@@ -58,7 +58,7 @@ public class TxtFile {
         BufferedWriter bufferedWriter;
         PrintWriter printWriter;
         try {
-            newfile = new File(name);
+            newfile = new File("Download\\" + name);
             fileWriter = new FileWriter(newfile);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
