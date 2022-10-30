@@ -30,9 +30,8 @@ public class Executor {
     }
 
     private void initProcess(List<String> command) throws ExecuteException {
-        ProcessBuilder builder = new ProcessBuilder(command);
-        Process process = null;
         try {
+            ProcessBuilder builder = new ProcessBuilder(command);
             process = builder.start();
             InputStream errorStream = process.getErrorStream();
             InputStreamReader inputStreamReader = new InputStreamReader(errorStream);

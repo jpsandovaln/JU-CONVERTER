@@ -1,12 +1,7 @@
 package com.jalasoft.convert.model.coverters;
 
 import com.jalasoft.convert.common.exception.ExecuteException;
-<<<<<<< HEAD
-import com.jalasoft.convert.common.exception.InvalidFileException;
-=======
 import com.jalasoft.convert.common.exception.ConverterFileException;
-
->>>>>>> 02bc9be (Added some Responses with exceptions)
 import java.io.InputStream;
 import java.io.OutputStream;
 

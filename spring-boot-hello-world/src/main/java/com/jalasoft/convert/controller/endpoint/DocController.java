@@ -4,12 +4,8 @@ import com.jalasoft.convert.common.exception.ConverterFileException;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.common.exception.InvalidFileException;
-import com.jalasoft.convert.controller.response.ErrorResponse;
-import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.ConvertWordDocumentToPDF;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -37,7 +32,6 @@ public class DocController {
     private ConvertWordDocumentToPDF documentWord;
 
     @PostMapping("/convertdocument")
-<<<<<<< HEAD
     public Response readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response){
         try {
             Path pathFile = fileStorageService.save(file);
@@ -47,28 +41,9 @@ public class DocController {
             response.setContentType("application/pdf");
             response.flushBuffer();
             return new Response("200");
-        } catch (InvalidFileException | IOException e) {
+        } catch (ConverterFileException | IOException e) {
             return new ErrorResponse("400",e.getMessage());
-=======
-    public Response readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
-        Path pathFile = fileStorageService.save(file);
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(pathFile.toFile());
 
-        documentWord.convertWordDocument(inputStream, response.getOutputStream());
-
-        response.addHeader("Content-disposition", "attachment; filename=" + "doc.pdf");
-        response.setContentType("application/pdf");
-        response.flushBuffer();
-        return new Response("200");
-        } catch (FileNotFoundException e) {
-            return new ErrorResponse("404", e.getMessage());
-        } catch (ConverterFileException e) {
-            return new ErrorResponse("400", e.getMessage());
-        }catch (IOException e) {
-            return new ErrorResponse("400", e.getMessage());
->>>>>>> 02bc9be (Added some Responses with exceptions)
         }
     }
 }
