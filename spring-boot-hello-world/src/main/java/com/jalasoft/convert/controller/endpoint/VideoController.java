@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2022 Jala University.
- *
+ * <p>
  * This software is the confidential and proprietary information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -8,16 +8,12 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
-<<<<<<< HEAD
-import com.jalasoft.convert.controller.response.ErrorResponse;
-import com.jalasoft.convert.controller.response.Response;
-import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.common.exception.ConverterFileException;
 import com.jalasoft.convert.common.exception.ExecuteException;
 import com.jalasoft.convert.common.exception.FileStorageException;
-=======
->>>>>>> b347209 (deleting unnecesary files, uploading tested controllers)
 import com.jalasoft.convert.common.logger.At18Logger;
+import com.jalasoft.convert.controller.response.ErrorResponse;
+import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
@@ -51,18 +47,18 @@ public class VideoController {
     @PostMapping("/uploadVideo")
     // public VideoUploadResponse uploadVideo(@RequestParam("file") MultipartFile file,
     public Response uploadVideo(@RequestParam("file") MultipartFile file,
-                            @RequestParam("outName") String newName,
-                            @RequestParam("outFormat") String outFormat,
-                            @RequestParam("volume") String volume,
-                            @RequestParam("removeAudio") String removeAudio,
-                            @RequestParam("videoBitrate") String videoBitrate,
-                            @RequestParam("audioBitrate") String audioBitrate,
-                            @RequestParam("videoFragment") String videoFragment,
-                            @RequestParam("rotate") String rotate,
-                            @RequestParam("fps") String fps,
-                            @RequestParam("color") String color,
-                            @RequestParam("size") String size,
-                            @RequestParam("cropVideo") String cropVideo, HttpServletResponse response){
+                                @RequestParam("outName") String newName,
+                                @RequestParam("outFormat") String outFormat,
+                                @RequestParam("volume") String volume,
+                                @RequestParam("removeAudio") String removeAudio,
+                                @RequestParam("videoBitrate") String videoBitrate,
+                                @RequestParam("audioBitrate") String audioBitrate,
+                                @RequestParam("videoFragment") String videoFragment,
+                                @RequestParam("rotate") String rotate,
+                                @RequestParam("fps") String fps,
+                                @RequestParam("color") String color,
+                                @RequestParam("size") String size,
+                                @RequestParam("cropVideo") String cropVideo, HttpServletResponse response) {
         try {
             String fileName = fileStorageService.storeFile(file);
             LOG.fine("File uploaded: " + fileName);
@@ -70,7 +66,8 @@ public class VideoController {
             VideoConverterConfigurationValues setting = new VideoConverterConfigurationValues(fileName, newName, outFormat, volume,
                     removeAudio, videoBitrate, audioBitrate, videoFragment, rotate, fps, color, size, cropVideo);
             videoCommandAdapterConvert.initializeConfiguration(setting);
-            videoCommandAdapterConvert.convert(file.getInputStream(), response.getOutputStream());response.addHeader("Content-disposition", "attachment; filename=" + "test.avi");
+            videoCommandAdapterConvert.convert(file.getInputStream(), response.getOutputStream());
+            response.addHeader("Content-disposition", "attachment; filename=" + "test.avi");
             response.setContentType("application/pdf");
             response.flushBuffer();
             return new Response("200");

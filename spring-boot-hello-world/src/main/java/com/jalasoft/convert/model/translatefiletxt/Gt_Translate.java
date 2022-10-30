@@ -7,6 +7,7 @@
  */
 
 package com.jalasoft.convert.model.translatefiletxt;
+
 import com.alibaba.fastjson.JSONArray;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -200,8 +201,8 @@ class Gt_Translate {
      * @throws Exception
      */
 
-    public String translateText(String text,String sourceLang, String targetLang){
-        String retStr="";
+    public String translateText(String text, String sourceLang, String targetLang) {
+        String retStr = "";
         /*
         if( !( isSupport(sourceLang) || isSupport(targetLang) ) ){
             //unir con el logger de Agriana Olivera para lanzar la excepcion
