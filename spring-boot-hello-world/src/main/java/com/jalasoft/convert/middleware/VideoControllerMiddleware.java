@@ -1,6 +1,7 @@
 package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.logger.At18Logger;
+import org.apache.poi.EmptyFileException;
 import javax.servlet.*;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -33,7 +34,8 @@ public class VideoControllerMiddleware implements Filter{
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            if(req.getPart("text").getContentType() != null && res.getStatus() == 200){
+            if(req.getPart("file").getContentType().contains("video") && res.getStatus() == 200){
+                LOG.info(req.getPart("file").getContentType());
                 LOG.info("Proccess Executed Sucessfully");
                 chain.doFilter(request, response);
                 LOG.info ("Response Status Code is: " + res.getStatus());

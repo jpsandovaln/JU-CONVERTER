@@ -1,2 +1,10 @@
-oct. 30, 2022 6:16:22 P. M. org.apache.coyote.AbstractProtocol start
+oct 30, 2022 6:41:10 P. M. org.apache.coyote.AbstractProtocol start
 INFO: Starting ProtocolHandler ["http-nio-5000"]
+oct 30, 2022 6:41:19 P. M. org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring DispatcherServlet 'dispatcherServlet'
+oct 30, 2022 6:41:19 P. M. com.jalasoft.convert.middleware.AudioControllerMiddleware doFilter
+INFO: Proccess Executed Sucessfully
+oct 30, 2022 6:41:19 P. M. com.jalasoft.convert.controller.endpoint.AudioControllerr uploadAudio
+INFO: File uploaded: Pearl Jam - Alive.mp3
+oct 30, 2022 6:41:22 P. M. com.jalasoft.convert.middleware.AudioControllerMiddleware doFilter
+INFO: Response Status Code is: 200
