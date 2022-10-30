@@ -7,9 +7,13 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.endpoint;
-
-import com.jalasoft.convert.common.logger.At18Logger;
+import com.jalasoft.convert.common.exception.FileNotFoundException;
+import com.jalasoft.convert.common.exception.FileStorageException;
+import com.jalasoft.convert.common.exception.MalformedUrlException;
+import com.jalasoft.convert.controller.response.ErrorResponse;
+import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.response.UploadFileResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +27,6 @@ import com.jalasoft.convert.controller.service.FileStorageService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 /**
  * It is responsable for uploading and downloading all type of files 
@@ -35,44 +38,47 @@ import java.util.logging.Logger;
 @RestController
 public class FileController {
 
-    private static final Logger LOG = new At18Logger().getLogger();
-
     @Autowired
     private FileStorageService fileStorageService;
     
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+    public Response uploadFile(@RequestParam("file") MultipartFile file) {
+        try {
+            String fileName = fileStorageService.storeFile(file);
+            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)
                 .toUriString();
-
-        return new UploadFileResponse(fileName, fileDownloadUri,
-                file.getContentType(), file.getSize());
+            return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        } catch (FileStorageException e) {
+            return new ErrorResponse("400", e.getLocalizedMessage());
+        }
+        
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+    public ResponseEntity<Object> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Loads the file as a Resource
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
-
+        Resource resource = null;
         // Identify the file's type
         String contentType = null;
         try {
+            resource = fileStorageService.loadFileAsResource(fileName);
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+            // If content type if type could not be determined
+            if(contentType == null) {
+                contentType = "application/octet-stream";
+            }
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+        } catch (MalformedUrlException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+        } catch (FileNotFoundException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         } catch (IOException ex) {
-            LOG.info("Could not determine file type.");
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Could not determine file type."));
         }
-
-        // If content type if type could not be determined
-        if(contentType == null) {
-            contentType = "application/octet-stream";
-        }
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
     }
 }

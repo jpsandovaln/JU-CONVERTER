@@ -2,7 +2,6 @@ package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.logger.At18Logger;
-import org.apache.poi.EmptyFileException;
 
 import javax.servlet.*;
 import javax.servlet.FilterChain;
@@ -49,6 +48,9 @@ public class AudioControllerMiddleware implements Filter{
         } catch (NullPointerException nulle) {
             LOG.info("Catch a null pointer exception: " + nulle);
             nulle.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 }

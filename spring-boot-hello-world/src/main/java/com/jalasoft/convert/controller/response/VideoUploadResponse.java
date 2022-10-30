@@ -13,7 +13,7 @@ package com.jalasoft.convert.controller.response;
  * @author Fernanda Aguilar
  * @version 1.0
  */
-public class VideoUploadResponse {
+public class VideoUploadResponse extends Response{
     private String fileName;
     private String fileType;
     private String newName;
@@ -27,6 +27,7 @@ public class VideoUploadResponse {
     private String size;
 
     public VideoUploadResponse(String fileName, String fileType, String newName, String outformat,String volume, String removeaudio,String videoBitrate,String audioBitrate,  String fps, String color,String size) {
+        super("200");
         this.fileName = fileName;
         this.fileType = fileType;
         this.newName = newName;

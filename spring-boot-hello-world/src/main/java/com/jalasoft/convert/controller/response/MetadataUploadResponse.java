@@ -14,13 +14,14 @@ package com.jalasoft.convert.controller.response;
  * @author Rodrigo Bernal
  * @version 1.0
  */
-public class MetadataUploadResponse {
+public class MetadataUploadResponse extends Response{
 
     private String outFormat;
     private String fileName;
     private String downloadMetadata;
 
     public MetadataUploadResponse (String fileName, String outFormat, String downloadMetadata) {
+        super("200");
         this.fileName = fileName;
         this.outFormat = outFormat;
         this.downloadMetadata = downloadMetadata;

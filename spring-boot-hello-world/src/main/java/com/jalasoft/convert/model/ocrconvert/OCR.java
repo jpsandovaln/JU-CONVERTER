@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class OCR {
     private String pathOcr;
-    public void convertOCR(String imageInputName, String lang) {
+    public void convertOCR(String imageInputName, String lang) throws TesseractException {
         ITesseract tesseract = new Tesseract();
         tesseract.setDatapath("tessdata");
         tesseract.setLanguage(lang);
@@ -38,7 +38,7 @@ public class OCR {
             FileUtils.writeStringToFile(new File("Downloads\\" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
             pathOcr="Downloads\\" + outputName[0] + ".txt";
         } catch (TesseractException e) {
-            System.out.println("Exception details: "+ e.getMessage());
+            throw new TesseractException("Error during processing");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

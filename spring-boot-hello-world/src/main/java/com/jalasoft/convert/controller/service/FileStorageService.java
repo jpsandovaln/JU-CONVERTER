@@ -10,6 +10,7 @@ package com.jalasoft.convert.controller.service;
 
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.exception.FileNotFoundException;
+import com.jalasoft.convert.common.exception.MalformedUrlException;
 import com.jalasoft.convert.controller.properties.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -19,6 +20,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -50,17 +52,17 @@ public class FileStorageService {
     }
 
     @Autowired
-    public FileStorageService(FileStorageProperties fileStorageProperties) {
-        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
-                .toAbsolutePath().normalize();
+    public FileStorageService(FileStorageProperties fileStorageProperties) throws FileStorageException{
         try {
+            this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
+                .toAbsolutePath().normalize();
             Files.createDirectories(this.fileStorageLocation);
-        } catch (Exception ex) {
-            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex); 
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    public String storeFile(MultipartFile file) throws FileStorageException {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -88,12 +90,11 @@ public class FileStorageService {
             Files.copy(file.getInputStream(), uploadsPath);
             return uploadsPath;
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
     }
 
-    public Resource loadFileAsResource(String fileName) {
+    public Resource loadFileAsResource(String fileName) throws MalformedUrlException, FileNotFoundException {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             Resource resource = new UrlResource(filePath.toUri());
@@ -102,8 +103,9 @@ public class FileStorageService {
             } else {
                 throw new FileNotFoundException("File not found " + fileName);
             }
-        } catch (MalformedURLException ex) {
-            throw new FileNotFoundException("File not found " + fileName, ex);
+        }
+        catch (MalformedURLException ex) {
+            throw new MalformedUrlException("File not found " + fileName, ex);
         }
     }
 }

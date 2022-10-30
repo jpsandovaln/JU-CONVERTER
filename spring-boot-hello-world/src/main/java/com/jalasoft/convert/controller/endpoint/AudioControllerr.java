@@ -7,21 +7,20 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.endpoint;
-
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-
+import com.jalasoft.convert.common.exception.ExecuteException;
+import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.controller.response.AudioUploadResponse;
+import com.jalasoft.convert.controller.response.ErrorResponse;
+import com.jalasoft.convert.controller.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.common.logger.At18Logger;
-import com.jalasoft.convert.controller.executor.Executor;
+import com.jalasoft.convert.model.executor.Executor;
 import com.jalasoft.convert.model.commandbuilder.AudioCommand;
 
 /**
@@ -38,26 +37,29 @@ public class AudioControllerr {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadAudio")
-    public AudioUploadResponse uploadAudio(@RequestParam("file") MultipartFile file,
-                                           @RequestParam("bitrate") String bitrate,
-                                           @RequestParam("channels") String channels,
-                                           @RequestParam("sampling frequency") String samplingFrequency,
-                                           @RequestParam("format") String format) throws IOException {
-        String fileName = fileStorageService.storeFile(file);
-        LOG.info("File uploaded: " + fileName);
-        List<String> parameters = new ArrayList<>();
-        String name = "Uploads\\";
-        parameters.add(fileName);
-        parameters.add(bitrate);
-        parameters.add(channels);
-        parameters.add(samplingFrequency);
-        parameters.add(format);
-        AudioCommand audioConverter = new AudioCommand(name + fileName);
-        audioConverter.setParameters(parameters);
-        Executor executor = new Executor();
-        executor.runCommand(audioConverter.getCommand());
-        return new AudioUploadResponse(fileName,
-                file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format);
+    public Response uploadAudio(@RequestParam("file") MultipartFile file,
+                                @RequestParam("bitrate") String bitrate,
+                                @RequestParam("channels") String channels,
+                                @RequestParam("sampling frequency") String samplingFrequency,
+                                @RequestParam("format") String format){
+        try {
+            String fileName = fileStorageService.storeFile(file);
+            LOG.info("File uploaded: " + fileName);
+            List<String> parameters = new ArrayList<>();
+            String name = "Uploads\\";
+            parameters.add(fileName);
+            parameters.add(bitrate);
+            parameters.add(channels);
+            parameters.add(samplingFrequency);
+            parameters.add(format);
+            AudioCommand audioConverter = new AudioCommand(name + fileName);
+            audioConverter.setParameters(parameters);
+            Executor executor = new Executor();
+            executor.runCommand(audioConverter.getCommand());
+            return new AudioUploadResponse(fileName,
+                    file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format);
+        } catch (ExecuteException | FileStorageException e) {
+            return new ErrorResponse("400",e.getMessage());
+        }
     }
-
 }

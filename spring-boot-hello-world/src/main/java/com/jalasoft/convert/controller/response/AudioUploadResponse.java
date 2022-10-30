@@ -13,7 +13,7 @@ package com.jalasoft.convert.controller.response;
  * @author Fernanda Aguilar
  * @version 1.0
  */
-public class AudioUploadResponse {
+public class AudioUploadResponse extends Response{
     private String fileName;
     private String fileType;
     private long size;
@@ -24,6 +24,7 @@ public class AudioUploadResponse {
 
 
     public AudioUploadResponse(String fileName, String fileType, long size, String bitrate, String channels, String samplingFrequency, String format) {
+        super("200");
         this.fileName = fileName;
         this.fileType = fileType;
         this.size = size;

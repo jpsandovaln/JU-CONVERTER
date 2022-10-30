@@ -8,7 +8,12 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.controller.response.ErrorResponse;
+import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.common.exception.ConverterFileException;
+import com.jalasoft.convert.common.exception.ExecuteException;
+import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
@@ -41,7 +46,7 @@ List<String> settings = new ArrayList<String>();
 
     @PostMapping("/uploadVideo")
     // public VideoUploadResponse uploadVideo(@RequestParam("file") MultipartFile file,
-    public void uploadVideo(@RequestParam("file") MultipartFile file,
+    public Response uploadVideo(@RequestParam("file") MultipartFile file,
                             @RequestParam("outName") String newName,
                             @RequestParam("outFormat") String outFormat,
                             @RequestParam("volume") String volume,
@@ -53,18 +58,20 @@ List<String> settings = new ArrayList<String>();
                             @RequestParam("fps") String fps,
                             @RequestParam("color") String color,
                             @RequestParam("size") String size,
-                            @RequestParam("cropVideo") String cropVideo, HttpServletResponse response) throws IOException {
-        String fileName = fileStorageService.storeFile(file);
-        LOG.fine("File uploaded: " + fileName);
-        VideoCommandAdapterConvert videoCommandAdapterConvert = new VideoCommandAdapterConvert();
-        VideoConverterConfigurationValues setting = new VideoConverterConfigurationValues(fileName, newName, outFormat, volume,
-                removeAudio, videoBitrate, audioBitrate, videoFragment, rotate, fps, color, size, cropVideo);
-        videoCommandAdapterConvert.initializeConfiguration(setting);
-
-        videoCommandAdapterConvert.convert(file.getInputStream(), response.getOutputStream());
-
-        response.addHeader("Content-disposition", "attachment; filename=" + "test.avi");
-        response.setContentType("application/pdf");
-        response.flushBuffer();
+                            @RequestParam("cropVideo") String cropVideo, HttpServletResponse response){
+        try {
+            String fileName = fileStorageService.storeFile(file);
+            LOG.fine("File uploaded: " + fileName);
+            VideoCommandAdapterConvert videoCommandAdapterConvert = new VideoCommandAdapterConvert();
+            VideoConverterConfigurationValues setting = new VideoConverterConfigurationValues(fileName, newName, outFormat, volume,
+                    removeAudio, videoBitrate, audioBitrate, videoFragment, rotate, fps, color, size, cropVideo);
+            videoCommandAdapterConvert.initializeConfiguration(setting);
+            videoCommandAdapterConvert.convert(file.getInputStream(), response.getOutputStream());response.addHeader("Content-disposition", "attachment; filename=" + "test.avi");
+            response.setContentType("application/pdf");
+            response.flushBuffer();
+            return new Response("200");
+        } catch (ExecuteException | FileStorageException | ConverterFileException | IOException e) {
+            return new ErrorResponse("400", e.getMessage());
+        }
     }
 }

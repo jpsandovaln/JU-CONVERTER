@@ -121,7 +121,7 @@ public class AudioCommand implements CommandBuilder {
             selectAudioChannel(value);
             selectBitrateAudio(value);
             selectFormat(value, getName("Download\\" + parameters.get(0)));
-            }
+        }
     }
     @Override
     public List<String> getCommand() {

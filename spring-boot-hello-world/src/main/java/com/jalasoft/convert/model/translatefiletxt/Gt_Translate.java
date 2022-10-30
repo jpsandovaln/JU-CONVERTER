@@ -34,7 +34,7 @@ class Gt_Translate {
 
     private static final String USER_AGENT = "Mozilla/5.0"; //"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
 
-    private static final Map<String,String> LANGUAGE_MAP=new HashMap();
+    private static final Map<String,String> LANGUAGE_MAP= new HashMap();
 
     private static Gt_Translate _instance = null;
 
@@ -199,7 +199,7 @@ class Gt_Translate {
      * @return
      * @throws Exception
      */
-    public String translateText(String text,String sourceLang, String targetLang) throws Exception{
+    public String translateText(String text,String sourceLang, String targetLang){
         String retStr="";
         /* 
         if( !( isSupport(sourceLang) || isSupport(targetLang) ) ){
