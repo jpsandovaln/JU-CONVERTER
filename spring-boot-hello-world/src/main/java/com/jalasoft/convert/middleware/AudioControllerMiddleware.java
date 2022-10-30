@@ -2,7 +2,6 @@ package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.logger.At18Logger;
-
 import javax.servlet.*;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,16 +29,17 @@ public class AudioControllerMiddleware implements Filter{
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException {
+                         FilterChain chain) throws IOException, ServletException
+    {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            if ((req.getPart("text").getContentType() != null && res.getStatus() == 200)) {
+            if (req.getPart("file").getContentType().contains("audio") && res.getStatus() == 200) {
                 LOG.info("Proccess Executed Sucessfully");
                 chain.doFilter(request, response);
                 LOG.info("Response Status Code is: " + res.getStatus());
             } else {
-                LOG.info("Status is not 200 or the file does not have content");
+                LOG.info("Status is not 200 or the file has a incorrect format");
                 throw new FileNotFoundException("Status is not 200 or the file does not have content");
             }
         } catch (InstantiationError ie) {
@@ -48,9 +48,6 @@ public class AudioControllerMiddleware implements Filter{
         } catch (NullPointerException nulle) {
             LOG.info("Catch a null pointer exception: " + nulle);
             nulle.printStackTrace();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 }
