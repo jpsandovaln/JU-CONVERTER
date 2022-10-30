@@ -1,13 +1,12 @@
 /**
  * Copyright (c) 2022 Jala University.
- * <p>
+ *
  * This software is the confidential and proprietary information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.endpoint;
-
 
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
@@ -43,7 +42,6 @@ public class OcrController {
     private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
-
 
     @PostMapping("/uploadOcrImg")
     public ResponseEntity<Object> translateGt(@RequestParam("img") MultipartFile file,

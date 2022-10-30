@@ -1,20 +1,24 @@
 /**
  * Copyright (c) 2022 Jala University.
- * <p>
- * This software is the confidential and proprieraty information of Jalasoft
+ *
+ * This software is the confidential and proprietary information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.endpoint;
 
+<<<<<<< HEAD
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.common.exception.ConverterFileException;
 import com.jalasoft.convert.common.exception.ExecuteException;
 import com.jalasoft.convert.common.exception.FileStorageException;
+=======
+>>>>>>> b347209 (deleting unnecesary files, uploading tested controllers)
 import com.jalasoft.convert.common.logger.At18Logger;
+import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +43,8 @@ import java.util.logging.Logger;
 @RestController
 public class VideoController {
 
-List<String> settings = new ArrayList<String>();
     private static final Logger LOG = new At18Logger().getLogger();
+    List<String> settings = new ArrayList<String>();
     @Autowired
     private FileStorageService fileStorageService;
 
