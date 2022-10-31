@@ -138,7 +138,7 @@ public class ImageCommand implements CommandBuilder {
 
     @Override
     public List<String> getCommand() {
-        //System.out.println("comando final" + command);
+        System.out.println("comando final" + command);
         return command;
     }
 }
