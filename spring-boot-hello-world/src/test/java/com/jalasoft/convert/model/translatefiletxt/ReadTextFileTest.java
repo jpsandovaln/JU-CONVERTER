@@ -2,6 +2,7 @@ package com.jalasoft.convert.model.translatefiletxt;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
@@ -33,9 +34,18 @@ public class ReadTextFileTest {
         assertEquals(null,gt_translate.getCode("en"));
     }
 
-    @Test(expected = IOException.class)
+    @Test
     public void shouldGetPath(){
         TxtFile txtFile = new TxtFile();
         txtFile.getPath("Downloads\\testText.txt","en","es");
+    }
+
+    /**
+     * The test case has to prove if the method getParameters bring back an FileNotFoundException
+     */
+    @Test(expected = FileNotFoundException.class)
+    public void shouldGetPathWithErrorParameters(){
+        TxtFile txtFile = new TxtFile();
+        txtFile.getPath("","","");
     }
 }

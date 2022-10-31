@@ -4,6 +4,7 @@ import com.jalasoft.convert.model.commandbuilder.AudioCommand;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AudioCommandTest {
 
-    @Test(expected = NullPointerException.class)
+    /**
+     * The unit test has to prove if the audioCommand generate a command for txt file
+     */
+    @Test(expected = IOException.class)
     public void shouldTestTypeOfFileWithDifferentFormat(){
         String fileName = "testText.txt";
         AudioCommand audioCommand = new AudioCommand(fileName);
@@ -25,9 +29,12 @@ public class AudioCommandTest {
         audioCommand.setParameters(parameters);
     }
 
+    /**
+     * The unit test has to prove if the user send a null file to the class
+     */
     @Test(expected = NullPointerException.class)
-    public void shouldTestTheBitRateAvailable(){
-        String fileName = "audio.mo3";
+    public void shouldTestWithNullFileToTheClass(){
+        String fileName = null;
         AudioCommand audioCommand = new AudioCommand(fileName);
         List<String> parameters = new ArrayList<>();
         parameters.add("audio.mp3");
@@ -38,16 +45,19 @@ public class AudioCommandTest {
         audioCommand.setParameters(parameters);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void shouldTestTheAudioChannelAvailable(){
+    /**
+     * The unit test has to the if the list is empty to generate the command
+     */
+    @Test(expected = IOException.class)
+    public void shouldTestIfTheListToBuildCommandIsEmpty(){
         String fileName = "audio.mo3";
         AudioCommand audioCommand = new AudioCommand(fileName);
         List<String> parameters = new ArrayList<>();
-        parameters.add("audio.mp3");
-        parameters.add("128k");
-        parameters.add("10");
-        parameters.add("44100");
-        parameters.add("txt");
+        parameters.add("");
+        parameters.add("");
+        parameters.add("");
+        parameters.add("");
+        parameters.add("");
         audioCommand.setParameters(parameters);
     }
 
