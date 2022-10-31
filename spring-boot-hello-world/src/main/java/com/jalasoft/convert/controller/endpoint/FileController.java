@@ -75,7 +75,7 @@ public class FileController {
         } catch (MalformedUrlException e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         } catch (FileNotFoundException e) {
-            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorResponse("404", e.getMessage()));
         } catch (IOException ex) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", "Could not determine file type."));
         }
