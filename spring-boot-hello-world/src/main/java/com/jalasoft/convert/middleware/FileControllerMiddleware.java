@@ -1,9 +1,16 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprietary information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
+
 package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.logger.At18Logger;
-import org.apache.poi.EmptyFileException;
-
 import javax.servlet.*;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -27,6 +34,11 @@ import java.util.logging.Logger;
 @WebFilter(urlPatterns = "/uploadFile")
 public class FileControllerMiddleware implements Filter{
     private static final Logger LOG = new At18Logger().getLogger();
+    /**
+     * This is the Filter to receive the request which contains what a user sends from Postman
+     * and response, the main idea is to manage exceptions before going through the controllers
+     * in this case this is the filter for FileController
+     */
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
