@@ -18,5 +18,4 @@ public abstract class TranslateConverter implements Converter, ConverterConfigur
         this.configurationValues = configurationValues;
     }
 
-
 }

@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+
 /*
  * It is responsible for using the Google Translate API to translate a text document.
  * @author Sarai Alvarez
@@ -27,7 +28,7 @@ public class ReadTextFile {
         and decodes them into characters using a specific character set using
         an InputStreamReader forms a string using a line separator.  
     */
-    
+
     public static String readFile(File file, Charset encoding) throws IOException {
         StringBuilder sb = new StringBuilder();
         FileInputStream fileStream = new FileInputStream(file);

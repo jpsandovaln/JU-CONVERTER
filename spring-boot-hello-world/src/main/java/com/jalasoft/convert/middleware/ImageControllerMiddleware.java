@@ -46,6 +46,8 @@ public class ImageControllerMiddleware implements Filter{
         } catch (NullPointerException nulle){
             LOG.info("Catch a null pointer exception: " + nulle);
             nulle.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

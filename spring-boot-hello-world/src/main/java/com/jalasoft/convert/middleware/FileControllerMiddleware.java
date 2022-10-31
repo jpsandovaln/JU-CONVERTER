@@ -44,7 +44,7 @@ public class FileControllerMiddleware implements Filter{
                 LOG.info("Status is not 200 or the file does not have content");
                 throw new FileNotFoundException("Status is not 200 or the file does not have content");
             }
-        } catch (InstantiationError ie){
+        } catch (InstantiationError | FileNotFoundException ie){
             LOG.info("Catch Instantiation Error: " + ie);
             ie.printStackTrace();
         } catch (NullPointerException nulle){
