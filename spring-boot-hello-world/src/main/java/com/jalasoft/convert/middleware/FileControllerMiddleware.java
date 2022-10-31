@@ -2,6 +2,7 @@ package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.logger.At18Logger;
+import org.apache.poi.EmptyFileException;
 
 import javax.servlet.*;
 import javax.servlet.FilterChain;
@@ -34,7 +35,8 @@ public class FileControllerMiddleware implements Filter{
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            if((req.getPart("text").getContentType() != null && res.getStatus() == 200 && req.getPart("file").getSize() > 12000)){
+            if(req.getPart("file").getContentType() != null && res.getStatus() == 200){
+                LOG.info(req.getPart("file").getContentType());
                 LOG.info("Proccess Executed Sucessfully");
                 chain.doFilter(request, response);
                 LOG.info ("Response Status Code is: " + res.getStatus());
@@ -48,9 +50,6 @@ public class FileControllerMiddleware implements Filter{
         } catch (NullPointerException nulle){
             LOG.info("Catch a null pointer exception: " + nulle);
             nulle.printStackTrace();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 }
