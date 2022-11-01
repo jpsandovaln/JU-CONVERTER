@@ -9,6 +9,7 @@
 
 package com.jalasoft.convert.middleware;
 
+import com.jalasoft.convert.common.exception.MiddlewareException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import javax.servlet.*;
 import javax.servlet.FilterChain;
@@ -18,8 +19,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 /**
@@ -47,6 +48,7 @@ public class MetadataControllerMiddleware implements Filter{
     {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        PrintWriter out = response.getWriter();
         try {
             if(req.getPart("file").getContentType() != null && res.getStatus() == 200){
                 LOG.info(req.getPart("file").getContentType());
@@ -55,14 +57,10 @@ public class MetadataControllerMiddleware implements Filter{
                 LOG.info ("Response Status Code is: " + res.getStatus());
             } else {
                 LOG.info("Status is not 200 or the file does not have content");
-                throw new FileNotFoundException("Status is not 200 or the file does not have content");
+                throw new MiddlewareException("Status is not 200 or the file does not have content");
             }
-        } catch (InstantiationError ie){
-            LOG.info("Catch Instantiation Error: " + ie);
-            ie.printStackTrace();
-        } catch (NullPointerException nulle){
-            LOG.info("Catch a null pointer exception: " + nulle);
-            nulle.printStackTrace();
+        } catch (MiddlewareException e) {
+            out.println(e.getMessage());
         }
     }
 }
