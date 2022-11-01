@@ -14,8 +14,13 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
+import java.io.File;
+import com.jalasoft.convert.common.exception.FileNotFoundException;
+
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
@@ -38,11 +43,23 @@ public class TranslatorMiddleware implements Filter {
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException
-    {
+                         FilterChain chain) throws IOException, ServletException, NullPointerException, InstantiationError {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        try {
+        String path = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
+        File fileToken = new File(path);
+        Scanner myReader = new Scanner(fileToken);
+        String token = myReader.nextLine();
+        int tokenCounter = Integer.parseInt(myReader.nextLine());
+        if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1){
+            FileWriter fw = new FileWriter(path, false);
+            tokenCounter -= 1;
+            LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
+            fw.write(token);
+            fw.write(System.getProperty( "line.separator" ));
+            fw.write(Integer.toString(tokenCounter));
+            fw.close();
+            myReader.close();
             if(((req.getParameter("langI").length() == 2) && req.getParameter("langO").length() == 2) && (req.getPart("text").getContentType().contains("text") || req.getPart("text").getContentType().contains("word"))){
                 LOG.info("Proccess Executed Sucessfully");
                 LOG.info(req.getPart("text").getContentType());
@@ -50,14 +67,27 @@ public class TranslatorMiddleware implements Filter {
                 LOG.info ("Response Status Code is " + res.getStatus());
             } else {
                 LOG.info("The language is incorrect or the file does not contain a .txt or .dock file");
-                throw new FileNotFoundException("The language is incorrect or the file does not contain a .txt or .dock file");
+                try {
+                    throw new FileNotFoundException("The language is incorrect or the file does not contain a .txt or .dock file");
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        } catch (InstantiationError ie){
-            LOG.info("Catch Instantiation Error: " + ie);
-            ie.printStackTrace();
-        } catch (NullPointerException nulle){
-            LOG.info("Catch a null pointer exception: " + nulle);
-            nulle.printStackTrace();
+        } else if (tokenCounter < 1) {
+            LOG.info("Token has no more uses, please request another one");
+            FileWriter fw = new FileWriter(path, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
+        }
+        else {
+            LOG.info("Token was not introduced correctly");
+            try {
+                throw new FileNotFoundException("Token was not introduced correctly");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

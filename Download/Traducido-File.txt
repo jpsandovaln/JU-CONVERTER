@@ -1,4 +1,0 @@
-﻿
-Solo evaluación. Creado con Aspose.Words. Copyright 2003-2022 Aspose Pty Ltd.
-hola mundo mi nombre es mauricio
-Creado con una copia de evaluación de Aspose.Words. Para descubrir las versiones completas de nuestras API, visite: https://products.aspose.com/words/
