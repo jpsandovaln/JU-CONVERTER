@@ -19,7 +19,8 @@ public class GenerateToken {
 
     @GetMapping("/getToken")
     public StringBuilder generateToken() throws IOException {
-        File myObj = new File(System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt");
+        String Path = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
+        File myObj = new File(Path);
         Scanner myReader = new Scanner(myObj);
         StringBuilder token = new StringBuilder();
         StringBuilder reference = new StringBuilder();
@@ -30,8 +31,7 @@ public class GenerateToken {
                 reference.append(tokenNumberReference).append(token);
                 return reference;
         } else {
-                String filename = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
-                FileWriter fw = new FileWriter(filename, false);
+                FileWriter fw = new FileWriter(Path, false);
                 Supplier<String> tokenSupplier = () -> {
                     long currentTimeInMilisecond = Instant.now().toEpochMilli();
                     return token.append(currentTimeInMilisecond).append("-")
