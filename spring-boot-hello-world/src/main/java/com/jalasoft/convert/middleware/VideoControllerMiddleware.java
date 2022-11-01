@@ -18,8 +18,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
+import com.jalasoft.convert.common.exception.FileNotFoundException;
+
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
@@ -32,7 +37,7 @@ import java.util.logging.Logger;
  * @version 1.0
  */
 @WebFilter(urlPatterns = "/uploadVideo")
-public class VideoControllerMiddleware implements Filter{
+public class VideoControllerMiddleware implements Filter {
     private static final Logger LOG = new At18Logger().getLogger();
 
     /**
@@ -43,26 +48,52 @@ public class VideoControllerMiddleware implements Filter{
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException
-    {
+                         FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        try {
-            if(req.getPart("file").getContentType().contains("video") && res.getStatus() == 200){
+        String path = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
+        File fileToken = new File(path);
+        Scanner myReader = new Scanner(fileToken);
+        String token = myReader.nextLine();
+        int tokenCounter = Integer.parseInt(myReader.nextLine());
+        if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1) {
+            FileWriter fw = new FileWriter(path, false);
+            tokenCounter -= 1;
+            LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
+            fw.write(token);
+            fw.write(System.getProperty("line.separator"));
+            fw.write(Integer.toString(tokenCounter));
+            fw.close();
+            myReader.close();
+            if (req.getPart("file").getContentType().contains("video") && res.getStatus() == 200) {
                 LOG.info(req.getPart("file").getContentType());
                 LOG.info("Proccess Executed Sucessfully");
                 chain.doFilter(request, response);
-                LOG.info ("Response Status Code is: " + res.getStatus());
+                LOG.info("Response Status Code is: " + res.getStatus());
             } else {
                 LOG.info("Status is not 200 or the file does not have content");
-                throw new FileNotFoundException("Status is not 200 or the file does not have content");
+                try {
+                    throw new FileNotFoundException("Status is not 200 or the file does not have content");
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        } catch (InstantiationError ie){
-            LOG.info("Catch Instantiation Error: " + ie);
-            ie.printStackTrace();
-        } catch (NullPointerException nulle){
-            LOG.info("Catch a null pointer exception: " + nulle);
-            nulle.printStackTrace();
+        } else if (tokenCounter < 1) {
+            LOG.info("Token has no more uses, please request another one");
+            FileWriter fw = new FileWriter(path, false);
+            PrintWriter pw = new PrintWriter(fw, false);
+            pw.flush();
+            pw.close();
+            fw.close();
         }
+        else {
+            LOG.info("Token was not introduced correctly");
+            try {
+                throw new FileNotFoundException("Token was not introduced correctly");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 }
