@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2022 Jala University.
- * <p>
+ *
  * This software is the confidential and proprietary information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -40,10 +40,10 @@ public class AudioController {
 
     @PostMapping("/uploadAudio")
     public ResponseEntity<Object> uploadAudio(@RequestParam("file") MultipartFile file,
-                                @RequestParam("bitrate") String bitrate,
-                                @RequestParam("channels") String channels,
-                                @RequestParam("sampling frequency") String samplingFrequency,
-                                @RequestParam("format") String format) {
+                                              @RequestParam("bitrate") String bitrate,
+                                              @RequestParam("channels") String channels,
+                                              @RequestParam("sampling frequency") String samplingFrequency,
+                                              @RequestParam("format") String format) {
         try {
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);

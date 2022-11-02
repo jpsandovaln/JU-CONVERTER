@@ -47,12 +47,7 @@ public class TranslateController {
             String fileName = fileStorageService.storeFile(file);
             String path = "Uploads\\" + fileName;
             TxtFile tFile = new TxtFile();
-            List<String> params = new ArrayList<>();
-            params.add(path);
-            params.add(langI);
-            params.add(langO);
-            //tFile.getPath(path, langI, langO);
-            tFile.extract(params);
+            tFile.extract(getParams(path, langI, langO));
             return downloadFile(tFile.getNewPath());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
@@ -67,25 +62,28 @@ public class TranslateController {
             LOG.info("A word file was introduced as input");
             String fileNameInput = fileStorageService.storeFile(file);
             Document doc = new Document("Uploads\\" + fileNameInput);
-            doc.save("Uploads\\" + "WordExtract.txt");
+            String[] outputName = fileNameInput.split("\\.");
+            fileNameInput = "Uploads\\" + outputName[0] + ".txt";
+            doc.save(fileNameInput);
 
-            String path = "Uploads\\" + "WordExtract.txt";
             TxtFile tFile = new TxtFile();
-            List<String> params = new ArrayList<>();
-            params.add(path);
-            params.add(langI);
-            params.add(langO);
-            //tFile.getPath(path, langI, langO);
-            tFile.extract(params);
+            tFile.extract(getParams(fileNameInput, langI, langO));
             return downloadFile(tFile.getNewPath());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
 
-    public ResponseEntity<Object> downloadFile(String pathOcr) throws IOException {
-        String filename = pathOcr;
-        File file = new File(filename);
+    public List<String> getParams(String path, String langI, String langO) {
+        List<String> params = new ArrayList<>();
+        params.add(path);
+        params.add(langI);
+        params.add(langO);
+        return params;
+    }
+
+    public ResponseEntity<Object> downloadFile(String pathTxtTransl) throws IOException {
+        File file = new File(pathTxtTransl);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         HttpHeaders headers = new HttpHeaders();
 

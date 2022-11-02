@@ -19,7 +19,7 @@ channels: "1"
 
 Configure sampling frequency
 Command: -ar sampling frequency
-ampling frequency: "32000"
+sampling frequency: "32000"
 		    "44100"
 		    "48000"
 	            "96000"
