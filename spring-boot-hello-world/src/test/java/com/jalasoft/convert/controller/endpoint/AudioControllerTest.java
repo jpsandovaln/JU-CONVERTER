@@ -1,8 +1,5 @@
 package com.jalasoft.convert.controller.endpoint;
 import org.junit.Test;
-import org.mockito.internal.util.io.IOUtil;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;

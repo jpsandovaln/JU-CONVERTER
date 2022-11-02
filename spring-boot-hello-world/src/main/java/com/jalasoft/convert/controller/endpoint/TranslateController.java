@@ -9,11 +9,10 @@
 package com.jalasoft.convert.controller.endpoint;
 
 import com.aspose.words.Document;
-import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.translatefiletxt.TxtFile;
+import com.jalasoft.convert.model.extractors.translatefiletxt.TxtFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @RequestMapping("/uploadGText")
@@ -46,9 +47,14 @@ public class TranslateController {
             String fileName = fileStorageService.storeFile(file);
             String path = "Uploads\\" + fileName;
             TxtFile tFile = new TxtFile();
-            tFile.getPath(path, langI, langO);
+            List<String> params = new ArrayList<>();
+            params.add(path);
+            params.add(langI);
+            params.add(langO);
+            //tFile.getPath(path, langI, langO);
+            tFile.extract(params);
             return downloadFile(tFile.getNewPath());
-        } catch (FileStorageException | IOException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
@@ -56,17 +62,25 @@ public class TranslateController {
     @PostMapping("word")
     public ResponseEntity<Object> translateGtWord(@RequestParam("text") MultipartFile file,
                                                   @RequestParam("langI") String langI,
-                                                  @RequestParam("langO") String langO) throws Exception {
-        LOG.info("A word file was introduced as input");
-        String fileNameInput = fileStorageService.storeFile(file);
-        Document doc = new Document("Uploads\\" + fileNameInput);
-        doc.save("Uploads\\" + "File.txt");
+                                                  @RequestParam("langO") String langO) {
+        try {
+            LOG.info("A word file was introduced as input");
+            String fileNameInput = fileStorageService.storeFile(file);
+            Document doc = new Document("Uploads\\" + fileNameInput);
+            doc.save("Uploads\\" + "WordExtract.txt");
 
-        String path = "Uploads\\" + "File.txt";
-        TxtFile tFile = new TxtFile();
-        tFile.getPath(path, langI, langO);
-
-        return downloadFile(tFile.getNewPath());
+            String path = "Uploads\\" + "WordExtract.txt";
+            TxtFile tFile = new TxtFile();
+            List<String> params = new ArrayList<>();
+            params.add(path);
+            params.add(langI);
+            params.add(langO);
+            //tFile.getPath(path, langI, langO);
+            tFile.extract(params);
+            return downloadFile(tFile.getNewPath());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+        }
     }
 
     public ResponseEntity<Object> downloadFile(String pathOcr) throws IOException {
@@ -82,7 +96,6 @@ public class TranslateController {
 
         ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(
                 file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
-
         return responseEntity;
     }
 }

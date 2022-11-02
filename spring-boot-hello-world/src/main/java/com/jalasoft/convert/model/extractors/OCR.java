@@ -6,8 +6,9 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.ocrconvert;
+package com.jalasoft.convert.model.extractors;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
@@ -17,6 +18,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -25,26 +27,29 @@ import java.util.logging.Logger;
  * @author Hugo Solares
  * @version 1.0
  */
-public class OCR {
-    private String pathOcr;
+public class OCR extends Extractor {
     private static final Logger LOG = new At18Logger().getLogger();
-    public void convertOCR(String imageInputName, String lang) throws TesseractException {
+    private String pathOcr;
+
+    @Override
+    public void extract(List<String> params) throws ExtractorException {
         ITesseract tesseract = new Tesseract();
         tesseract.setDatapath("tessdata");
-        tesseract.setLanguage(lang);
+        tesseract.setLanguage(params.get(1));
+        String imageInputName = params.get(0);
         String[] outputName = imageInputName.split("\\.");
         try {
             String strOutput = tesseract.doOCR(new File("Uploads\\" + imageInputName));
-            LOG.info("Test from image is: \n" +strOutput);
+            LOG.info("Test from image is: \n" + strOutput);
             FileUtils.writeStringToFile(new File("Download\\" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
-            pathOcr="Download\\" + outputName[0] + ".txt";
+            pathOcr = "Download\\" + outputName[0] + ".txt";
         } catch (TesseractException e) {
-            throw new TesseractException("Error during processing");
+            throw new ExtractorException("Error during processing OCR", e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
     public String getPathOcr() {
         return pathOcr;
     }

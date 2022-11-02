@@ -7,20 +7,17 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.common.exception;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * It takes care of the exception
  *
  * @author Libertad Tolaba
  * @version 1.0
  */
-@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-public class MalformedUrlException extends Exception{
-    public MalformedUrlException(String message) {
+public class ExtractorException extends Exception{
+    public ExtractorException(String message) {
         super(message);
     }
-    public MalformedUrlException(String message, Throwable cause) {
+    public ExtractorException(String message, Throwable cause) {
         super(message, cause);
     }
 }

@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.translatefiletxt;
+package com.jalasoft.convert.model.extractors.translatefiletxt;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,14 +14,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
+import com.jalasoft.convert.common.exception.ExtractorException;
+import com.jalasoft.convert.common.exception.ReadFileException;
+import com.jalasoft.convert.model.extractors.Extractor;
 
 /*
  * It is responsible for using the Google Translate API to translate a text document.
  * @author Sarai Alvarez
  * @version 1.0
  */
-public class TxtFile {
+public class TxtFile extends Extractor{
 
     public static String textToTranslate;
     public static File file;
@@ -32,19 +38,16 @@ public class TxtFile {
     //to get from the path the name of the file plus its extension (file.txt)
     public static void getFileName() {
 
-        String namefile = file.getAbsolutePath(); // save as string the path of the file
-        name = namefile.split("\\\\"); // we get only the name of the txt from the path.
+        String nameFile = file.getAbsolutePath(); // save as string the path of the file
+        name = nameFile.split("\\\\"); // we get only the name of the txt from the path.
     }
 
     //to translate the word "translated" which is added to the new generated txt, and rename the new document
     public static void translateWord(String languageInput, String languageOuput) {
         g = Gt_Translate.getInstance();
         String titleDocument = "Translated-"; // word to be added to the name of the new text file containing the translated text.
-        //for the name of the new txt the word "translated" is translated into the selected language
-        String translateTitle;
         try {
-            //traducireltituloalidiomaselect = g.translateText(tituloDocumento,"en","fr");
-            translateTitle = g.translateText(titleDocument, languageInput, languageOuput);
+            String translateTitle = g.translateText(titleDocument, languageInput, languageOuput);
             writeee(translateTitle + name[name.length - 1], languageInput, languageOuput); //name of the generated txt file
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,18 +55,18 @@ public class TxtFile {
     }
 
     //code to create the new file and write the translation into it
-    public static void writeee(String name, String languageInput, String languageOuput) {
-        File newfile;
+    public static void writeee(String name, String languageInput, String languageOutput) {
+        File newFile;
         FileWriter fileWriter;
         BufferedWriter bufferedWriter;
         PrintWriter printWriter;
         try {
-            newfile = new File("Download\\" + name);
-            fileWriter = new FileWriter(newfile);
+            newFile = new File("Download\\" + name);
+            fileWriter = new FileWriter(newFile);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
-            printWriter.write(g.translateText(textToTranslate, languageInput, languageOuput)); //translation with Gtranslate
-            newPath = newfile.toPath().toString();
+            printWriter.write(g.translateText(textToTranslate, languageInput, languageOutput)); //translation with Gtranslate
+            newPath = newFile.toPath().toString();
 
             printWriter.close();
             bufferedWriter.close();
@@ -73,21 +76,22 @@ public class TxtFile {
         }
     }
 
-    public void getPath(String path, String languageInput, String languageOuput) {
-        // We get the path of the txt file
-        file = new File(path);
-        String content = null;
-        try {
-            content = ReadTextFile.readFile(file, StandardCharsets.UTF_8); // Read the file
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
-        getFileName();
-        translateWord(languageInput, languageOuput);
-    }
-
     public String getNewPath() {
         return newPath;
+    }
+
+    @Override
+    public void extract(List<String> params) throws ExtractorException, ReadFileException {
+        try {
+            file = new File(params.get(0));
+            String content = ReadTextFile.readFile(file, StandardCharsets.UTF_8); // Read the file
+            textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
+            getFileName();
+            translateWord(params.get(1), params.get(2));
+        } catch (IOException e) {
+            throw new ExtractorException("Read text ", e);
+        } catch (ReadFileException e) {
+            throw new ReadFileException(e.getMessage(), e);
+        }
     }
 }

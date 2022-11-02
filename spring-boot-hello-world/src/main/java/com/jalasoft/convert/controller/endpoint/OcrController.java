@@ -8,12 +8,12 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.service.ConvertImageToTextOCR;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -44,25 +44,26 @@ public class OcrController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadOcrImg")
-    public ResponseEntity<Object> translateGt(@RequestParam("img") MultipartFile file,
-                                              @RequestParam("lang") String lang) {
+    public ResponseEntity<Object> OCRExtract(@RequestParam("img") MultipartFile file,
+                                             @RequestParam("lang") String lang) {
         try {
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);
             ConvertImageToTextOCR convert = new ConvertImageToTextOCR();
             convert.convertImageToText(fileName, lang);
             return downloadFile(convert.getPathOcr());
-        } catch (TesseractException | FileStorageException e) {
+        } catch (ExtractorException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+        } catch (FileStorageException e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
 
     public ResponseEntity<Object> downloadFile(String pathOcr) {
-        String filename = pathOcr;
-        File file = new File(filename);
-        InputStreamResource resource = null;
         try {
-            resource = new InputStreamResource(new FileInputStream(file));
+            String filename = pathOcr;
+            File file = new File(filename);
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
             headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
