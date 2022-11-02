@@ -8,8 +8,6 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
-import com.jalasoft.convert.common.exception.ExecuteException;
-import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.AudioUploadResponse;
 import com.jalasoft.convert.controller.response.ErrorResponse;
@@ -35,7 +33,7 @@ import java.util.logging.Logger;
  */
 
 @RestController
-public class AudioControllerr {
+public class AudioController {
     private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;

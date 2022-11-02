@@ -12,7 +12,6 @@ import com.jalasoft.convert.common.exception.FileNotFoundException;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.exception.MalformedUrlException;
 import com.jalasoft.convert.controller.response.ErrorResponse;
-import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.response.UploadFileResponse;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;

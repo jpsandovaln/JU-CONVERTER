@@ -8,7 +8,6 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
-import com.jalasoft.convert.common.exception.ConverterFileException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
@@ -23,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.logging.Logger;
