@@ -6,7 +6,7 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.convert.model.translatefiletxt;
+package com.jalasoft.convert.model.coverters.translatefiletxt;
 
 import java.io.BufferedReader;
 import java.io.File;

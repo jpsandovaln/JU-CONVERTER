@@ -48,7 +48,7 @@ public class Executor {
                 errorStream.close();
             }
         } catch (IOException e) {
-            throw new ExecuteException(e.getMessage());
+            throw new ExecuteException(e.getMessage(), e);
         }
     }
 }

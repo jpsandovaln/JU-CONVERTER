@@ -6,7 +6,7 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.convert.model.translatefiletxt;
+package com.jalasoft.convert.model.coverters.translatefiletxt;
 
 import com.alibaba.fastjson.JSONArray;
 import org.apache.http.HttpEntity;
@@ -28,7 +28,7 @@ import java.util.*;
  * @author Sarai Alvarez
  * @version 1.0
  */
-class Gt_Translate {
+public class Gt_Translate {
 
     private static final String PATH = "https://translate.googleapis.com/translate_a/single"; // Direction
     private static final String CLIENT = "gtx";

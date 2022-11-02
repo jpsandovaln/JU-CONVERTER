@@ -1,11 +1,19 @@
 package com.jalasoft.convert.model.translatefiletxt;
 import org.junit.Test;
 
+import com.jalasoft.convert.model.coverters.translatefiletxt.Gt_Translate;
+import com.jalasoft.convert.model.coverters.translatefiletxt.ReadTextFile;
+import com.jalasoft.convert.model.coverters.translatefiletxt.TxtFile;
+
+import net.sourceforge.tess4j.TesseractException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -49,10 +57,15 @@ public class ReadTextFileTest {
 
     /**
      * The test case has to prove if the method getParameters bring back an FileNotFoundException
+     * @throws TesseractException
      */
-    @Test(expected = FileNotFoundException.class)
+    @Test(expected = TesseractException.class)
     public void shouldGetPathWithErrorParameters(){
         TxtFile txtFile = new TxtFile();
-        txtFile.getPath("","","");
+        List<String> params = new ArrayList<>();
+        params.add("");
+        params.add("");
+        params.add("");
+        //txtFile.extract(params);
     }
 }

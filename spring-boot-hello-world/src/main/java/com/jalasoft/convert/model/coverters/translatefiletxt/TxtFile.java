@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.translatefiletxt;
+package com.jalasoft.convert.model.coverters.translatefiletxt;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,14 +14,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
+import com.jalasoft.convert.model.coverters.Extractor;
+
+import net.sourceforge.tess4j.TesseractException;
 
 /*
  * It is responsible for using the Google Translate API to translate a text document.
  * @author Sarai Alvarez
  * @version 1.0
  */
-public class TxtFile {
+public class TxtFile extends Extractor{
 
     public static String textToTranslate;
     public static File file;
@@ -73,21 +79,22 @@ public class TxtFile {
         }
     }
 
-    public void getPath(String path, String languageInput, String languageOuput) {
-        // We get the path of the txt file
-        file = new File(path);
-        String content = null;
-        try {
-            content = ReadTextFile.readFile(file, StandardCharsets.UTF_8); // Read the file
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
-        getFileName();
-        translateWord(languageInput, languageOuput);
-    }
-
     public String getNewPath() {
         return newPath;
+    }
+
+    @Override
+    public void extract(List<String> params) throws TesseractException {
+       // We get the path of the txt file
+       file = new File(params.get(0));
+       String content = null;
+       try {
+           content = ReadTextFile.readFile(file, StandardCharsets.UTF_8); // Read the file
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+       textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
+       getFileName();
+       translateWord(params.get(1), params.get(2));
     }
 }

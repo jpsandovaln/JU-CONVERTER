@@ -14,7 +14,10 @@ import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.MetadataExtractor;
+import com.jalasoft.convert.model.coverters.MetadataExtractor;
+
+import net.sourceforge.tess4j.TesseractException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +28,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -53,8 +58,11 @@ public class MetadataController {
             file.transferTo(metadataFile);
 
             //Extract the metadata in a new File
-            MetadataExtractor metadata = new MetadataExtractor(metadataFile);
-            File newFile = metadata.extractMetadataTxt();
+            MetadataExtractor metadata = new MetadataExtractor();
+            List<String> filePath = new ArrayList<>();
+            filePath.add(metadataFile.toPath().toString());
+            metadata.extract(filePath);
+            File newFile = metadata.getFile();            
             //Create the link to Download the new file with the metadata
             String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/downloadFile/")
@@ -62,6 +70,8 @@ public class MetadataController {
                     .toUriString();
             return new MetadataUploadResponse(fileName, newFormat, metadataDownloadUri);
         } catch (FileStorageException | IllegalStateException | IOException e) {
+            return new ErrorResponse("400", e.getMessage());
+        } catch (TesseractException e) {
             return new ErrorResponse("400", e.getMessage());
         }
     }
