@@ -1,8 +1,16 @@
+/**
+ * Copyright (c) 2022 Jala University.
+ *
+ * This software is the confidential and proprietary information of Jalasoft
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * Licence agreement you entered into with Jalasoft
+ */
+
 package com.jalasoft.convert.middleware;
 
-import com.jalasoft.convert.common.exception.FileNotFoundException;
+import com.jalasoft.convert.common.exception.MiddlewareException;
 import com.jalasoft.convert.common.logger.At18Logger;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +34,11 @@ import java.util.logging.Logger;
 @WebFilter(urlPatterns = "/uploadImage")
 public class ImageControllerMiddleware implements Filter{
     private static final Logger LOG = new At18Logger().getLogger();
+    /**
+     * This is the Filter to receive the request which contains what a user sends from Postman
+     * and response, the main idea is to manage exceptions before going through the controllers
+     * in this case this is the filter for ImageController
+     */
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
@@ -38,43 +51,41 @@ public class ImageControllerMiddleware implements Filter{
         Scanner myReader = new Scanner(fileToken);
         String token = myReader.nextLine();
         int tokenCounter = Integer.parseInt(myReader.nextLine());
-        if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1) {
-            FileWriter fw = new FileWriter(path, false);
-            tokenCounter -= 1;
-            LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
-            fw.write(token);
-            fw.write(System.getProperty("line.separator"));
-            fw.write(Integer.toString(tokenCounter));
-            fw.close();
-            myReader.close();
-            if((req.getPart("file").getContentType().contains("image") && res.getStatus() == 200)){
-                LOG.info(req.getPart("file").getContentType());
-                LOG.info("Proccess Executed Sucessfully");
-                chain.doFilter(request, response);
-                LOG.info ("Response Status Code is: " + res.getStatus());
-            } else {
-                LOG.info("Status is not 200 or the file does not have content");
-                try {
-                    throw new FileNotFoundException("Status is not 200 or the file does not have content");
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
+        LOG.info("Remaining token uses: " + tokenCounter);
+        try {
+            if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1) {
+                FileWriter fw = new FileWriter(path, false);
+                tokenCounter -= 1;
+                LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
+                fw.write(token);
+                fw.write(System.getProperty("line.separator"));
+                fw.write(Integer.toString(tokenCounter));
+                fw.close();
+                myReader.close();
+                if (res.getStatus() == 200) {
+                    LOG.info("Proccess Executed Sucessfully");
+                    chain.doFilter(request, response);
+                    LOG.info("Response Status Code is: " + res.getStatus());
+                } else {
+                    LOG.info("Status is not 200 or the file does not have content");
+                    throw new MiddlewareException("Status is not 200 or the file does not have content");
                 }
+            } else if (tokenCounter < 1) {
+                LOG.info("Token has no more uses, please request another one");
+                FileWriter fw = new FileWriter(path, false);
+                PrintWriter pw = new PrintWriter(fw, false);
+                pw.flush();
+                pw.close();
+                fw.close();
+                throw new MiddlewareException("Token has no more uses, please request another one");
+            } else {
+                LOG.info("Token was not introduced correctly");
+                throw new MiddlewareException("Token was not introduced correctly");
             }
-        } else if (tokenCounter < 1) {
-            LOG.info("Token has no more uses, please request another one");
-            FileWriter fw = new FileWriter(path, false);
-            PrintWriter pw = new PrintWriter(fw, false);
-            pw.flush();
-            pw.close();
-            fw.close();
-        }
-        else {
-            LOG.info("Token was not introduced correctly");
-            try {
-                throw new FileNotFoundException("Token was not introduced correctly");
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (MiddlewareException e){
+            PrintWriter out = res.getWriter();
+            out.println("Remaining token uses: " + tokenCounter);
+            out.println(e.getMessage());
         }
     }
 }
