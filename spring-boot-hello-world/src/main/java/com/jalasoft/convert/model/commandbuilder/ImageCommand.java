@@ -131,7 +131,6 @@ public class ImageCommand implements CommandBuilder {
         tool(setup.get(2), setup.get(3), setup.get(4), setup.get(5));
         // tool(setup.get(6), setup.get(7), setup.get(8), setup.get(9));
         format(setup.get(6), setup.get(7));
-
     }
 
     @Override

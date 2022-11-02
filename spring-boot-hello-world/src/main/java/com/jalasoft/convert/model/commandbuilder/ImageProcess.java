@@ -18,7 +18,6 @@ package com.jalasoft.convert.model.commandbuilder;
 public class ImageProcess {
     public ImageProcess () {//, String inputPath, String tool, String characteristic, String outputPath) {
         super();
-
     }
 
     protected static String resize (String width, String height) {
@@ -30,7 +29,6 @@ public class ImageProcess {
             String finalResize =  x_width + "x" + y_height + "^";
             return finalResize.toString();
         }
-
     }
 
     protected static String colorSpace (String colorSpace) {

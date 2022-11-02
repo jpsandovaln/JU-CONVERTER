@@ -68,11 +68,11 @@ public class FileStorageService {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         File uploadsDir = new File("Uploads");
         if (!uploadsDir.exists()){
-            uploadsDir.mkdirs();
+            uploadsDir.mkdir();
         }
         File downloadDir = new File("Download");
         if (!downloadDir.exists()){
-            downloadDir.mkdirs();
+            downloadDir.mkdir();
         }
         try {
             // Check if the file's name contains invalid characters

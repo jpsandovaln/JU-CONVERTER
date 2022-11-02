@@ -22,7 +22,7 @@ import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.exception.ReadFileException;
 import com.jalasoft.convert.model.extractors.Extractor;
 
-/*
+/**
  * It is responsible for using the Google Translate API to translate a text document.
  * @author Sarai Alvarez
  * @version 1.0
