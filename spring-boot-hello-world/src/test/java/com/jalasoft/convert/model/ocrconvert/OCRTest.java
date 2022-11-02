@@ -15,6 +15,7 @@ public class OCRTest {
     @Test (expected = ExtractorException.class)
     public void should() throws ExtractorException {
         OCR ocr = new OCR();
+
         List<String> params = new ArrayList<>();
         params.add("testResources\\testImage.png");
         params.add("eng");
