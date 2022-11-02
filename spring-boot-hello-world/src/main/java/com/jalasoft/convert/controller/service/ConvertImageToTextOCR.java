@@ -1,21 +1,20 @@
 package com.jalasoft.convert.controller.service;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * It is responsible for receiving images and converting them to text
- *
- * @author Hugo Solares
- * @version 1.0
- */
-import com.jalasoft.convert.model.ocrconvert.OCR;
-import net.sourceforge.tess4j.TesseractException;
 import org.springframework.stereotype.Service;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
+import com.jalasoft.convert.model.extractors.OCR;
 @Service
 public class ConvertImageToTextOCR {
     private String pathOcr;
-    public void convertImageToText(String imageInputname, String lang) throws TesseractException {
+    public void convertImageToText(String imageInputname, String lang) throws ExtractorException{
         OCR imageOCR = new OCR();
-        imageOCR.convertOCR(imageInputname, lang);
+        List<String> params = new ArrayList<>();
+        params.add(imageInputname);
+        params.add(lang);
+        imageOCR.extract(params);
         pathOcr = imageOCR.getPathOcr();
     }
     public String getPathOcr() {

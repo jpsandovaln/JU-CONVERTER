@@ -18,6 +18,7 @@ import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.commandbuilder.ImageCommand;
 import com.jalasoft.convert.model.executor.Executor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +42,7 @@ public class ImageController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadImage")
-    public Response uploadImage(@RequestParam("process") String process, //MultipartFile file
+    public ResponseEntity<Object> uploadImage(@RequestParam("process") String process, //MultipartFile file
                                 @RequestParam("file") MultipartFile file,
                                 @RequestParam("tool") String tool,
                                 @RequestParam("width_black") String width_black,
@@ -67,10 +68,11 @@ public class ImageController {
             LOG.info("final command" + imageconverter.getCommand());
             Executor executor = new Executor();
             executor.runCommand(imageconverter.getCommand());
-            return new ImageUploadResponse(process,
-                    fileName, tool, width_black, height_white, color, fileout, format);
-        } catch (ExecuteException | FileStorageException e) {
-            return new ErrorResponse("400", e.getMessage());
+            return ResponseEntity.ok().body(new ImageUploadResponse(process, fileName, tool, width_black, height_white, color, fileout, format));
+        } catch (ExecuteException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+        } catch (FileStorageException e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
 }

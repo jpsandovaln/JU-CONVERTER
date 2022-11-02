@@ -41,16 +41,16 @@ public class FileController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadFile")
-    public Response uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Object> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             String fileName = fileStorageService.storeFile(file);
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/downloadFile/")
                     .path(fileName)
                     .toUriString();
-            return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+            return ResponseEntity.ok().body(new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize()));
         } catch (FileStorageException e) {
-            return new ErrorResponse("400", e.getLocalizedMessage());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getLocalizedMessage()));
         }
 
     }
@@ -73,9 +73,9 @@ public class FileController {
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                     .body(resource);
         } catch (MalformedUrlException e) {
-            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorResponse("500", e.getMessage()));
         } catch (FileNotFoundException e) {
-            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
+            return ResponseEntity.badRequest().body(new ErrorResponse("404", e.getMessage()));
         } catch (IOException ex) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", "Could not determine file type."));
         }

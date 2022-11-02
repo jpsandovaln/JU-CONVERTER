@@ -15,6 +15,7 @@ import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.ConvertWordDocumentToPDF;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,7 +45,7 @@ public class DocController {
 
     @PostMapping("/convertdocument")
 
-    public Response readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
+    public ResponseEntity<Object> readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
         try {
             Path pathFile = fileStorageService.save(file);
             String fileName = pathFile.toString();
@@ -54,9 +55,9 @@ public class DocController {
             response.addHeader("Content-disposition", "attachment; filename=" + "doc.pdf");
             response.setContentType("application/pdf");
             response.flushBuffer();
-            return new Response("200");
-        } catch (ConverterFileException | IOException e) {
-            return new ErrorResponse("400", e.getMessage());
+            return ResponseEntity.ok().body(new Response("200"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
 }

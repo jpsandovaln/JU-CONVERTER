@@ -8,13 +8,17 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.MetadataExtractor;
+import com.jalasoft.convert.model.extractors.MetadataExtractor;
+
+import net.sourceforge.tess4j.TesseractException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +29,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -53,15 +59,18 @@ public class MetadataController {
             file.transferTo(metadataFile);
 
             //Extract the metadata in a new File
-            MetadataExtractor metadata = new MetadataExtractor(metadataFile);
-            File newFile = metadata.extractMetadataTxt();
+            MetadataExtractor metadata = new MetadataExtractor();
+            List<String> filePath = new ArrayList<>();
+            filePath.add(metadataFile.toPath().toString());
+            metadata.extract(filePath);
+            File newFile = metadata.getFile();            
             //Create the link to Download the new file with the metadata
             String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/downloadFile/")
                     .path(newFile.getName())
                     .toUriString();
             return new MetadataUploadResponse(fileName, newFormat, metadataDownloadUri);
-        } catch (FileStorageException | IllegalStateException | IOException e) {
+        } catch (Exception e) {
             return new ErrorResponse("400", e.getMessage());
         }
     }

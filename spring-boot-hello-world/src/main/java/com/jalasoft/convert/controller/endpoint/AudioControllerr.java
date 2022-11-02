@@ -13,11 +13,11 @@ import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.AudioUploadResponse;
 import com.jalasoft.convert.controller.response.ErrorResponse;
-import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.commandbuilder.AudioCommand;
 import com.jalasoft.convert.model.executor.Executor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +41,7 @@ public class AudioControllerr {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadAudio")
-    public Response uploadAudio(@RequestParam("file") MultipartFile file,
+    public ResponseEntity<Object> uploadAudio(@RequestParam("file") MultipartFile file,
                                 @RequestParam("bitrate") String bitrate,
                                 @RequestParam("channels") String channels,
                                 @RequestParam("sampling frequency") String samplingFrequency,
@@ -60,10 +60,9 @@ public class AudioControllerr {
             audioConverter.setParameters(parameters);
             Executor executor = new Executor();
             executor.runCommand(audioConverter.getCommand());
-            return new AudioUploadResponse(fileName,
-                    file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format);
-        } catch (ExecuteException | FileStorageException e) {
-            return new ErrorResponse("400", e.getMessage());
+            return ResponseEntity.ok().body(new AudioUploadResponse(fileName, file.getContentType(), file.getSize(), bitrate, channels, samplingFrequency, format));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
 }

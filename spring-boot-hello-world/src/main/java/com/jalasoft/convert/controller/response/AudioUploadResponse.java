@@ -7,12 +7,18 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.response;
+
 /**
  * It is responsable returning a response to a request 
  *
  * @author Fernanda Aguilar
  * @version 1.0
  */
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.OK)
 public class AudioUploadResponse extends Response{
     private String fileName;
     private String fileType;

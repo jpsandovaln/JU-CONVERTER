@@ -71,7 +71,7 @@ public class VideoController {
             response.setContentType("application/pdf");
             response.flushBuffer();
             return new Response("200");
-        } catch (ExecuteException | FileStorageException | ConverterFileException | IOException e) {
+        } catch (Exception e) {
             return new ErrorResponse("400", e.getMessage());
         }
     }

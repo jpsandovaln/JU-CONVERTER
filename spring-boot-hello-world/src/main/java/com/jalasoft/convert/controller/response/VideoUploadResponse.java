@@ -13,6 +13,11 @@ package com.jalasoft.convert.controller.response;
  * @author Fernanda Aguilar
  * @version 1.0
  */
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.OK)
 public class VideoUploadResponse extends Response{
     private String fileName;
     private String fileType;

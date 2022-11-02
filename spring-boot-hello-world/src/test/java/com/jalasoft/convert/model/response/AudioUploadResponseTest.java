@@ -3,8 +3,6 @@ package com.jalasoft.convert.model.response;
 import com.jalasoft.convert.controller.response.AudioUploadResponse;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 
 public class AudioUploadResponseTest {

@@ -1,4 +1,5 @@
 package com.jalasoft.convert.controller.response;
+
 public class Response {
     private String status;
 
