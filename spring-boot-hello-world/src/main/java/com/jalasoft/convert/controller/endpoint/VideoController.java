@@ -7,10 +7,6 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.controller.endpoint;
-
-import com.jalasoft.convert.common.exception.ConverterFileException;
-import com.jalasoft.convert.common.exception.ExecuteException;
-import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
@@ -24,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;

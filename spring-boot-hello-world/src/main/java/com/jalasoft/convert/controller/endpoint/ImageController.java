@@ -13,7 +13,6 @@ import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.ImageUploadResponse;
-import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.commandbuilder.ImageCommand;
 import com.jalasoft.convert.model.executor.Executor;
