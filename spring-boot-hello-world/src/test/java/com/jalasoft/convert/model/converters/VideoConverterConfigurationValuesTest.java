@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-
+/**
+ * It is responsible to test the VideoConverterConfigurationValues Class, this class convert the file with a list
+ * @author Rodrigo Valda
+ * @version 1.0
+ */
 public class VideoConverterConfigurationValuesTest {
     @Test
     public void shouldTestIfAllParameterAreSendingCorrectly(){

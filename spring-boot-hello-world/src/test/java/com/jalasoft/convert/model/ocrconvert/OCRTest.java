@@ -9,7 +9,11 @@ import org.junit.Test;
 
 import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.model.extractors.OCR;
-
+/**
+ * It is responsible to test the OCR Class, this class convert the file with a list
+ * @author Rodrigo Valda
+ * @version 1.0
+ */
 public class OCRTest {
 
     @Test (expected = ExtractorException.class)
