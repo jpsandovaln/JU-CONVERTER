@@ -42,13 +42,13 @@ public class ImageController {
 
     @PostMapping("/uploadImage")
     public ResponseEntity<Object> uploadImage(@RequestParam("process") String process, //MultipartFile file
-                                @RequestParam("file") MultipartFile file,
-                                @RequestParam("tool") String tool,
-                                @RequestParam("width_black") String width_black,
-                                @RequestParam("height_white") String height_white,
-                                @RequestParam("color") String color,
-                                @RequestParam("fileout") String fileout,
-                                @RequestParam("format") String format) {
+                                              @RequestParam("file") MultipartFile file,
+                                              @RequestParam("tool") String tool,
+                                              @RequestParam("width_black") String width_black,
+                                              @RequestParam("height_white") String height_white,
+                                              @RequestParam("color") String color,
+                                              @RequestParam("fileout") String fileout,
+                                              @RequestParam("format") String format) {
 
         try {
             LOG.info("An image was introduced correctly");
@@ -63,10 +63,10 @@ public class ImageController {
             settings.add(color);
             settings.add("Download\\" + fileout);
             settings.add(format);
-            ImageCommand imageconverter = new ImageCommand(settings);
-            LOG.info("final command" + imageconverter.getCommand());
+            ImageCommand imageConverter = new ImageCommand(settings);
+            LOG.info("final command" + imageConverter.getCommand());
             Executor executor = new Executor();
-            executor.runCommand(imageconverter.getCommand());
+            executor.runCommand(imageConverter.getCommand());
             return ResponseEntity.ok().body(new ImageUploadResponse(process, fileName, tool, width_black, height_white, color, fileout, format));
         } catch (ExecuteException e) {
             return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));

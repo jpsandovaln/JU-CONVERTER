@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2022 Jala University.
- * <p>
+ *
  * This software is the confidential and proprietary information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * It is responsable for uploading Video and converting them
+ * It is responsible for uploading Video and converting them
  *
  * @author Fernanda Aguilar
  * @version 1.0
