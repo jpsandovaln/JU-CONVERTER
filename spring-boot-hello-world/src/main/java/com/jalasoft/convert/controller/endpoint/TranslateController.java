@@ -13,7 +13,6 @@ import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.extractors.translatefiletxt.TxtFile;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -42,7 +41,7 @@ public class TranslateController {
     @PostMapping("txt")
     public ResponseEntity<Object> translateGtTxt(@RequestParam("text") MultipartFile file,
                                                  @RequestParam("langI") String langI,
-                                                 @RequestParam("langO") String langO){
+                                                 @RequestParam("langO") String langO) {
         LOG.info("A txt file was introduced as input");
         try {
             String fileName = fileStorageService.storeFile(file);
@@ -63,19 +62,19 @@ public class TranslateController {
     @PostMapping("word")
     public ResponseEntity<Object> translateGtWord(@RequestParam("text") MultipartFile file,
                                                   @RequestParam("langI") String langI,
-                                                  @RequestParam("langO") String langO){
+                                                  @RequestParam("langO") String langO) {
         try {
             LOG.info("A word file was introduced as input");
             String fileNameInput = fileStorageService.storeFile(file);
             Document doc = new Document("Uploads\\" + fileNameInput);
-            doc.save("Uploads\\" + "File.txt");
+            doc.save("Uploads\\" + "WordExtract.txt");
 
-            String path = "Uploads\\" + "File.txt";
+            String path = "Uploads\\" + "WordExtract.txt";
             TxtFile tFile = new TxtFile();
             List<String> params = new ArrayList<>();
-                params.add(path);
-                params.add(langI);
-                params.add(langO);
+            params.add(path);
+            params.add(langI);
+            params.add(langO);
             //tFile.getPath(path, langI, langO);
             tFile.extract(params);
             return downloadFile(tFile.getNewPath());
@@ -97,7 +96,6 @@ public class TranslateController {
 
         ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(
                 file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
-
         return responseEntity;
     }
 }

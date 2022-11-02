@@ -38,8 +38,8 @@ public class TxtFile extends Extractor{
     //to get from the path the name of the file plus its extension (file.txt)
     public static void getFileName() {
 
-        String namefile = file.getAbsolutePath(); // save as string the path of the file
-        name = namefile.split("\\\\"); // we get only the name of the txt from the path.
+        String nameFile = file.getAbsolutePath(); // save as string the path of the file
+        name = nameFile.split("\\\\"); // we get only the name of the txt from the path.
     }
 
     //to translate the word "translated" which is added to the new generated txt, and rename the new document
@@ -47,7 +47,6 @@ public class TxtFile extends Extractor{
         g = Gt_Translate.getInstance();
         String titleDocument = "Translated-"; // word to be added to the name of the new text file containing the translated text.
         try {
-            //traducireltituloalidiomaselect = g.translateText(tituloDocumento,"en","fr");
             String translateTitle = g.translateText(titleDocument, languageInput, languageOuput);
             writeee(translateTitle + name[name.length - 1], languageInput, languageOuput); //name of the generated txt file
         } catch (Exception e) {
@@ -56,18 +55,18 @@ public class TxtFile extends Extractor{
     }
 
     //code to create the new file and write the translation into it
-    public static void writeee(String name, String languageInput, String languageOuput) {
-        File newfile;
+    public static void writeee(String name, String languageInput, String languageOutput) {
+        File newFile;
         FileWriter fileWriter;
         BufferedWriter bufferedWriter;
         PrintWriter printWriter;
         try {
-            newfile = new File("Download\\" + name);
-            fileWriter = new FileWriter(newfile);
+            newFile = new File("Download\\" + name);
+            fileWriter = new FileWriter(newFile);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);
-            printWriter.write(g.translateText(textToTranslate, languageInput, languageOuput)); //translation with Gtranslate
-            newPath = newfile.toPath().toString();
+            printWriter.write(g.translateText(textToTranslate, languageInput, languageOutput)); //translation with Gtranslate
+            newPath = newFile.toPath().toString();
 
             printWriter.close();
             bufferedWriter.close();

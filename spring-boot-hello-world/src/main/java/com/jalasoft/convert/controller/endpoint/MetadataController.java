@@ -8,17 +8,12 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
-import com.jalasoft.convert.common.exception.ExtractorException;
-import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
 import com.jalasoft.convert.model.extractors.MetadataExtractor;
-
-import net.sourceforge.tess4j.TesseractException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +29,7 @@ import java.util.logging.Logger;
 
 
 /**
- * It is responsable for uploading Audios and converting them
+ * It is responsible for uploading Audios and converting them
  *
  * @author Rodrigo Bernal
  * @version 1.0
@@ -63,7 +57,7 @@ public class MetadataController {
             List<String> filePath = new ArrayList<>();
             filePath.add(metadataFile.toPath().toString());
             metadata.extract(filePath);
-            File newFile = metadata.getFile();            
+            File newFile = metadata.getFile();
             //Create the link to Download the new file with the metadata
             String metadataDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/downloadFile/")

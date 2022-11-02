@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2022 Jala University.
- * <p>
+ *
  * This software is the confidential and proprieraty information of Jalasoft
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -29,7 +30,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 /**
- * It is responsable for storing the uploaded file
+ * It is responsible for storing the uploaded file
  *
  * @author Fernanda Aguilar
  * @version 1.0
@@ -65,7 +66,14 @@ public class FileStorageService {
     public String storeFile(MultipartFile file) throws FileStorageException {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
+        File uploadsDir = new File("Uploads");
+        if (!uploadsDir.exists()){
+            uploadsDir.mkdirs();
+        }
+        File downloadDir = new File("Download");
+        if (!downloadDir.exists()){
+            downloadDir.mkdirs();
+        }
         try {
             // Check if the file's name contains invalid characters
             if (fileName.contains("..")) {

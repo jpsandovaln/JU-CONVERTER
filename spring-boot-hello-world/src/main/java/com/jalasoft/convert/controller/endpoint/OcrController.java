@@ -14,7 +14,6 @@ import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.service.ConvertImageToTextOCR;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import net.sourceforge.tess4j.TesseractException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -45,8 +44,8 @@ public class OcrController {
     private FileStorageService fileStorageService;
 
     @PostMapping("/uploadOcrImg")
-    public ResponseEntity<Object> translateGt(@RequestParam("img") MultipartFile file,
-                                              @RequestParam("lang") String lang) {
+    public ResponseEntity<Object> OCRExtract(@RequestParam("img") MultipartFile file,
+                                             @RequestParam("lang") String lang) {
         try {
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);
