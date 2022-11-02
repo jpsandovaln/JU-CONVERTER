@@ -6,9 +6,11 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.coverters;
+package com.jalasoft.convert.model.extractors;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.logger.At18Logger;
+
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -30,7 +32,7 @@ public class OCR extends Extractor{
     private static final Logger LOG = new At18Logger().getLogger();
 
     @Override
-    public void extract(List<String> params) throws TesseractException {
+    public void extract(List<String> params) throws ExtractorException {
         ITesseract tesseract = new Tesseract();
         tesseract.setDatapath("tessdata");
         tesseract.setLanguage(params.get(1));
@@ -42,7 +44,7 @@ public class OCR extends Extractor{
             FileUtils.writeStringToFile(new File("Download\\" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
             pathOcr="Download\\" + outputName[0] + ".txt";
         } catch (TesseractException e) {
-            throw new TesseractException("Error during processing", e);
+            throw new ExtractorException("Error during processing OCR", e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

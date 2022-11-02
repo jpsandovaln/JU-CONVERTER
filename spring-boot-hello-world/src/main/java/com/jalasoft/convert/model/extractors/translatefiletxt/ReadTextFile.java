@@ -6,14 +6,17 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.convert.model.coverters.translatefiletxt;
+package com.jalasoft.convert.model.extractors.translatefiletxt;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+
+import com.jalasoft.convert.common.exception.ReadFileException;
 
 /*
  * It is responsible for using the Google Translate API to translate a text document.
@@ -29,16 +32,22 @@ public class ReadTextFile {
         an InputStreamReader forms a string using a line separator.  
     */
 
-    public static String readFile(File file, Charset encoding) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        FileInputStream fileStream = new FileInputStream(file);
-        BufferedReader br;
-        String line;
-        br = new BufferedReader(new InputStreamReader(fileStream, encoding));
-        while ((line = br.readLine()) != null) {
-            sb.append(line + System.lineSeparator());
+    public static String readFile(File file, Charset encoding) throws FileNotFoundException, ReadFileException {
+        try {
+            StringBuilder sb = new StringBuilder();
+            FileInputStream fileStream = new FileInputStream(file);
+            BufferedReader br;
+            String line;
+            br = new BufferedReader(new InputStreamReader(fileStream, encoding));
+            while ((line = br.readLine()) != null) {
+                sb.append(line + System.lineSeparator());
+            }
+            br.close();
+            return sb.toString();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException(e.getMessage());
+        } catch (IOException e) {
+            throw new ReadFileException(e.getMessage());
         }
-        br.close();
-        return sb.toString();
     }
 }

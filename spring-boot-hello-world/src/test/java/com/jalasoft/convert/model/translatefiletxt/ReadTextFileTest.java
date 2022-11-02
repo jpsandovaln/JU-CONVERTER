@@ -1,15 +1,15 @@
 package com.jalasoft.convert.model.translatefiletxt;
 import org.junit.Test;
 
-import com.jalasoft.convert.model.coverters.translatefiletxt.Gt_Translate;
-import com.jalasoft.convert.model.coverters.translatefiletxt.ReadTextFile;
-import com.jalasoft.convert.model.coverters.translatefiletxt.TxtFile;
+import com.jalasoft.convert.common.exception.ReadFileException;
+import com.jalasoft.convert.model.extractors.translatefiletxt.Gt_Translate;
+import com.jalasoft.convert.model.extractors.translatefiletxt.ReadTextFile;
+import com.jalasoft.convert.model.extractors.translatefiletxt.TxtFile;
 
 import net.sourceforge.tess4j.TesseractException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class ReadTextFileTest {
         assertTrue(gt_translate.isSupport("es"));
     }
     @Test
-    public void shouldReturnTextRead() throws IOException {
+    public void shouldReturnTextRead() throws FileNotFoundException, ReadFileException {
         String expectedResult = "Hello goodevenning, I am working on the unit tests";
         ReadTextFile readTextFile = new ReadTextFile();
         File file = new File("Downloads/testText.txt");

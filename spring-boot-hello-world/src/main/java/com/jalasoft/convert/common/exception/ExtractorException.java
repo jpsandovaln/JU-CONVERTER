@@ -13,11 +13,11 @@ package com.jalasoft.convert.common.exception;
  * @author Libertad Tolaba
  * @version 1.0
  */
-public class TesseractException extends Exception{
-    public TesseractException(String message) {
+public class ExtractorException extends Exception{
+    public ExtractorException(String message) {
         super(message);
     }
-    public TesseractException(String message, Throwable cause) {
+    public ExtractorException(String message, Throwable cause) {
         super(message, cause);
     }
 }

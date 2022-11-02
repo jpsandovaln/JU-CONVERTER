@@ -6,21 +6,17 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.coverters;
+package com.jalasoft.convert.model.extractors;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
-import com.jalasoft.convert.controller.service.FileStorageService;
-
-import net.sourceforge.tess4j.TesseractException;
+import com.jalasoft.convert.common.exception.ExtractorException;
 
 public class MetadataExtractor extends Extractor{
     public static final String EXIFTOOL = "exiftool";
     public static final String FILE_TXT = "Uploads/file.txt";
-    private FileStorageService fileStorageService;
     private File outputFile;
 
     public MetadataExtractor(){
@@ -28,7 +24,7 @@ public class MetadataExtractor extends Extractor{
     }
 
     @Override
-    public void extract(List<String> params) throws TesseractException {
+    public void extract(List<String> params) throws ExtractorException {
         try {
             File file = new File(params.get(0));
             ProcessBuilder proc= new ProcessBuilder().command(EXIFTOOL, file.getPath());
@@ -37,7 +33,7 @@ public class MetadataExtractor extends Extractor{
             proc.redirectOutput(outputFile);    
             proc.start();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ExtractorException("Error with metadata extractor", e);
         }
     }
 

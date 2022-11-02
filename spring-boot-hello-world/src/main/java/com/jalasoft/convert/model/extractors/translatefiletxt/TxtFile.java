@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * Licence agreement you entered into with Jalasoft
  */
-package com.jalasoft.convert.model.coverters.translatefiletxt;
+package com.jalasoft.convert.model.extractors.translatefiletxt;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,9 +18,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.jalasoft.convert.model.coverters.Extractor;
-
-import net.sourceforge.tess4j.TesseractException;
+import com.jalasoft.convert.common.exception.ExtractorException;
+import com.jalasoft.convert.common.exception.ReadFileException;
+import com.jalasoft.convert.model.extractors.Extractor;
 
 /*
  * It is responsible for using the Google Translate API to translate a text document.
@@ -46,11 +46,9 @@ public class TxtFile extends Extractor{
     public static void translateWord(String languageInput, String languageOuput) {
         g = Gt_Translate.getInstance();
         String titleDocument = "Translated-"; // word to be added to the name of the new text file containing the translated text.
-        //for the name of the new txt the word "translated" is translated into the selected language
-        String translateTitle;
         try {
             //traducireltituloalidiomaselect = g.translateText(tituloDocumento,"en","fr");
-            translateTitle = g.translateText(titleDocument, languageInput, languageOuput);
+            String translateTitle = g.translateText(titleDocument, languageInput, languageOuput);
             writeee(translateTitle + name[name.length - 1], languageInput, languageOuput); //name of the generated txt file
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,17 +82,17 @@ public class TxtFile extends Extractor{
     }
 
     @Override
-    public void extract(List<String> params) throws TesseractException {
-       // We get the path of the txt file
-       file = new File(params.get(0));
-       String content = null;
-       try {
-           content = ReadTextFile.readFile(file, StandardCharsets.UTF_8); // Read the file
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
-       getFileName();
-       translateWord(params.get(1), params.get(2));
+    public void extract(List<String> params) throws ExtractorException, ReadFileException {
+        try {
+            file = new File(params.get(0));
+            String content = ReadTextFile.readFile(file, StandardCharsets.UTF_8); // Read the file
+            textToTranslate = content;// we get the text that the ReadFile class outputs and save it in a new String txt
+            getFileName();
+            translateWord(params.get(1), params.get(2));
+        } catch (IOException e) {
+            throw new ExtractorException("Read text ", e);
+        } catch (ReadFileException e) {
+            throw new ReadFileException(e.getMessage(), e);
+        }
     }
 }

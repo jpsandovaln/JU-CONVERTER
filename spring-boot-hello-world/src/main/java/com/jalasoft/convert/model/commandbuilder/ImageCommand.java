@@ -45,11 +45,9 @@ public class ImageCommand implements CommandBuilder {
         switch (process) {
             case "convert":
                 command.add("convert");
-
                 System.out.println("choose convert image");
             case "montage":
                 System.out.println("choose do a montage image");
-
             default:
                 System.out.println("It's not the process you are looking for");
         }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Libertad Tolaba
  * @version 1.0
  */
-@ResponseStatus(HttpStatus.NOT_FOUND)
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class MalformedUrlException extends Exception{
     public MalformedUrlException(String message) {
         super(message);

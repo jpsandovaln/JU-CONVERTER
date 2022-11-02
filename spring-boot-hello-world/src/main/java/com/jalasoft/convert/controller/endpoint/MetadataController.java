@@ -8,13 +8,14 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.exception.FileStorageException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.MetadataUploadResponse;
 import com.jalasoft.convert.controller.response.Response;
 import com.jalasoft.convert.controller.service.FileStorageService;
-import com.jalasoft.convert.model.coverters.MetadataExtractor;
+import com.jalasoft.convert.model.extractors.MetadataExtractor;
 
 import net.sourceforge.tess4j.TesseractException;
 
@@ -69,9 +70,7 @@ public class MetadataController {
                     .path(newFile.getName())
                     .toUriString();
             return new MetadataUploadResponse(fileName, newFormat, metadataDownloadUri);
-        } catch (FileStorageException | IllegalStateException | IOException e) {
-            return new ErrorResponse("400", e.getMessage());
-        } catch (TesseractException e) {
+        } catch (Exception e) {
             return new ErrorResponse("400", e.getMessage());
         }
     }

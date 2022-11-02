@@ -6,7 +6,7 @@
  * Licence agreement you entered into with Jalasoft
  */
 
-package com.jalasoft.convert.model.coverters.translatefiletxt;
+package com.jalasoft.convert.model.extractors.translatefiletxt;
 
 import com.alibaba.fastjson.JSONArray;
 import org.apache.http.HttpEntity;

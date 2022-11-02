@@ -13,6 +13,11 @@ package com.jalasoft.convert.common.exception;
  * @author Libertad Tolaba
  * @version 1.0
  */
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class ExecuteException extends Exception{
     public ExecuteException(String message) {
         super(message);

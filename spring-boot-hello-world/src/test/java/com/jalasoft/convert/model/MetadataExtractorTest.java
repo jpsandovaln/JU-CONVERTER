@@ -2,10 +2,7 @@ package com.jalasoft.convert.model;
 
 import org.junit.Test;
 
-import com.jalasoft.convert.model.coverters.MetadataExtractor;
-
-import net.sourceforge.tess4j.TesseractException;
-
+import com.jalasoft.convert.model.extractors.MetadataExtractor;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
