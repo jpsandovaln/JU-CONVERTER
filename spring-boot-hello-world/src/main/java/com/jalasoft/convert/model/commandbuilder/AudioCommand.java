@@ -93,22 +93,22 @@ public class AudioCommand implements CommandBuilder {
     private void selectFormat(String format, String name) {
         switch (format) {
             case "mp3":
-                command.add(name + "1.mp3");
+                command.add(name + ".mp3");
                 break;
             case "aac":
-                command.add(name + "1.aac");
+                command.add(name + ".aac");
                 break;
             case "ogg":
-                command.add(name + "1.ogg");
+                command.add(name + ".ogg");
                 break;
             case "flac":
-                command.add(name + "1.flac");
+                command.add(name + ".flac");
                 break;
             case "wma":
-                command.add(name + "1.wma");
+                command.add(name + ".wma");
                 break;
             case "wav":
-                command.add(name + "1.wav");
+                command.add(name + ".wav");
                 break;
         }
     }
