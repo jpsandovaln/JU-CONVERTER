@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -52,44 +53,51 @@ public class AudioControllerMiddleware implements Filter{
         String path = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
         File fileToken = new File(path);
         Scanner myReader = new Scanner(fileToken);
-        String token = myReader.nextLine();
-        int tokenCounter = Integer.parseInt(myReader.nextLine());
-        LOG.info("Remaining token uses: " + tokenCounter);
         try {
-            if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1) {
-                FileWriter fw = new FileWriter(path, false);
-                tokenCounter -= 1;
-                LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
-                fw.write(token);
-                fw.write(System.getProperty("line.separator"));
-                fw.write(Integer.toString(tokenCounter));
-                fw.close();
-                myReader.close();
-                if (res.getStatus() == 200) {
-                    LOG.info("Proccess Executed Sucessfully");
-                    chain.doFilter(request, response);
-                    LOG.info("Response Status Code is: " + res.getStatus());
+            String token = myReader.nextLine();
+            int tokenCounter = Integer.parseInt(myReader.nextLine());
+            LOG.info("Remaining token uses: " + tokenCounter);
+            try {
+                if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1) {
+                    FileWriter fw = new FileWriter(path, false);
+                    tokenCounter -= 1;
+                    LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
+                    fw.write(token);
+                    fw.write(System.getProperty("line.separator"));
+                    fw.write(Integer.toString(tokenCounter));
+                    fw.close();
+                    myReader.close();
+                    if (res.getStatus() == 200) {
+                        LOG.info("Proccess Executed Sucessfully");
+                        chain.doFilter(request, response);
+                        LOG.info("Response Status Code is: " + res.getStatus());
+                    } else {
+                        LOG.info("Status is not 200 or the file has a incorrect format");
+                        throw new MiddlewareException("Status is not 200 or the file has a incorrect format");
+                    }
+                } else if (tokenCounter < 1) {
+                    LOG.info("Token has no more uses, please request another one");
+                    FileWriter fw = new FileWriter(path, false);
+                    PrintWriter pw = new PrintWriter(fw, false);
+                    pw.flush();
+                    pw.close();
+                    fw.close();
+                    throw new MiddlewareException("Token has no more uses, please request another one");
                 } else {
-                    LOG.info("Status is not 200 or the file has a incorrect format");
-                    throw new MiddlewareException("Status is not 200 or the file has a incorrect format");
+                    LOG.info("Token was not introduced correctly");
+                    throw new MiddlewareException("Token was not introduced correctly");
                 }
-            } else if (tokenCounter < 1) {
-                LOG.info("Token has no more uses, please request another one");
-                FileWriter fw = new FileWriter(path, false);
-                PrintWriter pw = new PrintWriter(fw, false);
-                pw.flush();
-                pw.close();
-                fw.close();
-                throw new MiddlewareException("Token has no more uses, please request another one");
+            } catch (MiddlewareException e) {
+                PrintWriter out = res.getWriter();
+                out.println("Remaining token uses: " + tokenCounter);
+                out.println(e.getMessage());
             }
-            else {
-                LOG.info("Token was not introduced correctly");
-                throw new MiddlewareException("Token was not introduced correctly");
-            }
-        } catch (MiddlewareException e){
+        } catch (NoSuchElementException e) {
+            LOG.info("Number of token uses exhausted");
+            LOG.info("Please request another Token to keep using the service");
             PrintWriter out = res.getWriter();
-            out.println("Remaining token uses: " + tokenCounter);
-            out.println(e.getMessage());
+            out.println("Number of token uses exhausted");
+            out.println("Please request another Token to keep using the service");
         }
     }
 }

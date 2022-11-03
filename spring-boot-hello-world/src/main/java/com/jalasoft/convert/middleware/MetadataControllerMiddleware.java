@@ -48,7 +48,6 @@ public class MetadataControllerMiddleware implements Filter{
     {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        PrintWriter out = response.getWriter();
         try {
             if(res.getStatus() == 200){
                 LOG.info("Proccess Executed Sucessfully");
@@ -59,6 +58,7 @@ public class MetadataControllerMiddleware implements Filter{
                 throw new MiddlewareException("Status is not 200 or the file does not have content");
             }
         } catch (MiddlewareException e) {
+            PrintWriter out = response.getWriter();
             out.println(e.getMessage());
         }
     }
