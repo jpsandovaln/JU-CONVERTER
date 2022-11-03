@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/**
+ * It is responsible to test the AudioCommand Class, this class create a command with a list with the received parameters
+ * @author Rodrigo Valda
+ * @version 1.0
+ */
 public class AudioCommandTest {
 
     /**
@@ -26,6 +30,23 @@ public class AudioCommandTest {
         parameters.add("txt");
         audioCommand.setParameters(parameters);
     }
+
+    /**
+     * The unit test has to prove when AudioCommand does not have parameters
+     */
+    @Test(expected = IOException.class)
+    public void shouldTestCreateCommandWithNullParameter(){
+        String fileName = "";
+        AudioCommand audioCommand = new AudioCommand(fileName);
+        List<String> parameters = new ArrayList<>();
+        parameters.add("testText.txt");
+        parameters.add("128k");
+        parameters.add("2");
+        parameters.add("44100");
+        parameters.add("txt");
+        audioCommand.setParameters(parameters);
+    }
+
 
     /**
      * The unit test has to prove if the user send a null file to the class

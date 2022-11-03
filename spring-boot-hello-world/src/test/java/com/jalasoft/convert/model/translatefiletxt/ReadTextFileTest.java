@@ -5,12 +5,9 @@ import com.jalasoft.convert.common.exception.ReadFileException;
 import com.jalasoft.convert.model.extractors.translatefiletxt.Gt_Translate;
 import com.jalasoft.convert.model.extractors.translatefiletxt.ReadTextFile;
 import com.jalasoft.convert.model.extractors.translatefiletxt.TxtFile;
-
 import net.sourceforge.tess4j.TesseractException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,11 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ReadTextFileTest {
-
+    /**
+     * It is responsible to test the ReadText Class, all almost methods were tested
+     * @author Rodrigo Valda
+     * @version 1.0
+     */
     @Test
     public void shouldInitializeAllMapLanguages(){
         Gt_Translate gt_translate = new Gt_Translate();

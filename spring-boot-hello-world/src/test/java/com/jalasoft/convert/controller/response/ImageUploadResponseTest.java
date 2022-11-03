@@ -1,4 +1,4 @@
-package com.jalasoft.convert.model.response;
+package com.jalasoft.convert.controller.response;
 
 import com.jalasoft.convert.controller.response.ImageUploadResponse;
 import org.junit.Test;

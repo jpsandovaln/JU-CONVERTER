@@ -1,37 +1,30 @@
 package com.jalasoft.convert.controller.endpoint;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import java.io.File;
 import java.io.IOException;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.http.HttpEntity;
 
+
+/**
+ * It is responsible to test the TranslateController Class, this class works with Postman and receive all the parameters
+ * to generate the request
+ * @author Rodrigo Valda
+ * @version 1.0
+ */
 
 
 public class TranslateControllerTest {
     @Test
-    public void shouldExecuteTranslateController() throws IOException {
-
-        Path path = Paths.get("Uploads\\testText.txt");
-        String name = "data";
-        String originalFileName = "testText.txt";
-        String contentType = "text/plain";
-        byte[] content = "Hello goodevenning, I am working on the unit tests".getBytes();
-        MultipartFile result = new MockMultipartFile(name,
-                originalFileName, contentType, content);
+    public void shouldExecuteTranslateControllerAndThrowBadRequest() throws IOException {
         TranslateController tr = new TranslateController();
-        //tr.translateGt(result,"en","es");
-        //assertEquals("textTet", tr.translateGt(result,"en","es");)
+        File testFile = new File("java/com/jalasoft/convert/middleware/prooffiles/Trouble.txt");
+        byte[] byteFile = new byte[(int) testFile.length()];
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("text",byteFile);
+        assertThat(tr.translateGtTxt(mockMultipartFile,"en","es").getStatusCode().value()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 }
 

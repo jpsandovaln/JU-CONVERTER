@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-
+/**
+ * It is responsible to test the ImageCommand Class, this class create a command with a list with the received parameters
+ * @author Rodrigo Valda
+ * @version 1.0
+ */
 public class ImageCommandTest {
 
     @Test

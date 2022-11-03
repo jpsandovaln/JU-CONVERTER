@@ -1,4 +1,4 @@
-package com.jalasoft.convert.model.response;
+package com.jalasoft.convert.controller.response;
 
 import com.jalasoft.convert.controller.response.UploadFileResponse;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class UploadFileResponseTest {
                 "txt",
                 4000
         );
-        upload.setFileDownloadUri("newTextDonwloadTest");
+        upload.setFileDownloadUri("newTextDownloadTest");
         assertEquals(expected,upload.getFileDownloadUri());
     }
 
@@ -41,7 +41,7 @@ public class UploadFileResponseTest {
                 "txt",
                 4000
         );
-        upload.setFileName("doc");
+        upload.setFileType("doc");
         assertEquals(expected,upload.getFileType());
     }
 
