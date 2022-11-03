@@ -6,10 +6,6 @@ package com.jalasoft.convert.controller.response;
  * @version 1.0
  */
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.OK)
 public class ImageUploadResponse extends Response{
     private String process;
     private String file;

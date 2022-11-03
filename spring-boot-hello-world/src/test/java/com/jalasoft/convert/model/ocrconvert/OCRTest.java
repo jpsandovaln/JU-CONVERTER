@@ -1,12 +1,8 @@
 package com.jalasoft.convert.model.ocrconvert;
 
-import net.sourceforge.tess4j.TesseractException;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Test;
-
 import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.model.extractors.OCR;
 /**

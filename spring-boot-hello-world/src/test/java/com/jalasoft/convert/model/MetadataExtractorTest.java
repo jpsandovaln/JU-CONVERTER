@@ -1,26 +1,22 @@
 package com.jalasoft.convert.model;
 
+import com.jalasoft.convert.common.exception.ExtractorException;
 import org.junit.Test;
-
 import com.jalasoft.convert.model.extractors.MetadataExtractor;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MetadataExtractorTest {
-    @Test (expected = IOException.class)
-    public void shouldTestIfReturnAnOutputFileWithIOException() {
+    /**
+     * It is responsible to test the MetadataExtractor Class, this class return a exception if insert a corrupt file
+     * @author Rodrigo Valda
+     * @version 1.0
+     */
+    @Test (expected = ExtractorException.class)
+    public void shouldTestIfReturnAnOutputFileWithIOException() throws ExtractorException {
         MetadataExtractor metadataExtractor = new MetadataExtractor();
         List<String> params = new ArrayList<>();
-        params.add("Downloads/justnew.txt");
-        //metadataExtractor.extract(params);
-    }
-
-    @Test
-    public void shouldTestIfReturnAnOutputFile() throws IOException {
-        File fileTest = new File("Downloads\\justnew.txt");
-        //MetadataExtractor metadataExtractor = new MetadataExtractor(fileTest);
-       // System.out.println(metadataExtractor.extractMetadataTxt());
+        params.add("java/com/jalasoft/convert/middleware/prooffiles/Trouble.txt");
+        metadataExtractor.extract(params);
     }
 }
