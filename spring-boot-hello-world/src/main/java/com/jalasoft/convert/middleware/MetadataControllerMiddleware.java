@@ -44,22 +44,23 @@ public class MetadataControllerMiddleware implements Filter{
     @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
-                         FilterChain chain) throws IOException, ServletException
-    {
+                         FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {
-            if(res.getStatus() == 200){
+            if (res.getStatus() == 200 && req.getPart("file").getContentType().contains("image")) {
                 LOG.info("Proccess Executed Sucessfully");
                 chain.doFilter(request, response);
-                LOG.info ("Response Status Code is: " + res.getStatus());
+                LOG.info("Response Status Code is: " + res.getStatus());
             } else {
                 LOG.info("Status is not 200 or the file does not have content");
                 throw new MiddlewareException("Status is not 200 or the file does not have content");
             }
+        } catch (NullPointerException e) {
+            LOG.info("The File is empty");
+            throw new NullPointerException("The file is empty");
         } catch (MiddlewareException e) {
-            PrintWriter out = response.getWriter();
-            out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

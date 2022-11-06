@@ -80,20 +80,17 @@ public class TranslatorMiddleware implements Filter {
                     fw.close();
                     throw new MiddlewareException("Token has no more uses, please request another one");
                 } else {
+                    LOG.info("Remaining token uses: " + tokenCounter);
                     LOG.info("Token was not introduced correctly");
-                    throw new MiddlewareException("Token was not introduced correctly");
+                    throw new MiddlewareException("Remaining token uses: " + tokenCounter + ", Token was not introduced correctly");
                 }
             } catch (MiddlewareException e) {
-                PrintWriter out = res.getWriter();
-                out.println("Remaining token uses: " + tokenCounter);
-                out.println(e.getMessage());
+                throw new RuntimeException(e.getMessage());
             }
         } catch (NoSuchElementException e) {
             LOG.info("Number of token uses exhausted");
             LOG.info("Please request another Token to keep using the service");
-            PrintWriter out = res.getWriter();
-            out.println("Number of token uses exhausted");
-            out.println("Please request another Token to keep using the service");
+            throw new NoSuchElementException("Number of token uses exhausted, Please request another Token to keep using the service", e);
         }
     }
 }
