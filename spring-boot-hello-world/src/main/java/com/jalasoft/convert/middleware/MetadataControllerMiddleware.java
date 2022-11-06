@@ -53,8 +53,8 @@ public class MetadataControllerMiddleware implements Filter{
                 chain.doFilter(request, response);
                 LOG.info("Response Status Code is: " + res.getStatus());
             } else {
-                LOG.info("Status is not 200 or the file does not have content");
-                throw new MiddlewareException("Status is not 200 or the file does not have content");
+                LOG.info("Status is not 200 or the file is not an image");
+                throw new MiddlewareException("Status is not 200 or the file is not an image");
             }
         } catch (NullPointerException e) {
             LOG.info("The File is empty");
