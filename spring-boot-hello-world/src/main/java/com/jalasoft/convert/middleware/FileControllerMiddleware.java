@@ -56,9 +56,11 @@ public class FileControllerMiddleware implements Filter{
                 LOG.info("Status is not 200 or the file does not have content");
                 throw new MiddlewareException("Status is not 200 or the file does not have content");
             }
+        }catch (NullPointerException e) {
+            LOG.info("The File is empty");
+            throw new NullPointerException("The file is empty");
         } catch (MiddlewareException e) {
-            PrintWriter out = response.getWriter();
-            out.println(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

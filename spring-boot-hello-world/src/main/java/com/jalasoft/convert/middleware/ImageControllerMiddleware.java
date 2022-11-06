@@ -85,16 +85,15 @@ public class ImageControllerMiddleware implements Filter{
                     throw new MiddlewareException("Token was not introduced correctly");
                 }
             } catch (MiddlewareException e) {
-                PrintWriter out = res.getWriter();
-                out.println("Remaining token uses: " + tokenCounter);
-                out.println(e.getMessage());
+                LOG.info("Remaining token uses: " + tokenCounter);
+                throw new MiddlewareException("Remaining token uses: " + tokenCounter + " ,introduce the correct token");
             }
         } catch (NoSuchElementException e) {
             LOG.info("Number of token uses exhausted");
             LOG.info("Please request another Token to keep using the service");
-            PrintWriter out = res.getWriter();
-            out.println("Number of token uses exhausted");
-            out.println("Please request another Token to keep using the service");
+            throw new NoSuchElementException("Number of token uses exhausted, Please request another Token to keep using the service", e);
+        } catch (MiddlewareException e) {
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
