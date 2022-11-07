@@ -46,5 +46,3 @@ test {
 }
 
 test.finalizedBy("jacocoTestReport")
-
-targetCompatibility = JavaVersion.VERSION_15
