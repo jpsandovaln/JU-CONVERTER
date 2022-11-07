@@ -67,7 +67,7 @@ public class ImageMiddlewareTest {
     /**
      * This Test Case checkS if the middleware and controller works correctly with a incorrect token number
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeImageControllerMiddleware() throws IOException, ServletException, NullPointerException{
         ImageControllerMiddleware imageControllerMiddleware = new ImageControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\image.jpg");

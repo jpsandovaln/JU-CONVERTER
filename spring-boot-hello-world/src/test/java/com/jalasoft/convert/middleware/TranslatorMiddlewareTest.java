@@ -57,7 +57,7 @@ public class TranslatorMiddlewareTest {
     /**
      * This Test Case checks if the middleware and controller works correctly with a incorrect token number txt file
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeTranslateControllerTxtMiddleware() throws IOException, ServletException, NullPointerException{
         TranslatorMiddleware translatorMiddleware = new TranslatorMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\Trouble.txt");
@@ -107,7 +107,7 @@ public class TranslatorMiddlewareTest {
     /**
      * This Test Case checks if the middleware and controller works correctly with a incorrect token number word file
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeTranslateControllerWordMiddleware() throws IOException, ServletException, NullPointerException{
         TranslatorMiddleware translatorMiddleware = new TranslatorMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\document.dock");

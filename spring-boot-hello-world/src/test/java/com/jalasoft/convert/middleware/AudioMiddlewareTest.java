@@ -57,7 +57,7 @@ public class AudioMiddlewareTest{
     /**
      * This Test Case checkS if the middleware and controller works correctly with a incorrect token number
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeAudioControllerMiddleware() throws IOException, ServletException, NullPointerException{
         AudioControllerMiddleware audioControllerMiddleware = new AudioControllerMiddleware();
         String fileName = "song.mp3";

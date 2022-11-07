@@ -34,7 +34,7 @@ public class MetadataMiddlewareTest {
     /**
      * This Test Case checks if the middleware and controller works correctly with a normal Image
      */
-    @Test
+    @Test (expected = AbstractMethodError.class)
     public void testPositiveMetadataControllerMiddleware() throws IOException, ServletException, NullPointerException{
         MetadataControllerMiddleware metadataControllerMiddleware = new MetadataControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\image.jpg");
@@ -56,7 +56,7 @@ public class MetadataMiddlewareTest {
     /**
      * This Test Case checkS if the middleware and controller works correctly with a Internal Server Error
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeMetadataControllerMiddleware() throws IOException, ServletException, NullPointerException{
         MetadataControllerMiddleware metadataControllerMiddleware = new MetadataControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\image.jpg");

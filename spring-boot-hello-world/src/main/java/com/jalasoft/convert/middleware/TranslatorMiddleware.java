@@ -9,6 +9,7 @@
 
 package com.jalasoft.convert.middleware;
 
+import com.aspose.words.Run;
 import com.jalasoft.convert.common.exception.MiddlewareException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import javax.servlet.*;
@@ -90,7 +91,7 @@ public class TranslatorMiddleware implements Filter {
         } catch (NoSuchElementException e) {
             LOG.info("Number of token uses exhausted");
             LOG.info("Please request another Token to keep using the service");
-            throw new NoSuchElementException("Number of token uses exhausted, Please request another Token to keep using the service", e);
+            throw new RuntimeException("Number of token uses exhausted, Please request another Token to keep using the service", e);
         }
     }
 }
