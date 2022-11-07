@@ -94,7 +94,7 @@ public class OcrControllerMiddleware implements Filter{
         } catch (NoSuchElementException e) {
             LOG.info("Number of token uses exhausted");
             LOG.info("Please request another Token to keep using the service");
-            throw new NoSuchElementException("Number of token uses exhausted, Please request another Token to keep using the service", e);
+            throw new RuntimeException("Number of token uses exhausted, Please request another Token to keep using the service", e);
         }
     }
 }

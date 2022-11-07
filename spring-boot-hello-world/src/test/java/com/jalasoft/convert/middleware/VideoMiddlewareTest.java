@@ -77,7 +77,7 @@ public class VideoMiddlewareTest {
     /**
      * This Test Case checkS if the middleware and controller works correctly with a incorrect token number
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeVideoControllerMiddleware() throws IOException, ServletException, NullPointerException{
         VideoControllerMiddleware videoControllerMiddleware = new VideoControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\perrito.mp4");
@@ -116,7 +116,7 @@ public class VideoMiddlewareTest {
         assertEquals(req.getParameter("color"), "1");
         assertEquals(req.getParameter("size"), "600x600");
         assertEquals(req.getParameter("cropVideo"), "");
-        assertThat(rsp.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(rsp.getStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
     /**
      * This Test Case checks if the middleware and controller works correctly with a empty field on parameters sended

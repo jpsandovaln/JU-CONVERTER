@@ -32,7 +32,7 @@ public class DocControllerMiddlewareTest {
     /**
      * This Test Case checks if the middleware and controller works correctly with a normal DocFile
      */
-    @Test
+    @Test (expected = AbstractMethodError.class)
     public void testPositiveDocControllerMiddleware() throws IOException, ServletException, NullPointerException{
         DocControllerMiddleware docControllerMiddleware = new DocControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\document.dock");
@@ -51,7 +51,7 @@ public class DocControllerMiddlewareTest {
     /**
      * This Test Case checkS if the middleware and controller works correctly with a Internal Server Error
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeDocControllerMiddleware() throws IOException, ServletException, NullPointerException{
         DocControllerMiddleware docControllerMiddleware = new DocControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\document.dock");

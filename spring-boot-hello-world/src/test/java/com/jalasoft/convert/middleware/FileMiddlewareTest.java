@@ -50,7 +50,7 @@ public class FileMiddlewareTest {
     /**
      * This Test Case checkS if the middleware and controller works correctly with a Internal Server Error
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeFileControllerMiddleware() throws IOException, ServletException, NullPointerException{
         FileControllerMiddleware fileControllerMiddleware = new FileControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\document.dock");

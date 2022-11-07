@@ -56,7 +56,7 @@ public class OcrMiddlewareTest {
     /**
      * This Test Case checkS if the middleware and controller works correctly with a incorrect token number
      */
-    @Test
+    @Test (expected = RuntimeException.class)
     public void testNegativeOcrControllerMiddleware() throws IOException, ServletException, NullPointerException{
         OcrControllerMiddleware ocrControllerMiddleware = new OcrControllerMiddleware();
         File newFile = new File(System.getProperty("user.dir") + "\\src\\test\\java\\com\\jalasoft\\convert\\middleware\\prooffiles\\ocrImage.png");
