@@ -59,7 +59,7 @@ public class AudioControllerMiddleware implements Filter{
             int tokenCounter = Integer.parseInt(myReader.nextLine());
             LOG.info("Remaining token uses: " + tokenCounter);
             try {
-                if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1) {
+                if (req.getHeader("Authorization").contains(token) && tokenCounter >= 1 && req.getHeader("Authorization").length() == 57) {
                     FileWriter fw = new FileWriter(path, false);
                     tokenCounter -= 1;
                     LOG.info("Remaining token uses: " + String.valueOf(tokenCounter));
