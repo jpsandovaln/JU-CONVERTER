@@ -35,7 +35,6 @@ import java.io.IOException;
 
 @RestController
 public class FileController {
-
     @Autowired
     private FileStorageService fileStorageService;
 

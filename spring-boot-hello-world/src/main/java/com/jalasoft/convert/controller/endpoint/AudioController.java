@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 
 @RestController
 public class AudioController {
-    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -45,6 +44,7 @@ public class AudioController {
                                               @RequestParam("sampling frequency") String samplingFrequency,
                                               @RequestParam("format") String format) {
         try {
+            Logger LOG = new At18Logger().getLogger();
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);
             List<String> parameters = new ArrayList<>();

@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 @RequestMapping("/uploadGText")
 @RestController
 public class TranslateController {
-    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -42,6 +41,7 @@ public class TranslateController {
     public ResponseEntity<Object> translateGtTxt(@RequestParam("text") MultipartFile file,
                                                  @RequestParam("langI") String langI,
                                                  @RequestParam("langO") String langO) {
+        Logger LOG = new At18Logger().getLogger();
         LOG.info("A txt file was introduced as input");
         try {
             String fileName = fileStorageService.storeFile(file);
@@ -59,6 +59,7 @@ public class TranslateController {
                                                   @RequestParam("langI") String langI,
                                                   @RequestParam("langO") String langO) {
         try {
+            Logger LOG = new At18Logger().getLogger();
             LOG.info("A word file was introduced as input");
             String fileNameInput = fileStorageService.storeFile(file);
             Document doc = new Document("Uploads\\" + fileNameInput);

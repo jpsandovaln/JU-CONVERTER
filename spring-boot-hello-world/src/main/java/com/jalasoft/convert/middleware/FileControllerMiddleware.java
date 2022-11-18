@@ -11,6 +11,8 @@ package com.jalasoft.convert.middleware;
 
 import com.jalasoft.convert.common.exception.MiddlewareException;
 import com.jalasoft.convert.common.logger.At18Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.servlet.*;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -34,7 +36,6 @@ import java.util.logging.Logger;
  */
 @WebFilter(urlPatterns = "/uploadFile")
 public class FileControllerMiddleware implements Filter{
-    private static final Logger LOG = new At18Logger().getLogger();
     /**
      * This is the Filter to receive the request which contains what a user sends from Postman
      * and response, the main idea is to manage exceptions before going through the controllers
@@ -45,6 +46,7 @@ public class FileControllerMiddleware implements Filter{
                          ServletResponse response,
                          FilterChain chain) throws IOException, ServletException
     {
+        Logger LOG = new At18Logger().getLogger();
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         try {

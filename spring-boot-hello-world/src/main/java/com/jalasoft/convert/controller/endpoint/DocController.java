@@ -35,7 +35,6 @@ import java.util.logging.Logger;
  */
 @RestController
 public class DocController {
-    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
     @Autowired
@@ -45,6 +44,7 @@ public class DocController {
 
     public ResponseEntity<Object> readDoc(@RequestParam("file") MultipartFile file, HttpServletResponse response) {
         try {
+            Logger LOG = new At18Logger().getLogger();
             Path pathFile = fileStorageService.save(file);
             String fileName = pathFile.toString();
             LOG.info("File uploaded: " + fileName);

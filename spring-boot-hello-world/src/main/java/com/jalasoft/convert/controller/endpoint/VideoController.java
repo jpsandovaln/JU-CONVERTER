@@ -33,9 +33,6 @@ import java.util.logging.Logger;
 
 @RestController
 public class VideoController {
-
-    private static final Logger LOG = new At18Logger().getLogger();
-    List<String> settings = new ArrayList<String>();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -55,6 +52,7 @@ public class VideoController {
                                 @RequestParam("size") String size,
                                 @RequestParam("cropVideo") String cropVideo, HttpServletResponse response) {
         try {
+            Logger LOG = new At18Logger().getLogger();
             String fileName = fileStorageService.storeFile(file);
             LOG.fine("File uploaded: " + fileName);
             VideoCommandAdapterConvert videoCommandAdapterConvert = new VideoCommandAdapterConvert();

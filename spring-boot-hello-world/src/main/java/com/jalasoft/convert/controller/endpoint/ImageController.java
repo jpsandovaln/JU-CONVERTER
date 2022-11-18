@@ -36,7 +36,6 @@ import java.util.logging.Logger;
 
 @RestController
 public class ImageController {
-    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -51,6 +50,7 @@ public class ImageController {
                                               @RequestParam("format") String format) {
 
         try {
+            Logger LOG = new At18Logger().getLogger();
             LOG.info("An image was introduced correctly");
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);

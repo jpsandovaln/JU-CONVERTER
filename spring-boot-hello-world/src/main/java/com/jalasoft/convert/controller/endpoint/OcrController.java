@@ -19,6 +19,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,8 +39,6 @@ import java.util.logging.Logger;
 
 @RestController
 public class OcrController {
-
-    private static final Logger LOG = new At18Logger().getLogger();
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -47,6 +46,7 @@ public class OcrController {
     public ResponseEntity<Object> OCRExtract(@RequestParam("img") MultipartFile file,
                                              @RequestParam("lang") String lang) {
         try {
+            Logger LOG = new At18Logger().getLogger();
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);
             ConvertImageToTextOCR convert = new ConvertImageToTextOCR();

@@ -36,8 +36,6 @@ import java.util.logging.Logger;
  */
 @RestController
 public class MetadataController {
-    private static final Logger LOG = new At18Logger().getLogger();
-
     @Autowired
     private FileStorageService fileStorageService;
 
@@ -45,6 +43,7 @@ public class MetadataController {
     public Response uploadMetadata(@RequestParam("file") MultipartFile file,
                                    @RequestParam("outFormat") String newFormat) {
         try {
+            Logger LOG = new At18Logger().getLogger();
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);
             Path targetLocation = fileStorageService.fileStorageLocation.resolve(fileName);
