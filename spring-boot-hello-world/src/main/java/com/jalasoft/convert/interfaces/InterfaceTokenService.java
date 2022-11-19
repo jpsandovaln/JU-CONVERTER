@@ -3,7 +3,6 @@ package com.jalasoft.convert.interfaces;
 import com.jalasoft.convert.model.mysqlmodel.TokenDB;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface InterfaceTokenService {
     public List<TokenDB>getList();

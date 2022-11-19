@@ -1,0 +1,22 @@
+version: '2.12.1'
+services:
+  converter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 5000:5000
+    depends_on:
+      - convertermysql
+  convertermysql:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=Control123
+      - MYSQL_DATABASE=converter_dbsql
+    ports:
+      - 3307:3306
+networks:
+  default:
+    name: converter-network-project

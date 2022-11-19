@@ -19,7 +19,7 @@ import java.util.List;
 
 public class VideoCommand implements CommandBuilder {
     private String input;
-    private String ffmpegPath = "ffmpeg\\bin\\ffmpeg";
+    private String ffmpegPath = "ffmpeg";
     private String outName = "out";
     private String outFormat = ".mp4";
     private List<String> command;
@@ -88,7 +88,7 @@ public class VideoCommand implements CommandBuilder {
             command.add(videoFilter.getCommandText());
         }
         command.add("-y");
-        command.add("Download\\" + outName + outFormat);
+        command.add("Uploads\\" + outName + outFormat);
     }
 
     private void setVolume(double vol) {

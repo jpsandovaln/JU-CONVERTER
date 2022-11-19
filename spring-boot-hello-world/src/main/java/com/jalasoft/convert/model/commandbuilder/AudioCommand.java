@@ -23,7 +23,7 @@ public class AudioCommand implements CommandBuilder {
     String format;
 
     public AudioCommand(String fileName) {
-        exe = ("ffmpeg\\bin\\ffmpeg.exe");
+        exe = ("ffmpeg");
         this.fileName = fileName;
         command.add(exe);
         command.add("-i");

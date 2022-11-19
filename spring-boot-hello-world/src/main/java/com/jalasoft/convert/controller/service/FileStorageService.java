@@ -70,7 +70,7 @@ public class FileStorageService {
         if (!uploadsDir.exists()){
             uploadsDir.mkdir();
         }
-        File downloadDir = new File("Download");
+        File downloadDir = new File("Uploads");
         if (!downloadDir.exists()){
             downloadDir.mkdir();
         }
