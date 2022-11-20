@@ -19,7 +19,7 @@ public class VideoCommandAdapterConvert extends VideoConvert {
             builderCommand.setParameters(settings.parameters());
             Executor executor = new Executor();
             executor.runCommand(builderCommand.getCommand());
-            String newFilePath = "Download\\" + settings.getNewName() + settings.getOutFormat();
+            String newFilePath = System.getProperty("user.dir") + "/Download/" + settings.getNewName() + settings.getOutFormat();
             IOUtils.copy(new FileInputStream(newFilePath), outputStream);
         } catch (ExecuteException e) {
             throw new ExecuteException(e.getMessage());

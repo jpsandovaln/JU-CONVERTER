@@ -48,7 +48,7 @@ public class AudioController {
             String fileName = fileStorageService.storeFile(file);
             LOG.info("File uploaded: " + fileName);
             List<String> parameters = new ArrayList<>();
-            String name = "Uploads\\";
+            String name = System.getProperty("user.dir") + "/Uploads/";
             parameters.add(fileName);
             parameters.add(bitrate);
             parameters.add(channels);

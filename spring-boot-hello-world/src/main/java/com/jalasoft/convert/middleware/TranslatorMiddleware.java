@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  * @author Mauricio Aliendre
  * @version 1.0
  */
-@WebFilter(urlPatterns = "/uploadGText/*")
+//@WebFilter(urlPatterns = "/uploadGText/*")
 public class TranslatorMiddleware implements Filter {
     private static final Logger LOG = new At18Logger().getLogger();
     /**

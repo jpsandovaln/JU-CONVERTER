@@ -66,11 +66,12 @@ public class FileStorageService {
     public String storeFile(MultipartFile file) throws FileStorageException {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        File uploadsDir = new File("Uploads");
+        Path root = Paths.get(".").normalize().toAbsolutePath();
+        File uploadsDir = new File(root + "/Uploads");
         if (!uploadsDir.exists()){
             uploadsDir.mkdir();
         }
-        File downloadDir = new File("Download");
+        File downloadDir = new File(root + "/Download");
         if (!downloadDir.exists()){
             downloadDir.mkdir();
         }

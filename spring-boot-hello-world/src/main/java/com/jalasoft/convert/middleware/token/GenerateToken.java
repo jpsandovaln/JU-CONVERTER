@@ -19,7 +19,7 @@ public class GenerateToken {
 
     @GetMapping("/getToken")
     public StringBuilder generateToken() throws IOException {
-        String Path = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
+        String Path = System.getProperty("user.dir") + "/token.txt";
         System.out.println(new File("").getAbsolutePath());
         System.out.println(new File(""));
         File myObj = new File(Path);

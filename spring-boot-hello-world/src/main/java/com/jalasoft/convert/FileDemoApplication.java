@@ -7,6 +7,11 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,4 +27,5 @@ public class FileDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(FileDemoApplication.class, args);
     }
+
 }

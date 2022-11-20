@@ -39,3 +39,6 @@ out/
 
 ### IntelliJ Idea ###
 .idea
+
+# Ignore Gradle build output directory
+build

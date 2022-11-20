@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  * @author Mauricio Aliendre
  * @version 1.0
  */
-@WebFilter(urlPatterns = "/metadata")
+//@WebFilter(urlPatterns = "/metadata")
 public class MetadataControllerMiddleware implements Filter{
 
     private static final Logger LOG = new At18Logger().getLogger();

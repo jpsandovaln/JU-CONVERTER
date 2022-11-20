@@ -48,7 +48,7 @@ public class VideoConverterConfigurationValues implements ConverterConfiguration
 
     public List<String> parameters() {
         List<String> parameters = new ArrayList<>();
-        parameters.add("Uploads\\" + this.fileName);
+        parameters.add(System.getProperty("user.dir") + "/Uploads/" + this.fileName);
         parameters.add(this.newName);
         parameters.add(this.outFormat);
         parameters.add(this.volume);

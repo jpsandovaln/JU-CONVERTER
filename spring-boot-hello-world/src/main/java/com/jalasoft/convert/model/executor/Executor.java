@@ -31,6 +31,7 @@ public class Executor {
 
     private void initProcess(List<String> command) throws ExecuteException {
         try {
+            //ProcessBuilder builder = new ProcessBuilder("sh","-c","\"" + command + "\"");
             ProcessBuilder builder = new ProcessBuilder(command);
             process = builder.start();
             InputStream errorStream = process.getErrorStream();

@@ -45,7 +45,7 @@ public class TranslateController {
         LOG.info("A txt file was introduced as input");
         try {
             String fileName = fileStorageService.storeFile(file);
-            String path = "Uploads\\" + fileName;
+            String path = System.getProperty("user.dir") + "/Uploads/" + fileName;
             TxtFile tFile = new TxtFile();
             tFile.extract(getParams(path, langI, langO));
             return downloadFile(tFile.getNewPath());
@@ -61,9 +61,9 @@ public class TranslateController {
         try {
             LOG.info("A word file was introduced as input");
             String fileNameInput = fileStorageService.storeFile(file);
-            Document doc = new Document("Uploads\\" + fileNameInput);
+            Document doc = new Document(System.getProperty("user.dir") + "/Uploads/" + fileNameInput);
             String[] outputName = fileNameInput.split("\\.");
-            fileNameInput = "Uploads\\" + outputName[0] + ".txt";
+            fileNameInput = System.getProperty("user.dir") + "/Uploads/" + outputName[0] + ".txt";
             doc.save(fileNameInput);
 
             TxtFile tFile = new TxtFile();

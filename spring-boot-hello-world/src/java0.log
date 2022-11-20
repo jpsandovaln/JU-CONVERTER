@@ -1,0 +1,6 @@
+nov. 19, 2022 4:44:57 P. M. org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-nio-5000"]
+nov. 19, 2022 4:45:07 P. M. org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring DispatcherServlet 'dispatcherServlet'
+nov. 19, 2022 4:45:07 P. M. com.jalasoft.convert.controller.endpoint.AudioController uploadAudio
+INFO: File uploaded: song.mp3

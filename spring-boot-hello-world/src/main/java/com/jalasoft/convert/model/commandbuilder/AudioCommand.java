@@ -7,6 +7,8 @@
  * Licence agreement you entered into with Jalasoft
  */
 package com.jalasoft.convert.model.commandbuilder;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -23,7 +25,7 @@ public class AudioCommand implements CommandBuilder {
     String format;
 
     public AudioCommand(String fileName) {
-        exe = ("ffmpeg\\bin\\ffmpeg.exe");
+        exe = ("ffmpeg");
         this.fileName = fileName;
         command.add(exe);
         command.add("-i");
@@ -93,22 +95,22 @@ public class AudioCommand implements CommandBuilder {
     private void selectFormat(String format, String name) {
         switch (format) {
             case "mp3":
-                command.add(name + "1.mp3");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.mp3");
                 break;
             case "aac":
-                command.add(name + "1.aac");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.aac");
                 break;
             case "ogg":
-                command.add(name + "1.ogg");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.ogg");
                 break;
             case "flac":
-                command.add(name + "1.flac");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.flac");
                 break;
             case "wma":
-                command.add(name + "1.wma");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.wma");
                 break;
             case "wav":
-                command.add(name + "1.wav");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.wav");
                 break;
         }
     }
@@ -121,12 +123,19 @@ public class AudioCommand implements CommandBuilder {
             selectSamplingFrequency(value);
             selectAudioChannel(value);
             selectBitrateAudio(value);
-            selectFormat(value, getName("Download\\" + parameters.get(0)));
+            selectFormat(value, getName(parameters.get(0)));
         }
     }
     @Override
     public List<String> getCommand() {
+        printList(command);
         return command;
+    }
+    public void printList(List command) {
+        for(int i=0; i<command.size(); i++) {
+            System.out.print(command.get(i) + " ");
+        }
+        System.out.println();
     }
 
 }

@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  * @author Mauricio Aliendre
  * @version 1.0
  */
-@WebFilter(urlPatterns = "/uploadImage")
+//@WebFilter(urlPatterns = "/uploadImage")
 public class ImageControllerMiddleware implements Filter{
     private static final Logger LOG = new At18Logger().getLogger();
     /**
