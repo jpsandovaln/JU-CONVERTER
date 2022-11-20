@@ -67,11 +67,11 @@ public class FileStorageService {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path root = Paths.get(".").normalize().toAbsolutePath();
-        File uploadsDir = new File(root + "/Uploads");
+        File uploadsDir = new File(System.getProperty("user.dir") + "/Uploads/");
         if (!uploadsDir.exists()){
             uploadsDir.mkdir();
         }
-        File downloadDir = new File(root + "/Download");
+        File downloadDir = new File(System.getProperty("user.dir") + "/Download/");
         if (!downloadDir.exists()){
             downloadDir.mkdir();
         }

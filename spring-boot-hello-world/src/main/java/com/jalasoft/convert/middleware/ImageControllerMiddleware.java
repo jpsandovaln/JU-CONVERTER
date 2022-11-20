@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  * @author Mauricio Aliendre
  * @version 1.0
  */
-//@WebFilter(urlPatterns = "/uploadImage")
+@WebFilter(urlPatterns = "/uploadImage")
 public class ImageControllerMiddleware implements Filter{
     private static final Logger LOG = new At18Logger().getLogger();
     /**
@@ -47,7 +47,7 @@ public class ImageControllerMiddleware implements Filter{
     {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        String path = System.getProperty("user.dir") + "\\spring-boot-hello-world\\src\\main\\java\\com\\jalasoft\\convert\\middleware\\token\\token.txt";
+        String path = System.getProperty("user.dir") + "/token.txt";
         File fileToken = new File(path);
         Scanner myReader = new Scanner(fileToken);
         try {

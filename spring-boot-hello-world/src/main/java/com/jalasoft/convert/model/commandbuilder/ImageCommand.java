@@ -31,7 +31,7 @@ public class ImageCommand implements CommandBuilder {
 
     public ImageCommand(List<String> setup) {
         // C:\\Program Files\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe
-        command.add("magick\\ImageMagick-7.1.0-Q16-HDRI\\magick.exe");
+        //command.add("magick");
         setParameters(setup);
 
         imageprocess = new ImageProcess();

@@ -7,4 +7,5 @@ COPY spring-boot-hello-world/build/libs/spring-boot-hello-world-0.0.1-SNAPSHOT.j
 COPY token .
 RUN apt update && apt install ffmpeg -y
 RUN apt install tesseract-ocr -y && apt install libtesseract-dev -y
+RUN apt install exiftool -y && apt install imagemagick -y
 ENTRYPOINT java -jar spring-boot-hello-world-0.0.1-SNAPSHOT.jar
