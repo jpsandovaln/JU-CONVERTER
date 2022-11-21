@@ -43,6 +43,7 @@ public class TranslateController {
                                                  @RequestParam("langI") String langI,
                                                  @RequestParam("langO") String langO) {
         LOG.info("A txt file was introduced as input");
+
         try {
             String fileName = fileStorageService.storeFile(file);
             String path = System.getProperty("user.dir") + "/Uploads/" + fileName;

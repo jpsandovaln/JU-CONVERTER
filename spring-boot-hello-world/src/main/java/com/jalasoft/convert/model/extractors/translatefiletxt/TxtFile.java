@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import javax.swing.JOptionPane;
+
 
 import com.jalasoft.convert.common.exception.ExtractorException;
 import com.jalasoft.convert.common.exception.ReadFileException;
@@ -39,7 +39,13 @@ public class TxtFile extends Extractor{
     public static void getFileName() {
 
         String nameFile = file.getAbsolutePath(); // save as string the path of the file
-        name = nameFile.split("\\\\"); // we get only the name of the txt from the path.
+        name = nameFile.split("//"); // we get only the name of the txt from the path.
+        System.out.println("namefile " + nameFile);
+        for(int i = 0 ; i<name.length ; i++) {
+            System.out.println(name[i]);
+        }
+        //file.getN
+        //name = "translate123.txt";
     }
 
     //to translate the word "translated" which is added to the new generated txt, and rename the new document
@@ -48,7 +54,7 @@ public class TxtFile extends Extractor{
         String titleDocument = "Translated-"; // word to be added to the name of the new text file containing the translated text.
         try {
             String translateTitle = g.translateText(titleDocument, languageInput, languageOuput);
-            writeee(translateTitle + name[name.length - 1], languageInput, languageOuput); //name of the generated txt file
+            writeee(translateTitle + file.getName(), languageInput, languageOuput); //name of the generated txt file
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +78,8 @@ public class TxtFile extends Extractor{
             bufferedWriter.close();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "An error has occurred" + e);
+            System.out.println("An error has ocurred" + e);
+            //JOptionPane.showMessageDialog(null, "An error has occurred" + e);
         }
     }
 

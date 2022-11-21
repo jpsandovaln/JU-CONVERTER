@@ -1,22 +1,2 @@
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Remaining token uses: 9639
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Remaining token uses: 9638
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Proccess Executed Sucessfully
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Response Status Code is: 200
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Remaining token uses: 9638
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Remaining token uses: 9638
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Token was not introduced correctly
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Remaining token uses: 9638
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Remaining token uses: 9637
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Proccess Executed Sucessfully
-nov. 19, 2022 6:21:45 P. M. com.jalasoft.convert.middleware.VideoControllerMiddleware doFilter
-INFO: Response Status Code is: 200
+nov. 21, 2022 9:20:58 A. M. com.jalasoft.convert.middleware.MetadataControllerMiddleware doFilter
+INFO: Status is not 200 or the file is not an image
