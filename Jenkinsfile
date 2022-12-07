@@ -1,12 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('docker compose') {
+        stage('Assemble') {
             steps {
                 script{
-                    sh "docker-compose up"
+                    sh "./gradlew assemble"
                 }
             }
         }
+        stage('Test') {
+             steps {
+                 script{
+                      sh "./gradlew test"
+                  }
+              }
+          }
     }
 }
