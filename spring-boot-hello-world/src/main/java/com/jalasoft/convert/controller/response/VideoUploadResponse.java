@@ -27,10 +27,10 @@ public class VideoUploadResponse extends Response{
     private String color;
     private String size;
 
-    public VideoUploadResponse(String fileName, String fileType, String newName, String outformat,String volume, String removeaudio,String videoBitrate,String audioBitrate,  String fps, String color,String size) {
+    public VideoUploadResponse(String fileName, String newName, String outformat,String volume, String removeaudio,String videoBitrate,String audioBitrate,  String fps, String color,String size) {
         super("200");
         this.fileName = fileName;
-        this.fileType = fileType;
+        this.fileType = "fileType";
         this.newName = newName;
         this.size = size;
         this.videoBitrate = videoBitrate;
@@ -40,7 +40,6 @@ public class VideoUploadResponse extends Response{
         this.outformat = outformat;
         this.fps = fps;
         this.color = color;
-
     }
 
     public String getFileName() {

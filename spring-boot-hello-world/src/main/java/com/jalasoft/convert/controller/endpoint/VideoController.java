@@ -10,10 +10,14 @@ package com.jalasoft.convert.controller.endpoint;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.response.Response;
+import com.jalasoft.convert.controller.response.VideoUploadResponse;
 import com.jalasoft.convert.controller.service.FileStorageService;
+import com.jalasoft.convert.model.commandbuilder.VideoCommand;
 import com.jalasoft.convert.model.coverters.VideoCommandAdapterConvert;
 import com.jalasoft.convert.model.coverters.VideoConverterConfigurationValues;
+import com.jalasoft.convert.model.executor.Executor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +42,7 @@ public class VideoController {
 
     @PostMapping("/uploadVideo")
     // public VideoUploadResponse uploadVideo(@RequestParam("file") MultipartFile file,
-    public Response uploadVideo(@RequestParam("file") MultipartFile file,
+    public ResponseEntity<Object> uploadVideo(@RequestParam("file") MultipartFile file,
                                 @RequestParam("outName") String newName,
                                 @RequestParam("outFormat") String outFormat,
                                 @RequestParam("volume") String volume,
@@ -55,17 +59,27 @@ public class VideoController {
             Logger LOG = new At18Logger().getLogger();
             String fileName = fileStorageService.storeFile(file);
             LOG.fine("File uploaded: " + fileName);
-            VideoCommandAdapterConvert videoCommandAdapterConvert = new VideoCommandAdapterConvert();
-            VideoConverterConfigurationValues setting = new VideoConverterConfigurationValues(fileName, newName, outFormat, volume,
-                    removeAudio, videoBitrate, audioBitrate, videoFragment, rotate, fps, color, size, cropVideo);
-            videoCommandAdapterConvert.initializeConfiguration(setting);
-            videoCommandAdapterConvert.convert(file.getInputStream(), response.getOutputStream());
-            response.addHeader("Content-disposition", "attachment; filename=" + "test.avi");
-            response.setContentType("application/pdf");
-            response.flushBuffer();
-            return new Response("200");
+            List<String> parameters = new ArrayList<>();
+            parameters.add(System.getProperty("user.dir") + "/Uploads/" + fileName);
+            parameters.add(newName);
+            parameters.add(outFormat);
+            parameters.add(volume);
+            parameters.add(removeAudio);
+            parameters.add(videoBitrate);
+            parameters.add(audioBitrate);
+            parameters.add(videoFragment);
+            parameters.add(rotate);
+            parameters.add(fps);
+            parameters.add(color);
+            parameters.add(size);
+            parameters.add(cropVideo);
+            VideoCommand videoCommand = new VideoCommand();
+            videoCommand.setParameters(parameters);
+            Executor executor = new Executor();
+            executor.runCommand(videoCommand.getCommand());
+            return ResponseEntity.ok().body(new VideoUploadResponse(fileName, newName, outFormat, volume, removeAudio, videoBitrate, audioBitrate, fps,  color, size));
         } catch (Exception e) {
-            return new ErrorResponse("400", e.getMessage());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", e.getMessage()));
         }
     }
 }

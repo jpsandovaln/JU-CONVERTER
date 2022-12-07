@@ -88,7 +88,7 @@ public class VideoCommand implements CommandBuilder {
             command.add(videoFilter.getCommandText());
         }
         command.add("-y");
-        command.add("Uploads\\" + outName + outFormat);
+        command.add(System.getProperty("user.dir") + "/Download/" + outName + outFormat);
     }
 
     private void setVolume(double vol) {

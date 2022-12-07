@@ -93,22 +93,22 @@ public class AudioCommand implements CommandBuilder {
     private void selectFormat(String format, String name) {
         switch (format) {
             case "mp3":
-                command.add(name + "1.mp3");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.mp3");
                 break;
             case "aac":
-                command.add(name + "1.aac");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.aac");
                 break;
             case "ogg":
-                command.add(name + "1.ogg");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.ogg");
                 break;
             case "flac":
-                command.add(name + "1.flac");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.flac");
                 break;
             case "wma":
-                command.add(name + "1.wma");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.wma");
                 break;
             case "wav":
-                command.add(name + "1.wav");
+                command.add(System.getProperty("user.dir") + "/Download/" + name + "1.wav");
                 break;
         }
     }
@@ -121,7 +121,7 @@ public class AudioCommand implements CommandBuilder {
             selectSamplingFrequency(value);
             selectAudioChannel(value);
             selectBitrateAudio(value);
-            selectFormat(value, getName("Download\\" + parameters.get(0)));
+            selectFormat(value, getName(System.getProperty("user.dir") + "/Download/" + parameters.get(0)));
         }
     }
     @Override

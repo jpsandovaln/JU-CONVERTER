@@ -61,7 +61,7 @@ public class TxtFile extends Extractor{
         BufferedWriter bufferedWriter;
         PrintWriter printWriter;
         try {
-            newFile = new File("Uploads\\" + name);
+            newFile = new File(System.getProperty("user.dir") + "/Download/" + name);
             fileWriter = new FileWriter(newFile);
             bufferedWriter = new BufferedWriter(fileWriter);
             printWriter = new PrintWriter(bufferedWriter);

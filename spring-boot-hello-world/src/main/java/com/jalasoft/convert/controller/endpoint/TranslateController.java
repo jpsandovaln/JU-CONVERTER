@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -45,7 +46,8 @@ public class TranslateController {
         LOG.info("A txt file was introduced as input");
         try {
             String fileName = fileStorageService.storeFile(file);
-            String path = "Uploads\\" + fileName;
+            LOG.info(fileName);
+            String path = System.getProperty("user.dir") + "/Uploads/" + fileName;
             TxtFile tFile = new TxtFile();
             tFile.extract(getParams(path, langI, langO));
             return downloadFile(tFile.getNewPath());
@@ -62,9 +64,10 @@ public class TranslateController {
             Logger LOG = new At18Logger().getLogger();
             LOG.info("A word file was introduced as input");
             String fileNameInput = fileStorageService.storeFile(file);
-            Document doc = new Document("Uploads\\" + fileNameInput);
+            LOG.info(fileNameInput);
+            Document doc = new Document(System.getProperty("user.dir") + "/Uploads/" + fileNameInput);
             String[] outputName = fileNameInput.split("\\.");
-            fileNameInput = "Uploads\\" + outputName[0] + ".txt";
+            fileNameInput = System.getProperty("user.dir") + "/Uploads/" + outputName[0] + ".txt";
             doc.save(fileNameInput);
 
             TxtFile tFile = new TxtFile();

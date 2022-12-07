@@ -39,10 +39,10 @@ public class OCR extends Extractor {
         String imageInputName = params.get(0);
         String[] outputName = imageInputName.split("\\.");
         try {
-            String strOutput = tesseract.doOCR(new File("Uploads\\" + imageInputName));
+            String strOutput = tesseract.doOCR(new File(System.getProperty("user.dir") + "/Uploads/"  + imageInputName));
             LOG.info("Test from image is: \n" + strOutput);
-            FileUtils.writeStringToFile(new File("Download\\" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
-            pathOcr = "Download\\" + outputName[0] + ".txt";
+            FileUtils.writeStringToFile(new File(System.getProperty("user.dir") + "/Download/" + outputName[0] + ".txt"), strOutput, StandardCharsets.UTF_8);
+            pathOcr = System.getProperty("user.dir") + "/Download/" + outputName[0] + ".txt";
         } catch (TesseractException e) {
             throw new ExtractorException("Error during processing OCR", e);
         } catch (IOException e) {

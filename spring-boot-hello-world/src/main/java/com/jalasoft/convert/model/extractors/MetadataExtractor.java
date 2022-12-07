@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MetadataExtractor extends Extractor {
     public static final String EXIFTOOL = "exiftool";
-    public static final String FILE_TXT = "Download/MetadataExtract.txt";
+    public static final String FILE_TXT = System.getProperty("user.dir") + "/Download/MetadataExtract.txt";
     private File outputFile;
 
     public MetadataExtractor() {

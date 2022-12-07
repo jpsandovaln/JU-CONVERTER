@@ -56,12 +56,12 @@ public class ImageController {
             LOG.info("File uploaded: " + fileName);
             List<String> settings = new ArrayList<>();
             settings.add(process);
-            settings.add("Uploads\\" + fileName);
+            settings.add(System.getProperty("user.dir") + "/Uploads/" + fileName);
             settings.add(tool);
             settings.add(width_black);
             settings.add(height_white);
             settings.add(color);
-            settings.add("Download\\" + fileout);
+            settings.add(System.getProperty("user.dir") + "/Download/" + fileout);
             settings.add(format);
             ImageCommand imageConverter = new ImageCommand(settings);
             LOG.info("final command" + imageConverter.getCommand());
