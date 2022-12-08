@@ -11,14 +11,14 @@ pipeline {
         stage('Assemble') {
             steps {
                 script{
-                    sh "/spring-boot-hello-world/gradlew assemble"
+                    sh "./spring-boot-hello-world/gradlew assemble"
                 }
             }
         }
         stage('Test') {
              steps {
                  script{
-                     sh "/spring-boot-hello-world/gradlew test"
+                     sh "./spring-boot-hello-world/gradlew test"
                   }
               }
          }
