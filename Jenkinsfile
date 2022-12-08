@@ -1,19 +1,26 @@
 pipeline {
     agent any
     stages {
+        stage ('Execution') {
+             steps {
+                 script{
+                    sh "chmod +x spring-boot-hello-world/gradlew"
+                  }
+             }
+        }
         stage('Assemble') {
             steps {
                 script{
-                    sh "./gradlew assemble"
+                    sh "spring-boot-hello-world/gradlew assemble"
                 }
             }
         }
         stage('Test') {
              steps {
                  script{
-                      sh "./gradlew test"
+                     sh "spring-boot-hello-world/gradlew test"
                   }
               }
-          }
+         }
     }
 }
