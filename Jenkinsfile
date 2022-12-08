@@ -12,14 +12,14 @@ pipeline {
         stage('Assemble') {
             steps {
                 dir("./spring-boot-hello-world") {
-                    sh "gradle assemble"
+                    sh "./gradlew assemble"
                 }
             }
         }
         stage('Test') {
              steps {
                  dir("./spring-boot-hello-world") {
-                     sh "gradle test"
+                     sh "./gradlew test"
                   }
               }
          }
