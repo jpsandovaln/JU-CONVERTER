@@ -4,8 +4,8 @@ pipeline {
         stage ('Execution') {
              steps {
                  script {
-                    sh 'chmod +x gradlew'
-                    sh 'chmod +x gradle'
+                    sh 'springboot-hello-world/chmod +x gradlew'
+                    sh 'springboot-hello-world/chmod +x gradle'
                  }
              }
         }
