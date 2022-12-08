@@ -4,7 +4,11 @@ pipeline {
        stage ('Change Directory') {
             steps {
                 script{
-                       sh "cd spring-boot-hello-world"
+                      sh "pwd"
+                      dir('spring-boot-hello-world') {
+                         sh "pwd"
+                        }
+                      sh "pwd"
                       }
                  }
             }
