@@ -11,6 +11,7 @@ pipeline {
         stage ('Execution') {
              steps {
                  script{
+                    sh "ls -l"
                     sh "chmod +x gradlew"
                     sh "chmod +x gradle"
                   }
