@@ -8,7 +8,7 @@
  */
 package com.jalasoft.convert.controller.endpoint;
 
-import com.aspose.words.Document;
+//import com.aspose.words.Document;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.controller.response.ErrorResponse;
 import com.jalasoft.convert.controller.service.FileStorageService;
@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -65,10 +64,10 @@ public class TranslateController {
             LOG.info("A word file was introduced as input");
             String fileNameInput = fileStorageService.storeFile(file);
             LOG.info(fileNameInput);
-            Document doc = new Document(System.getProperty("user.dir") + "/Uploads/" + fileNameInput);
+//            Document doc = new Document(System.getProperty("user.dir") + "/Uploads/" + fileNameInput);
             String[] outputName = fileNameInput.split("\\.");
             fileNameInput = System.getProperty("user.dir") + "/Uploads/" + outputName[0] + ".txt";
-            doc.save(fileNameInput);
+//            doc.save(fileNameInput);
 
             TxtFile tFile = new TxtFile();
             tFile.extract(getParams(fileNameInput, langI, langO));

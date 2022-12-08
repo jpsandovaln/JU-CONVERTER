@@ -9,7 +9,6 @@
 
 package com.jalasoft.convert.middleware;
 
-import com.aspose.words.Run;
 import com.jalasoft.convert.common.exception.MiddlewareException;
 import com.jalasoft.convert.common.logger.At18Logger;
 import com.jalasoft.convert.model.mysqlmodel.TokenDB;
@@ -20,17 +19,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 /**
