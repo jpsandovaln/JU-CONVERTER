@@ -9,13 +9,13 @@ pipeline {
                  }
              }
         }
-        stage('Assemble') {
-            steps {
-                dir('./spring-boot-hello-world') {
-                    sh './gradlew assemble'
-                }
-            }
-        }
+//         stage('Assemble') {
+//             steps {
+//                 dir('./spring-boot-hello-world') {
+//                     sh './gradlew assemble'
+//                 }
+//             }
+//         }
         stage('Test') {
              steps {
                  dir('./spring-boot-hello-world') {
@@ -23,5 +23,6 @@ pipeline {
                   }
               }
          }
+
     }
 }
