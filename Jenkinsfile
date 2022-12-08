@@ -1,36 +1,24 @@
 pipeline {
     agent any
     stages {
-       stage ('Change Directory') {
-            steps {
-                script{
-                      sh "pwd"
-                      dir('spring-boot-hello-world') {
-                         sh "pwd"
-                        }
-                      sh "pwd"
-                      }
-                 }
-            }
         stage ('Execution') {
              steps {
-                 script{
-                    sh "ls -l"
+                 dir("./spring-boot-hello-world") {
                     sh "chmod +x gradlew"
                     sh "chmod +x gradle"
-                  }
+                 }
              }
         }
         stage('Assemble') {
             steps {
-                script{
+                dir("./spring-boot-hello-world") {
                     sh "gradle assemble"
                 }
             }
         }
         stage('Test') {
              steps {
-                 script{
+                 dir("./spring-boot-hello-world") {
                      sh "gradle test"
                   }
               }
