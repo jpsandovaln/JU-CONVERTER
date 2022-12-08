@@ -6,6 +6,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import java.io.File;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -23,7 +24,7 @@ public class VideoControllerTest {
         byte[] byteFile = new byte[(int) newFile.length()];
         MockMultipartFile mockMultipartFile = new MockMultipartFile("file",byteFile);
         MockHttpServletResponse rsp = new MockHttpServletResponse();
-        String value = vd.uploadVideo(mockMultipartFile, "hi",".wmv","1","0","2000","250","","","30","1","600x600","",rsp).getStatus();
-        assertThat(Integer.parseInt(value)).isEqualTo(HttpStatus.BAD_REQUEST.value());
+        int value = vd.uploadVideo(mockMultipartFile, "hi",".wmv","1","0","2000","250","","","30","1","600x600","",rsp).getStatusCodeValue();
+        assertEquals(value, 400);
     }
 }
